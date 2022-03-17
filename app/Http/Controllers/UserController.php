@@ -34,7 +34,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->username);
         DB::beginTransaction();
         try {
             User::create([
@@ -57,37 +56,66 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $roles = [
+            0 => [
+                'name' => 'MKS',
+                'value' => 'mks'
+            ],
+            1 => [
+                'name' => 'MKA',
+                'value' => 'mka'
+            ],
+            2 => [
+                'name' => 'Kepala Cabang',
+                'value' => 'kepala cabang'
+            ],
+        ];
+
+        $data = [
+            'menu' => $this->menu,
+            'user' => $user,
+            'roles' => $roles
+        ];
+
+        return view('users.edit')->with($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $user = User::findOrFail($id);
+            $user->fullname = $request->fullname;
+            $user->username = $request->username;
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->roles = $request->roles;
+            $user->save();
+            DB::commit();
+            return redirect('users')->with('success', 'Berhasil edit user');
+        } catch (\Throwable $err) {
+            DB::rollBack();
+            return back()->with('error', 'Gagal edit user');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            DB::commit();
+            return back()->with('success', 'Berhasil hapus user');
+        } catch (\Throwable $err) {
+            DB::rollBack();
+            return back()->with('error', 'Gagal hapus user');
+        }
     }
 }
