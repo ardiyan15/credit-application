@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CreditController extends Controller
 {
     public function index()
     {
-        //
+        return view('credits.index');
     }
 
     public function create()
     {
-        //
+        return view('credits.create');
     }
 
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     public function show($id)

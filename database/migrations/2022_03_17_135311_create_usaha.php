@@ -14,12 +14,12 @@ class CreateUsaha extends Migration
     public function up()
     {
         Schema::create('usaha', function (Blueprint $table) {
-            $table->bigInteger('id')->length(11)->unsigined();
+            $table->unsignedBigInteger('id')->primary()->length(11);
             $table->date('berusaha_sejak');
             $table->string('bidang_usaha', 20);
             $table->text('alamat_usaha');
             $table->string('status_kepemilikan', 50);
-            $table->integer('jumlah_karyawan', 3);
+            $table->integer('jumlah_karyawan')->length(3);
             $table->string('no_telepon', 13);
             $table->date('ditempati_sejak');
             $table->softDeletes();
