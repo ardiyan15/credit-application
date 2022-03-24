@@ -40,15 +40,16 @@
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputPassword1">Jangka Waktu (bulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" class="form-control"
+                                                <input name="jangka_waktu" required type="number" class="form-control"
                                                     placeholder="jangka waktu (bulan)">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Tujuan Penggunaan</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="" id="" class="form-control">
+                                                <select required name="tujuan_penggunaan" id="" class="form-control">
                                                     <option value="" selected>-- Pilih Tujuan Penggunaan --</option>
-                                                    <option value="kur">KUR</option>
+                                                    <option value="modal kerja">Modal Kerja</option>
+                                                    <option value="investasi">Investasi</option>
                                                     <option value="kum">KUM</option>
                                                 </select>
                                             </div>
@@ -57,6 +58,26 @@
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="deskripsi_penggunaan"
                                                     placeholder="Jelaskan Tujuan Penggunaan" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="">Jenis Pinjaman</label>
+                                                <select name="jenis_pinjaman" id="" class="form-control">
+                                                    <option value="">-- Pilih Jenis Pinjaman --</option>
+                                                    <option value="kur">KUR</option>
+                                                    <option value="kum">KUM</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="">Jenis Agunan</label>
+                                                <select name="jenis_aguanan" id="" class="form-control">
+                                                    <option value="">-- Pilih Jenis Agunan --</option>
+                                                    <option value="">Sertifikat Tanah</option>
+                                                    <option value="">BPKB</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="">Input File / Foto Jenis Aguanan</label>
+                                                <input type="file" name="file_agunan" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Nasabah</h5>
@@ -135,30 +156,30 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
-                                                <textarea name="alamat_ktp" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5" rows="3"></textarea>
+                                                <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5" rows="3"></textarea>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kecamatan</label>
-                                                <input type="text" name="kecamatan" placeholder="Kecamatan"
+                                                <input type="text" name="kecamatan_2" placeholder="Kecamatan"
                                                     class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kota</label>
-                                                <input type="text" name="kota" placeholder="Kota" class="form-control">
+                                                <input type="text" name="kota_2" placeholder="Kota" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Provinsi</label>
-                                                <input type="text" name="provinsi" placeholder="Provinsi"
+                                                <input type="text" name="provinsi_2" placeholder="Provinsi"
                                                     class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kode Pos</label>
-                                                <input type="text" name="kode_pos" placeholder="Kode Pos"
+                                                <input type="text" name="kode_pos_2" placeholder="Kode Pos"
                                                     class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No telepon yang dapat dihubungi</label>
-                                                <input type="text" name="no_telepon"
+                                                <input type="text" name="no_telepon_2"
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
@@ -186,7 +207,7 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Lama Tinggal</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="" id="" class="form-control">
+                                                <select required name="lama_tinggal" id="" class="form-control">
                                                     <option value="">-- Pilih Lama Tinggal --</option>
                                                     <option value="< 2 tahun">
                                                         < 2 Tahun</option>
@@ -225,7 +246,7 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label>
-                                                <input type="text" name="tempat_lahir" class="form-control"
+                                                <input type="text" name="tempat_lahir_suami_istri" class="form-control"
                                                     placeholder="Tempat Lahir">
                                             </div>
                                             <div class="col-md-6 form-group">
@@ -245,6 +266,11 @@
                                                     <option value="diploma">Diploma</option>
                                                     <option value="sarjana">Sarjana</option>
                                                 </select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Pekerjaan Suami / Istri</label>
+                                                <input type="text" class="form-control" name="pekerjaan_suami_istri"
+                                                    placeholder="Pekerjaan Suami / Istri">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label>
@@ -337,14 +363,14 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kota</label> <small class="text-danger text-bold">*</small>
-                                                <input required type="text" name="kota" placeholder="Kota"
+                                                <input required type="text" name="kota_kerabat" placeholder="Kota"
                                                     class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No Telepon Rumah</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input type="number" name="no_telepon_rumah" placeholder="No Telepon Rumah"
-                                                    class="form-control">
+                                                <input type="number" name="no_telepon_rumah_kerabat"
+                                                    placeholder="No Telepon Rumah" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Nomor HP</label> <small

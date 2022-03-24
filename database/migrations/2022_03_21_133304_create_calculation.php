@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsaha extends Migration
+class CreateCalculation extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateUsaha extends Migration
      */
     public function up()
     {
-        Schema::create('usaha', function (Blueprint $table) {
+        Schema::create('calculation', function (Blueprint $table) {
             $table->id();
-            $table->date('berusaha_sejak');
-            $table->string('bidang_usaha', 20);
-            $table->text('alamat_usaha');
-            $table->string('status_kepemilikan', 50);
-            $table->string('jumlah_karyawan');
-            $table->string('no_telepon', 13);
-            $table->date('ditempati_sejak');
-            $table->softDeletes();
+            $table->float('bunga_per_bulan', 8, 2);
+            $table->float('biaya_provisi_admin', 8, 2);
+            $table->float('biaya_administrasi', 8, 2);
+            $table->string('jenis_agunan');
+            $table->text('foto_agunan');
             $table->timestamps();
             $table->unsignedBigInteger('nasabah_id');
             $table->foreign('nasabah_id')->references('id')->on('nasabah');
@@ -36,6 +33,6 @@ class CreateUsaha extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usaha');
+        Schema::dropIfExists('calculation');
     }
 }

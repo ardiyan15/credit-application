@@ -14,7 +14,7 @@ class CreateNasabah extends Migration
     public function up()
     {
         Schema::create('nasabah', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
+            $table->id();
             $table->string('nama_lengkap', 100);
             $table->string('tempat_lahir', 30);
             $table->date('tanggal_lahir');
@@ -35,12 +35,12 @@ class CreateNasabah extends Migration
             $table->string('status_tempat_tinggal', 50);
             $table->string('lama_tinggal', 30);
             $table->string('status_pernikahan', 50);
-            $table->integer('jumlah_tanggungan')->length(2);
+            $table->string('jumlah_tanggungan');
             $table->string('no_kartu_keluarga', 16);
             $table->string('jenis_pengajuan', 10);
             $table->string('limit_kredit', 20);
             $table->string('jangka_waktu', 10);
-            $table->string('tujuan_penggunaan', 10);
+            $table->string('tujuan_penggunaan');
             $table->text('deskripsi');
             $table->softDeletes();
             $table->timestamps();
