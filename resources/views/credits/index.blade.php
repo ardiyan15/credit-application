@@ -24,14 +24,25 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
-                                            <th class="text-center">Username</th>
-                                            <th class="text-center">Roles</th>
-                                            <th class="text-center">Tanggal Dibuat</th>
+                                            <th class="text-center">Nama Lengkap</th>
+                                            <th class="text-center">Nomor KTP</th>
+                                            <th class="text-center">Limit Kredit</th>
                                             <th class="text-center">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach ($customers as $customer)
+                                            <tr>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-center">{{ $customer->nama_lengkap }}</td>
+                                                <td class="text-center">{{ $customer->no_ktp }}</td>
+                                                <td class="text-center">{{ $customer->limit_kredit }}</td>
+                                                <td class="text-center">
+                                                    <a href="" class="btn btn-sm btn-info rounded">Edit</a>
+                                                    <a href="" class="btn btn-sm btn-danger rounded">Hapus</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

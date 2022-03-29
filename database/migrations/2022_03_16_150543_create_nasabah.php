@@ -42,6 +42,10 @@ class CreateNasabah extends Migration
             $table->string('jangka_waktu', 10);
             $table->string('tujuan_penggunaan');
             $table->text('deskripsi');
+            $table->string('nama_pemilik_agunan');
+            $table->string('nomor_sertifikat');
+            $table->string('jenis_agunan');
+            $table->string('jenis_pinjaman');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -78,6 +78,16 @@
                                                     <option value="ajb">AJB (Akta Jual Beli)</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="">Nama Pemilik Agunan</label>
+                                                <input type="text" class="form-control" name="nama_pemilik_agunan"
+                                                    placeholder="Nama Pemilik Agunan">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="">Nomor Sertifikat Agunan</label>
+                                                <input type="text" class="form-control" name="nomor_sertifikat"
+                                                    placeholder="Nomor Sertifikat">
+                                            </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Nasabah</h5>
                                         <div class="row">

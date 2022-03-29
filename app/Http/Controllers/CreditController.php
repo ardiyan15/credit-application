@@ -15,7 +15,11 @@ class CreditController extends Controller
 {
     public function index()
     {
-        return view('credits.index');
+        $data = [
+            'customers' => Nasabah::orderBy('id', 'DESC')->get()
+        ];
+
+        return view('credits.index')->with($data);
     }
 
     public function create()
@@ -26,23 +30,39 @@ class CreditController extends Controller
     public function store(Request $request)
     {
         // mendapatkkan bunga per bulan
-        $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
+        if ($request->jenis_pinjaman === 'kur') {
 
-        $biaya_provisi_admin = ($request->limit_kredit * 1.5) / 100;
+            $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
 
-        if ($request->limit_kredit >= 200000000 || $request->limit_kredit <= 350000000) {
-            $biaya_provisi_admin = ($request->limit_kredit * 0.25) / 100;
+            $biaya_provisi_admin = ($request->limit_kredit * 1.5) / 100;
+
+            if ($request->limit_kredit >= 200000000 || $request->limit_kredit <= 350000000) {
+                $biaya_provisi_admin = ($request->limit_kredit * 0.25) / 100;
+            }
+
+            $biaya_administrasi = 250000;
+
+            if ($request->limit_kredit >= 25000000 || $request->limit_kredit <= 350000000) {
+                $biaya_administrasi = 500000;
+            }
+        } else {
+            if ($request->limit_kredit <= 50000000) {
+                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 1.5 / 100));
+            } else {
+                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.99 / 100));
+            }
+
+            $biaya_provisi_admin = ($request->limit_kredit * 0.5) / 100;
+
+            $biaya_administrasi = 50000;
+
+            if ($request->limit_kredit >= 50000000) {
+                $biaya_administrasi = 100000;
+            }
         }
 
-        $biaya_administrasi = 250000;
 
-        if ($request->limit_kredit >= 25000000 || $request->limit_kredit <= 350000000) {
-            $biaya_administrasi = 500000;
-        }
-
-        if ($request->jenis_agunan == 'bpkb motor' || $request->jenis_agunan == 'bpkb mobil' && $request->limit_kredit)
-
-            DB::beginTransaction();
+        DB::beginTransaction();
         try {
             Nasabah::create([
                 'nama_lengkap' => $request->nama_lengkap,
@@ -72,6 +92,10 @@ class CreditController extends Controller
                 'jangka_waktu' => $request->jangka_waktu,
                 'tujuan_penggunaan' => $request->tujuan_penggunaan,
                 'deskripsi' => $request->deskripsi_penggunaan,
+                'nama_pemilik_agunan' => $request->nama_pemilik_agunan,
+                'nomor_sertifikat' => $request->nomor_sertifikat,
+                'jenis_agunan' => $request->jenis_agunan,
+                'jenis_pinjaman' => $request->jenis_pinjaman,
             ]);
 
             $nasabah = Nasabah::orderBy('id', 'DESC')->first();
@@ -120,11 +144,11 @@ class CreditController extends Controller
                 'nasabah_id' => $nasabah->id
             ]);
 
-            Calculation::ccreate([
+            Calculation::create([
                 'bunga_per_bulan' => $bunga_per_bulan,
                 'biaya_provisi_admin' => $biaya_provisi_admin,
-                'jenis_agunan' => $request->jenis_agunan,
-                ''
+                'nasabah_id' => $nasabah->id,
+                'biaya_administrasi' => $biaya_administrasi
             ]);
 
             DB::commit();

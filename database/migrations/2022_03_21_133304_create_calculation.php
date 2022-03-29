@@ -15,10 +15,9 @@ class CreateCalculation extends Migration
     {
         Schema::create('calculation', function (Blueprint $table) {
             $table->id();
-            $table->float('bunga_per_bulan', 8, 2);
-            $table->float('biaya_provisi_admin', 8, 2);
-            $table->float('biaya_administrasi', 8, 2);
-            $table->string('jenis_agunan');
+            $table->float('bunga_per_bulan', 20, 2);
+            $table->float('biaya_provisi_admin', 20, 2);
+            $table->float('biaya_administrasi', 20, 2);
             $table->timestamps();
             $table->unsignedBigInteger('nasabah_id');
             $table->foreign('nasabah_id')->references('id')->on('nasabah');
