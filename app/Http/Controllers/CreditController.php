@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calculation;
 use App\Models\Calon_Debitur;
 use App\Models\Kerabat;
 use App\Models\Nasabah;
@@ -24,7 +25,24 @@ class CreditController extends Controller
 
     public function store(Request $request)
     {
-        DB::beginTransaction();
+        // mendapatkkan bunga per bulan
+        $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
+
+        $biaya_provisi_admin = ($request->limit_kredit * 1.5) / 100;
+
+        if ($request->limit_kredit >= 200000000 || $request->limit_kredit <= 350000000) {
+            $biaya_provisi_admin = ($request->limit_kredit * 0.25) / 100;
+        }
+
+        $biaya_administrasi = 250000;
+
+        if ($request->limit_kredit >= 25000000 || $request->limit_kredit <= 350000000) {
+            $biaya_administrasi = 500000;
+        }
+
+        if ($request->jenis_agunan == 'bpkb motor' || $request->jenis_agunan == 'bpkb mobil' && $request->limit_kredit)
+
+            DB::beginTransaction();
         try {
             Nasabah::create([
                 'nama_lengkap' => $request->nama_lengkap,
@@ -100,6 +118,13 @@ class CreditController extends Controller
                 'angsuran_pinjaman_lain' => $request->angsuran_pinjaman_lain,
                 'total_penghasilan' => $request->total_penghasilan,
                 'nasabah_id' => $nasabah->id
+            ]);
+
+            Calculation::ccreate([
+                'bunga_per_bulan' => $bunga_per_bulan,
+                'biaya_provisi_admin' => $biaya_provisi_admin,
+                'jenis_agunan' => $request->jenis_agunan,
+                ''
             ]);
 
             DB::commit();

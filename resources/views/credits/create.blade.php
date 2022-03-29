@@ -69,15 +69,14 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Jenis Agunan</label>
-                                                <select name="jenis_aguanan" id="" class="form-control">
+                                                <select name="jenis_agunan" id="jenis_agunan" class="form-control">
                                                     <option value="">-- Pilih Jenis Agunan --</option>
-                                                    <option value="">Sertifikat Tanah</option>
-                                                    <option value="">BPKB</option>
+                                                    <option value="shgb">SHGB (Sertifikat Hak Guna Bangunan)</option>
+                                                    <option value="shm">SHM (Sertifikat Hak Milik)</option>
+                                                    <option value="bpkb motor">BPKB Motor</option>
+                                                    <option value="bpkb mobil">BPKB Mobil</option>
+                                                    <option value="ajb">AJB (Akta Jual Beli)</option>
                                                 </select>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="">Input File / Foto Jenis Aguanan</label>
-                                                <input type="file" name="file_agunan" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Nasabah</h5>
@@ -431,7 +430,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-sm rounded">Submit</button>
+                                    <button id="submit" class="btn btn-primary btn-sm rounded">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -444,30 +443,22 @@
 
 @push('scripts')
     <script>
-        var rupiah = document.getElementsByClassName('rupiah');
-
-        rupiah.addEventListener('keyup', function(e) {
-            // tambahkan 'Rp.' pada saat form di ketik
-            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-            rupiah.value = formatRupiah(this.value, 'Rp. ');
-        });
-
-        /* Fungsi formatRupiah */
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.replace(/[^,\d]/g, '').toString(),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            // tambahkan titik jika yang di input sudah menjadi angka ribuan
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
+        let jenisAgunan = '';
+        let limitKredit
+        $("#jenis_agunan").on('change', function() {
+            jenisAgunan = $(this).val()
+            console.log(jenisAgunan)
+        })
+        $("#submit").on('click', function(e) {
+            limitKredit = $("#limit_kredit").val()
+            if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
+                Swal.fire(
+                    'Gagal',
+                    'Jika agunan menggunakan BPKB Motor atau BPKB Mobil limit kredit tidak boleh lebih dari Rp. 50.000.000',
+                    'error'
+                )
+                e.preventDefault()
             }
-
-            return rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            // return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-        }
+        })
     </script>
 @endpush

@@ -19,7 +19,6 @@ class CreateCalculation extends Migration
             $table->float('biaya_provisi_admin', 8, 2);
             $table->float('biaya_administrasi', 8, 2);
             $table->string('jenis_agunan');
-            $table->text('foto_agunan');
             $table->timestamps();
             $table->unsignedBigInteger('nasabah_id');
             $table->foreign('nasabah_id')->references('id')->on('nasabah');
