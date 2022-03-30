@@ -15,10 +15,6 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <a href="{{ route('users.create') }}"
-                                    class="btn btn-primary btn-sm rounded pull-right">Tambah User</a>
-                            </div>
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">
                                     <thead>
@@ -28,34 +24,20 @@
                                             <th class="text-center">Nomor KTP</th>
                                             <th class="text-center">Nomor Handphone</th>
                                             <th class="text-center">Limit Kredit</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($customers as $customer)
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td class="text-center">{{ $customer->nama_lengkap }}</td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('approval.show', $customer->id) }}">
+                                                        {{ $customer->nama_lengkap }}
+                                                    </a>
+                                                </td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
                                                 <td class="text-center">{{ $customer->no_telepon }}</td>
                                                 <td class="text-center">{{ $customer->limit_kredit }}</td>
-                                                <td class="text-center">
-                                                    @if ($customer->approval_lv_1 == 0)
-                                                        <span class="text-white badge badge-pill p-1 bg-warning">Pending
-                                                            MKA</span>
-                                                    @elseif($customer->approval_lv_2 == 0)
-                                                        <span class="text-white badge badge-pill p-1 bg-warning">Pending
-                                                            K.Cabang</span>
-                                                    @else
-                                                        <span
-                                                            class="text-white badge badge-pill p-1 bg-success">Disetujui</span>
-                                                    @endif
-                                                </td>
-                                                <td class="text-center">
-                                                    <a href="" class="btn btn-sm btn-info rounded">Edit</a>
-                                                    <a href="" class="btn btn-sm btn-danger rounded">Hapus</a>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

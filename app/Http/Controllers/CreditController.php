@@ -96,6 +96,10 @@ class CreditController extends Controller
                 'nomor_sertifikat' => $request->nomor_sertifikat,
                 'jenis_agunan' => $request->jenis_agunan,
                 'jenis_pinjaman' => $request->jenis_pinjaman,
+                'approval_lv_1' => 0,
+                'pesan_approval_lv_1' => null,
+                'approval_lv_2' => 0,
+                'pesan_approval_lv_2' => null
             ]);
 
             $nasabah = Nasabah::orderBy('id', 'DESC')->first();

@@ -46,6 +46,10 @@ class CreateNasabah extends Migration
             $table->string('nomor_sertifikat');
             $table->string('jenis_agunan');
             $table->string('jenis_pinjaman');
+            $table->string('approval_lv_1', 1);
+            $table->text('pesan_approval_lv_1')->nullable();
+            $table->string('approval_lv_2', 1);
+            $table->text('pesan_approval_lv_2')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
