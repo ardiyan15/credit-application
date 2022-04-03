@@ -79,6 +79,9 @@
                                                         @if (($customer->approval_lv_1 == 0 && $customer->approval_lv_2 == 0) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 2))
                                                             <a href="{{ route('credits.edit', $customer->id) }}"
                                                                 class="btn btn-sm btn-info rounded">Edit</a>
+                                                        @else
+                                                            <a href="{{ route('credits.print', $customer->id) }}"
+                                                                class="btn btn-info btn-sm rounded">Print</a>
                                                         @endif
                                                         <button
                                                             class="delete-confirm btn btn-sm btn-danger rounded">Hapus</button>

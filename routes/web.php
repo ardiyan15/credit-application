@@ -10,7 +10,7 @@ Route::resource('/users', UserController::class);
 Route::resource('/approval', ApprovalController::class);
 
 Route::patch('/approvalmka/{id}', [ApprovalController::class, 'approvalmka'])->name('approval.approvemka');
-
+Route::get('/print/{id}', [CreditController::class, 'print_credit_approved'])->name('credits.print');
 
 Route::get('/', function () {
     return view('auth.login');

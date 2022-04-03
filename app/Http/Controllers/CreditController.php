@@ -10,6 +10,7 @@ use App\Models\Suami_istri;
 use App\Models\Usaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class CreditController extends Controller
 {
@@ -478,5 +479,14 @@ class CreditController extends Controller
         $customer = Nasabah::findOrFail($id);
         $customer->delete();
         return back()->with('success', 'Berhasil Hapus Data');
+    }
+
+    public function print_credit_approved($id)
+    {
+        $customer = Nasabah::findOrFail($id);
+
+        $pdf = PDF::loadview('credits.credit_approved', ['customer' => $customer]);
+
+        return $pdf->stream();
     }
 }
