@@ -74,34 +74,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link ">
+                            <a href="{{ route('credits.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Karyawan</p>
+                                <p>Pengajuan Kredit</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Departemen</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Divisi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Supervisor</p>
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -115,30 +96,6 @@
                             <a href="{{ route('credits.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengajuan Kredit</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Laporan
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Karyawan Perdivisi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Karyawan IN / OFF</p>
                             </a>
                         </li>
                     </ul>

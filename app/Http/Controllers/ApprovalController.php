@@ -13,13 +13,21 @@ class ApprovalController extends Controller
 
     public function index()
     {
-        if (Auth::user()->roles == 'mka' || Auth::user()->roles == 'superadmin') {
-            $customers = Nasabah::where('approval_lv_1', 0)->orderBy('id', 'DESC')->get();
-        } elseif (Auth::user()->roles == 'kepala cabang' || Auth::user()->roles == 'superadmin') {
-            $customers = Nasabah::where('approval_lv_2', 0)->orderBy('id', 'DESC')->get();
+        $customers = [];
+        if (Auth::user()->roles == 'mka') {
+            $customers = Nasabah::where([
+                ['approval_lv_1', '=', 0],
+                ['approval_lv_2', '=', 0]
+            ])->orderBy('id', 'DESC')->get();
+        } else if (Auth::user()->roles == 'kepala cabang') {
+            $customers = Nasabah::where([
+                ['approval_lv_1', '=', 1],
+                ['approval_lv_2', '=', 0],
+            ])->orWhere([
+                ['approval_lv_1', '=', 1],
+                ['approval_lv_2', '=', 2]
+            ])->orderBy('id', 'DESC')->get();
         }
-
-        dd($customers);
 
         $data = [
             'menu' => $this->menu,
@@ -69,8 +77,13 @@ class ApprovalController extends Controller
         DB::beginTransaction();
         try {
             $customer = Nasabah::findOrFail($id);
-            $customer->approval_lv_1 = 1;
-            $customer->pesan_approval_lv_1 = $request->message;
+            if (Auth::user()->roles == 'mka') {
+                $customer->approval_lv_1 = 1;
+                $customer->pesan_approval_lv_1 = $request->message;
+            } else {
+                $customer->approval_lv_2 = $request->kode_approval;
+                $customer->pesan_approval_lv_2 = $request->message;
+            }
             $customer->save();
             DB::commit();
             return redirect('approval')->with('success', 'Berhasil Approve Kredit');

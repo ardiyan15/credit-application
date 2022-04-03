@@ -429,9 +429,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">
+                                <button type="button" id="approve" class="btn btn-primary btn-sm rounded"
+                                    data-toggle="modal" data-target="#exampleModal">
                                     Approve
+                                </button>
+                                <button type="button" id="revisi"
+                                    class="btn btn-warning btn-sm rounded text-white">Revisi</button>
+                                <button type="button" id="reject" class="btn btn-danger btn-sm rounded" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    Tolak
                                 </button>
                             </div>
                         </div>
@@ -446,7 +452,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Approval MKA</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Approval Pengajuan Kredit</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -454,6 +460,7 @@
                 <form action="{{ route('approval.approvemka', $customer->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
+                    <input type="text" id="valueApproval" name="kode_approval">
                     <div class="modal-body">
                         <label for="">Pesan Approval</label>
                         <textarea class="form-control" name="message" id="" cols="30" rows="10" placeholder="Pesan Approval"></textarea>
@@ -467,3 +474,28 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $("#approve").on('click', function() {
+            $("#valueApproval").val(1)
+            $("#exampleModal").modal({
+                show: true
+            })
+        })
+
+        $("#revisi").on('click', function() {
+            $("#valueApproval").val(2)
+            $("#exampleModal").modal({
+                show: true
+            })
+        })
+
+        $("#reject").on('click', function() {
+            $("#valueApproval").val(3)
+            $("#exampleModal").modal({
+                show: true
+            })
+        })
+    </script>
+@endpush
