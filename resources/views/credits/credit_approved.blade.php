@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        table {
+        #calculation {
             font-size: 12px;
         }
 
@@ -19,9 +19,10 @@
 <body>
     <h4 class="text-center">Perjanjian Kredit</h4>
     <h5 class="text-center">Nomor : R03.JRK/0033/KUR/2019</h5>
-    <p>Perjanjian kredit ini dibuat dan ditandatangani di DKI Jakarta pada hari Jumat, 29 Maret 2019 oleh dan antara :
+    <p style="font-size: 13px;">Perjanjian kredit ini dibuat dan ditandatangani di DKI Jakarta pada hari Jumat, 29 Maret
+        2019 oleh dan antara :
     </p>
-    <ol type="I">
+    <ol type="I" style="font-size: 13px;">
         <li class="text-justify">
             PT Bank Mandiri (Persero) Tbk. berkedudukan di Jakarta Selatan dan berkantor pusat di Jl. Jend. Gatot
             Subroto
@@ -37,17 +38,21 @@
             unutk selanjutnya disebut "<b>Debitur</b>"
         </li>
     </ol>
-    <p>Bank dan Debitur untuk selanjutnya secara bersama - sama disebut juga "<b>Para Pihak</b></p>
-    <p class="text-justify">Para Pihak bertindak dalam kedudukan masing - masing seperti tersebut di atas terlebih
+    <p style="font-size: 13px;">Bank dan Debitur untuk selanjutnya secara bersama - sama disebut juga "<b>Para Pihak</b>
+    </p>
+    <p style="font-size: 13px;" class="text-justify">Para Pihak bertindak dalam kedudukan masing - masing seperti
+        tersebut di atas terlebih
         dahulu menerangkan bahwa
         Para Pihak sepakat untuk mengatur pemberian Kredit tersebut dalam Perjanjian Kredit yang dibuat dengan ketentuan
         dan syarat sebagai berikut (Perjanjian Kredit ini berikut semua lampiran perubahan dan penambahannya dari waktu
         kewaktu selanjutnya disebut "Perjanjian Kredit") </p>
 
-    <p class="text-center"><b> Pasal 1 </b></p>
-    <p class="text-center"><b>Jumlah, Tujuan, Sifat, Jangka Waktu, dan Angsuran Kredit</b></p>
+    <div class="text-center" style="font-size: 13px;">
+        <span class="text-center"><b> Pasal 1 </b></span> <br>
+        <span class="text-center"><b>Jumlah, Tujuan, Sifat, Jangka Waktu, dan Angsuran Kredit</b></span>
+    </div> <br>
 
-    <table>
+    <table id="calculation">
         <tr>
             <td width="20">1. </td>
             <td width="150">Jumlah Kredit</td>
@@ -125,52 +130,70 @@
     </table>
     <br>
 
-    <p class="text-center"><b>Pasal 2</b></p>
-    <p class="text-center"><b>Agunan</b></p>
-    <p>Untuk menjamin pembayaran kembali Kredit secara tertib sesuai dengan Perjanjian Kredit, dengan ini Debitur
+    <div class="text-center" style="font-size: 13px;">
+        <span class="text-center"><b>Pasal 2</b></span> <br>
+        <span class="text-center"><b>Agunan</b></span>
+    </div>
+    <p style="font-size: 13px;">Untuk menjamin pembayaran kembali Kredit secara tertib sesuai dengan Perjanjian Kredit,
+        dengan ini Debitur
         menyerahkan agunan berupa</p>
-    <p>BURHANUDDIN - SHGB NO. 1606 dengan sertifikat No. 1606</p>
+    <p style="font-size: 13px;">BURHANUDDIN - SHGB NO. 1606 dengan sertifikat No. 1606</p>
 
-    <div class="text-center">
+    <br> <br>
+    <div class="text-center" style="font-size: 13px;">
         <span class="text-center"><b> Pasal 3 </b></span><br>
         <span class="text-center"><b>Pencairan Kredit</b></span>
-
     </div>
 
-    <p>Pencairan Kredit dilakukan secara sekaligus dengan cara dipindahkan ke rekening tabungan atas nama Debitur nomor
-        rekening 123456789 setelah persyaratan yaitu:</p>
-    <ol type="1">
-        <li>Perjanjian Kredit telah ditandatangani.</li>
-        <li>Telah dilakukan pengamanan/pengikatan agunan sesuai dengan persyaratan Bank.</li>
-        <li>Telah dilakukan penutupan asuransi jiwa dengna syarat Banker's Clause PT. Bank Mandiri (Persero) Tbk. pada
-            perusahaan asuransi yang menjadi rekanan Bank.</li>
-        <li>Telah dilakukan penutupan asuransi kredit dan kerugian untuk agunan yang dapat diasuransikan dengan syarat
-            Banker's Clause PT. Bank Mandiri (Persero) Tbk. pada perusahaan asuransi yang menjadi rekanan Bank, apabila
-            dipersyaratkan Bank</li>
-    </ol>
+    <div style="font-size: 13px;">
+        <p>Pencairan Kredit dilakukan secara sekaligus dengan cara dipindahkan ke rekening tabungan atas nama Debitur
+            nomor
+            rekening 123456789 setelah persyaratan yaitu:</p>
+        <ol type="1">
+            <li>Perjanjian Kredit telah ditandatangani.</li>
+            <li>Telah dilakukan pengamanan/pengikatan agunan sesuai dengan persyaratan Bank.</li>
+            <li>Telah dilakukan penutupan asuransi jiwa dengna syarat Banker's Clause PT. Bank Mandiri (Persero) Tbk.
+                pada
+                perusahaan asuransi yang menjadi rekanan Bank.</li>
+            <li>Telah dilakukan penutupan asuransi kredit dan kerugian untuk agunan yang dapat diasuransikan dengan
+                syarat
+                Banker's Clause PT. Bank Mandiri (Persero) Tbk. pada perusahaan asuransi yang menjadi rekanan Bank,
+                apabila
+                dipersyaratkan Bank</li>
+        </ol>
 
-    <div class="text-justify">
-        <span>Perjanjian Kredit ini merupakan satu kesatuan dan bagian yang tidak dapat dipisahkan dengan Ketentuan
-            Kredit
-            Usaha Mikro.</span>
-        <span>Demikian Perjanjian Kredit ini ditandatangani oleh Para Pihak di atas materai rangkap 2 (dua)
-            masing-masing
-            memiliki kekuatan pembuktian yang sama.</span>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                One of three columns
-            </div>
-            <div class="col-sm-4">
-                One of three columns
-            </div>
-            <div class="col-sm-4">
-                One of three columns
-            </div>
+        <div class="text-justify">
+            <span>Perjanjian Kredit ini merupakan satu kesatuan dan bagian yang tidak dapat dipisahkan dengan Ketentuan
+                Kredit
+                Usaha Mikro.</span>
+            <span>Demikian Perjanjian Kredit ini ditandatangani oleh Para Pihak di atas materai rangkap 2 (dua)
+                masing-masing
+                memiliki kekuatan pembuktian yang sama.</span>
         </div>
     </div>
+
+
+    <table class="mt-3" style="font-size: 13px;">
+        <tr>
+            <td width="180">
+                Debitur
+            </td>
+            <td width="150">
+                Menyetujui
+            </td>
+            <td>
+                <b>PT. Bank Mandiri (Persero) TBK MBU - KCP MMU Jakarta Raya Kosambi</b>
+            </td>
+        </tr>
+    </table>
+
+    <table style="margin-top: 100px; font-size: 13px;">
+        <tr>
+            <td width="180">Ardiyan Agus</td>
+            <td width="150">Prayogo Sri</td>
+            <td>INDAH YULIANA</td>
+        </tr>
+    </table>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
