@@ -9,7 +9,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
 
-                    <a href="" class="nav-link"><i class="nav-icon fas fa-tachometer-alt"></i>
+                    <a href="{{ route('home') }}" class="nav-link @if ($menu == 'Dashboard') active @endif"><i
+                            class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
                         </p>
@@ -17,15 +18,17 @@
                 </li>
                 <li class="nav-item">
 
-                    <a href="" class="nav-link"><i class="nav-icon fas fa-tachometer-alt"></i>
+                    <a href="{{ route('users.show', Auth::user()->id) }}"
+                        class="nav-link @if ($menu == 'users') active @endif"><i
+                            class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             User Profile
                         </p>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item @if ($menu == 'approval') menu-open @endif">
+                    <a href="#" class="@if ($menu == 'approval') active @endif nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Approval
@@ -35,31 +38,17 @@
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('approval.index') }}" class="nav-link">
+                            <a href="{{ route('approval.index') }}"
+                                class="@if ($sub_menu == 'approval_credit') active @endif nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Approval Kredit</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Penilaian Karyawan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Kontrak Karyawan</p>
-                        </a>
-                    </li>
-                </ul>
-                </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item @if ($menu == 'master') menu-open @endif">
+                    <a href="#" class="@if ($menu == 'master') active @endif nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Data Master
@@ -68,15 +57,24 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('users.index') }}" class="nav-link active">
+                            <a href="{{ route('users.index') }}"
+                                class="@if ($sub_menu == 'user') active @endif nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>User</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('credits.index') }}" class="nav-link ">
+                            <a href="{{ route('credits.index') }}"
+                                class="@if ($sub_menu == 'credit') active @endif nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengajuan Kredit</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('sukubunga.index') }}"
+                                class="@if ($sub_menu == 'suku_bunga') active @endif nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Suku Bunga</p>
                             </a>
                         </li>
                     </ul>

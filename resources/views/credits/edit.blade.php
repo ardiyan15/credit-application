@@ -121,6 +121,11 @@
                                                     placeholder="Nomor Sertifikat"
                                                     value="{{ $customer->nomor_sertifikat }}">
                                             </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="">Nomor Rekening</label>
+                                                <input type="text" class="form-control" name="nomor_rekening"
+                                                    placeholder="Nomor Rekening" value="{{ $customer->no_rekening }}">
+                                            </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Nasabah</h5>
                                         <div class="row">
@@ -172,6 +177,12 @@
                                                     rows="3">{{ $customer->alamat }}</textarea>
                                             </div>
                                             <div class="col-md-6 form-group">
+                                                <label for="">Kelurahan</label> <small
+                                                    class="text-danger text-bold">*</small>
+                                                <input required type="text" name="kelurahan" placeholder="Kelurahan"
+                                                    class="form-control" value="{{ $customer->kelurahan }}">
+                                            </div>
+                                            <div class="col-md-6 form-group">
                                                 <label for="">Kecamatan</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="kecamatan" placeholder="Kecamatan"
@@ -205,6 +216,11 @@
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
                                                 <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5"
                                                     rows="3">{{ $customer->alamat_2 }}</textarea>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Kelurahan</label>
+                                                <input type="text" name="kelurahan_2" placeholder="Kelurahan"
+                                                    class="form-control" value="{{ $customer->kelurahan_2 }}">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kecamatan</label>
@@ -311,6 +327,25 @@
                                                 <input type="text" name="nama_suami_istri" class="form-control"
                                                     placeholder="Nama Suami / Istri"
                                                     value="{{ $customer->suami_istri->nama_suami_istri }}">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Status</label>
+                                                <select name="status" id="" class="form-control">
+                                                    @foreach ($status_suami_istri as $sts)
+                                                        @if ($sts['value'] == $customer->suami_istri->status)
+                                                            <option value="{{ $sts['value'] }}" selected>
+                                                                {{ $sts['name'] }}</option>
+                                                        @else
+                                                            <option value="">
+                                                                {{ $sts['name'] }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Tanggal Nikah</label>
+                                                <input type="date" name="tanggal_nikah" class="form-control"
+                                                    value="{{ $customer->suami_istri->tanggal_nikah }}">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label>

@@ -31,6 +31,7 @@ class ApprovalController extends Controller
 
         $data = [
             'menu' => $this->menu,
+            'sub_menu' => 'approval_credit',
             'customers' => $customers
         ];
 
@@ -51,6 +52,7 @@ class ApprovalController extends Controller
     {
         $data = [
             'menu' => $this->menu,
+            'sub_menu' => 'approval_credit',
             'customer' => Nasabah::findOrFail($id)
         ];
 

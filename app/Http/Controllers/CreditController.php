@@ -7,6 +7,7 @@ use App\Models\Calon_Debitur;
 use App\Models\Kerabat;
 use App\Models\Nasabah;
 use App\Models\Suami_istri;
+use App\Models\SukuBunga;
 use App\Models\Usaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,11 +15,13 @@ use PDF;
 
 class CreditController extends Controller
 {
-    protected $menu = "Kredit";
+    protected $menu = "master";
     public function index()
     {
         $data = [
-            'customers' => Nasabah::orderBy('id', 'DESC')->get()
+            'menu' => $this->menu,
+            'customers' => Nasabah::orderBy('id', 'DESC')->get(),
+            'sub_menu' => 'credit'
         ];
 
         return view('credits.index')->with($data);
@@ -26,15 +29,28 @@ class CreditController extends Controller
 
     public function create()
     {
-        return view('credits.create');
+        $data = [
+            'menu' => $this->menu,
+            'sub_menu' => 'credit'
+        ];
+        return view('credits.create')->with($data);
     }
 
     public function store(Request $request)
     {
-        // mendapatkkan bunga per bulan
-        if ($request->jenis_pinjaman === 'kur') {
+        // mendapatkkan cicilan per bulan
+        $items = SukuBunga::all();
 
-            $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
+        foreach ($items as $item) {
+            if ($item->tipe === $request->jenis_pinjaman && $request->limit_kredit >= $item->kredit_terkecil && $request->limit_kredit < $item->kredit_terbesar) {
+                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * $item->per_bulan / 100));
+                $bunga_per_tahun = $item->per_tahun;
+            }
+        }
+
+
+        if ($request->jenis_pinjaman === 'kur') {
+            // $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
 
             $biaya_provisi_admin = ($request->limit_kredit * 1.5) / 100;
 
@@ -48,11 +64,11 @@ class CreditController extends Controller
                 $biaya_administrasi = 500000;
             }
         } else {
-            if ($request->limit_kredit <= 50000000) {
-                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 1.5 / 100));
-            } else {
-                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.99 / 100));
-            }
+            // if ($request->limit_kredit <= 50000000) {
+            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 1.5 / 100));
+            // } else {
+            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.99 / 100));
+            // }
 
             $biaya_provisi_admin = ($request->limit_kredit * 0.5) / 100;
 
@@ -63,22 +79,38 @@ class CreditController extends Controller
             }
         }
 
+        // Generate continous number
+        $nasabah = Nasabah::orderBy('id', 'DESC')->first();
+
+        $nomor_urut = '0001';
+
+        if ($nasabah !== null) {
+            $nomor_urut = $nasabah->nomor_urut;
+            (int)$last_number = substr($nomor_urut, 3);
+            $result = $last_number + 1;
+            $nomor_urut = sprintf('%04d', $result);
+        }
+
 
         DB::beginTransaction();
         try {
             Nasabah::create([
+                'no_rekening' => $request->nomor_rekening,
+                'nomor_urut' => $nomor_urut,
                 'nama_lengkap' => $request->nama_lengkap,
                 'tempat_lahir' => $request->tempat_lahir,
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'pendidikan_terakhir' => $request->pendidikan_terakhir,
                 'nama_ibu_kandung' => $request->ibu_kandung,
                 'alamat' => $request->alamat_ktp,
+                'kelurahan' => $request->kelurahan,
                 'kecamatan' => $request->kecamatan,
                 'kota' => $request->kota,
                 'provinsi' => $request->provinsi,
                 'no_telepon' => $request->no_telepon,
                 'kode_pos' => $request->kode_pos,
                 'alamat_2' => $request->alamat_ktp_2,
+                'kelurahan_2' => $request->kelurahan_2,
                 'kecamatan_2' => $request->kecamatan_2,
                 'kota_2' => $request->kota_2,
                 'kode_pos_2' => $request->kode_pos_2,
@@ -114,7 +146,9 @@ class CreditController extends Controller
                 'penghasilan' => $request->penghasilan_bulanan,
                 'tanggal_lahir' => $request->tanggal_lahir_suami_istri,
                 'nasabah_id' => $nasabah->id,
-                'no_ktp' => $request->no_ktp_suami_istri
+                'no_ktp' => $request->no_ktp_suami_istri,
+                'tanggal_nikah' => $request->tanggal_nikah,
+                'status' => $request->status
             ]);
 
             Usaha::create([
@@ -155,7 +189,8 @@ class CreditController extends Controller
                 'bunga_per_bulan' => $bunga_per_bulan,
                 'biaya_provisi_admin' => $biaya_provisi_admin,
                 'nasabah_id' => $nasabah->id,
-                'biaya_administrasi' => $biaya_administrasi
+                'biaya_administrasi' => $biaya_administrasi,
+                'bunga_per_tahun' => $bunga_per_tahun
             ]);
 
             DB::commit();
@@ -329,10 +364,22 @@ class CreditController extends Controller
             ]
         ];
 
+        $status_suami_istri = [
+            [
+                'value' => 'suami',
+                'name' => 'Suami'
+            ],
+            [
+                'value' => 'istri',
+                'name' => 'Istri'
+            ]
+        ];
+
         $customer = Nasabah::with('calculation', 'calon_debitur', 'kerabat', 'suami_istri', 'usaha')->findOrFail($id);
 
         $data = [
             'menu' => $this->menu,
+            'sub_menu' => 'credit',
             'customer' => $customer,
             'jenis_pengajuan' => $jenis_pengajuan,
             'tujuan_penggunaan' => $tujuan_penggunaan,
@@ -342,7 +389,8 @@ class CreditController extends Controller
             'residences' => $residences,
             'stays' => $stays,
             'marital_status' => $marital_status,
-            'business_status' => $business_status
+            'business_status' => $business_status,
+            'status_suami_istri' => $status_suami_istri
         ];
 
         return view('credits.edit')->with($data);
@@ -351,9 +399,17 @@ class CreditController extends Controller
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
+        $items = SukuBunga::all();
+
+        foreach ($items as $item) {
+            if ($item->tipe === $request->jenis_pinjaman && $request->limit_kredit >= $item->kredit_terkecil && $request->limit_kredit < $item->kredit_terbesar) {
+                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * $item->per_bulan / 100));
+            }
+        }
+
         if ($request->jenis_pinjaman === 'kur') {
 
-            $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
+            // $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
 
             $biaya_provisi_admin = ($request->limit_kredit * 1.5) / 100;
 
@@ -367,11 +423,11 @@ class CreditController extends Controller
                 $biaya_administrasi = 500000;
             }
         } else {
-            if ($request->limit_kredit <= 50000000) {
-                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 1.5 / 100));
-            } else {
-                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.99 / 100));
-            }
+            // if ($request->limit_kredit <= 50000000) {
+            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 1.5 / 100));
+            // } else {
+            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.99 / 100));
+            // }
 
             $biaya_provisi_admin = ($request->limit_kredit * 0.5) / 100;
 
@@ -385,18 +441,21 @@ class CreditController extends Controller
 
         try {
             Nasabah::where('id', $id)->update([
+                'no_rekening' => $request->nomor_rekening,
                 'nama_lengkap' => $request->nama_lengkap,
                 'tempat_lahir' => $request->tempat_lahir,
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'pendidikan_terakhir' => $request->pendidikan_terakhir,
                 'nama_ibu_kandung' => $request->ibu_kandung,
                 'alamat' => $request->alamat_ktp,
+                'kelurahan' => $request->kelurahan,
                 'kecamatan' => $request->kecamatan,
                 'kota' => $request->kota,
                 'provinsi' => $request->provinsi,
                 'no_telepon' => $request->no_telepon,
                 'kode_pos' => $request->kode_pos,
                 'alamat_2' => $request->alamat_ktp_2,
+                'kelurahan_2' => $request->kelurahan_2,
                 'kecamatan_2' => $request->kecamatan_2,
                 'kota_2' => $request->kota_2,
                 'kode_pos_2' => $request->kode_pos_2,
@@ -425,7 +484,9 @@ class CreditController extends Controller
                 'pekerjaan' => $request->pekerjaan_suami_istri,
                 'penghasilan' => $request->penghasilan_bulanan,
                 'tanggal_lahir' => $request->tanggal_lahir_suami_istri,
-                'no_ktp' => $request->no_ktp_suami_istri
+                'no_ktp' => $request->no_ktp_suami_istri,
+                'tanggal_nikah' => $request->tanggal_nikah,
+                'status' => $request->status
             ]);
 
             Usaha::where('nasabah_id', $id)->update([
@@ -483,7 +544,7 @@ class CreditController extends Controller
 
     public function print_credit_approved($id)
     {
-        $customer = Nasabah::findOrFail($id);
+        $customer = Nasabah::with('calculation', 'calon_debitur', 'kerabat', 'suami_istri', 'usaha')->findOrFail($id);
 
         $pdf = PDF::loadview('credits.credit_approved', ['customer' => $customer]);
 

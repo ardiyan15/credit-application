@@ -88,6 +88,11 @@
                                                 <input type="text" class="form-control" name="nomor_sertifikat"
                                                     placeholder="Nomor Sertifikat">
                                             </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="">Nomor Rekening</label>
+                                                <input type="text" class="form-control" name="nomor_rekening"
+                                                    placeholder="Nomor Rekening">
+                                            </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Nasabah</h5>
                                         <div class="row">
@@ -135,6 +140,12 @@
                                                     rows="3"></textarea>
                                             </div>
                                             <div class="col-md-6 form-group">
+                                                <label for="">Kelurahan</label> <small
+                                                    class="text-danger text-bold">*</small>
+                                                <input required type="text" name="kelurahan" placeholder="Kelurahan"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="col-md-6 form-group">
                                                 <label for="">Kecamatan</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="kecamatan" placeholder="Kecamatan"
@@ -166,6 +177,11 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
                                                 <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Kelurahan</label>
+                                                <input type="text" name="kelurahan_2" placeholder="Kelurahan"
+                                                    class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kecamatan</label>
@@ -252,6 +268,18 @@
                                                 <label for="">Nama Suami / Istri</label>
                                                 <input type="text" name="nama_suami_istri" class="form-control"
                                                     placeholder="Nama Suami / Istri">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Status</label>
+                                                <select name="status" id="" class="form-control">
+                                                    <option value="">-- Pilih Status --</option>
+                                                    <option value="suami">Suami</option>
+                                                    <option value="istri">Istri</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Tanggal Nikah</label>
+                                                <input type="date" name="tanggal_nikah" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label>

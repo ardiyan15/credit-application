@@ -43,8 +43,10 @@
                                                             class="btn btn-info btn-sm rounded">Ubah</a>
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button onclick="return confirm('Ingin menghapus data?')"
-                                                            class="btn btn-danger btn-sm rounded delete-confirm">Hapus</button>
+                                                        @if (Auth::user()->id != $user->id)
+                                                            <button onclick="return confirm('Ingin menghapus data?')"
+                                                                class="btn btn-danger btn-sm rounded delete-confirm">Hapus</button>
+                                                        @endif
                                                     </form>
                                                 </td>
                                             </tr>

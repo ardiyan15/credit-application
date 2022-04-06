@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    protected $menu = 'users';
+    protected $menu = 'master';
 
     public function index()
     {
@@ -17,6 +17,7 @@ class UserController extends Controller
 
         $data = [
             'users' => $users,
+            'sub_menu' => 'user',
             'menu' => $this->menu
         ];
 
@@ -26,7 +27,8 @@ class UserController extends Controller
     public function create()
     {
         $data = [
-            'menu' => $this->menu
+            'menu' => $this->menu,
+            'sub_menu' => 'user'
         ];
 
         return view('users.create')->with($data);
@@ -40,7 +42,8 @@ class UserController extends Controller
                 'username' => $request->username,
                 'fullname' => $request->fullname,
                 'password' => Hash::make($request->password),
-                'roles' => $request->roles
+                'roles' => $request->roles,
+                'nip' => $request->nip
             ]);
             DB::commit();
             return redirect('users')->with('success', 'Data Berhasil ditambahkan');
@@ -53,7 +56,15 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $data = [
+            'menu' => 'users',
+            'sub_menu' => '',
+            'user' => $user
+        ];
+
+        return view('users.profile')->with($data);
     }
 
     public function edit($id)
@@ -77,6 +88,7 @@ class UserController extends Controller
 
         $data = [
             'menu' => $this->menu,
+            'sub_menu' => 'user',
             'user' => $user,
             'roles' => $roles
         ];
@@ -94,12 +106,16 @@ class UserController extends Controller
             if ($request->password) {
                 $user->password = Hash::make($request->password);
             }
-            $user->roles = $request->roles;
+            if ($request->roles) {
+                $user->roles = $request->roles;
+            }
+            $user->nip = $request->nip;
             $user->save();
             DB::commit();
             return redirect('users')->with('success', 'Berhasil edit user');
         } catch (\Throwable $err) {
             DB::rollBack();
+            throw $err;
             return back()->with('error', 'Gagal edit user');
         }
     }

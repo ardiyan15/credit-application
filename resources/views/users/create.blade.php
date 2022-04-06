@@ -20,6 +20,10 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6 form-group">
+                                            <label for="">NIP</label>
+                                            <input type="text" class="form-control" placeholder="NIP" name="nip">
+                                        </div>
+                                        <div class="col-md-6 form-group">
                                             <label for="">Nama Lengkap</label>
                                             <input class="form-control" type="text" name="fullname"
                                                 placeholder="Nama Lengkap" required>

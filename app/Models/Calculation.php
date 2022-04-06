@@ -12,4 +12,9 @@ class Calculation extends Model
     protected $table = 'calculation';
 
     protected $guarded = [];
+
+    public function nasabah()
+    {
+        return $this->belongsTo(Nasabah::class, 'nasabah_id');
+    }
 }

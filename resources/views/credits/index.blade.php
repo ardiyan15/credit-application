@@ -40,7 +40,7 @@
                                                 <td class="text-center">{{ $customer->nama_lengkap }}</td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
                                                 <td class="text-center">{{ $customer->no_telepon }}</td>
-                                                <td class="text-center">{{ $customer->approval_lv_2 }}</td>
+                                                <td class="text-center">{{ $customer->limit_kredit }}</td>
                                                 <td class="text-center">
                                                     @if ($customer->approval_lv_1 == 0)
                                                         <span class="text-white badge badge-pill p-1 bg-warning">Pending
@@ -79,9 +79,10 @@
                                                         @if (($customer->approval_lv_1 == 0 && $customer->approval_lv_2 == 0) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 2))
                                                             <a href="{{ route('credits.edit', $customer->id) }}"
                                                                 class="btn btn-sm btn-info rounded">Edit</a>
-                                                        @else
-                                                            <a href="{{ route('credits.print', $customer->id) }}"
-                                                                class="btn btn-info btn-sm rounded">Print</a>
+                                                            {{-- @elseif($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1) --}}
+                                                            <a target="_blank"
+                                                                href="{{ route('credits.print', $customer->id) }}"
+                                                                class="btn btn-success btn-sm rounded">Print</a>
                                                         @endif
                                                         <button
                                                             class="delete-confirm btn btn-sm btn-danger rounded">Hapus</button>

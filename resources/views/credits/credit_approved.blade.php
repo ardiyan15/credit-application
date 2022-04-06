@@ -18,23 +18,39 @@
 
 <body>
     <h4 class="text-center">Perjanjian Kredit</h4>
-    <h5 class="text-center">Nomor : R03.JRK/0033/KUR/2019</h5>
+    <h5 class="text-center">Nomor :
+        R03.JRK/{{ $customer->nomor_urut }}/{{ strtoupper($customer->jenis_pinjaman) }}/{{ substr($customer->created_at, 0, 4) }}
+    </h5>
     <p style="font-size: 13px;">Perjanjian kredit ini dibuat dan ditandatangani di DKI Jakarta pada hari Jumat, 29 Maret
         2019 oleh dan antara :
     </p>
     <ol type="I" style="font-size: 13px;">
         <li class="text-justify">
-            PT Bank Mandiri (Persero) Tbk. berkedudukan di Jakarta Selatan dan berkantor pusat di Jl. Jend. Gatot
+            PT Bank Mandiri (Persero) Tbk. b erkedudukan di Jakarta Selatan dan berkantor pusat di Jl. Jend. Gatot
             Subroto
             Kav. YULIANA MAHARANI selaku kepala Unit / Cabang MMU KCP MMU Jakarta Raya Kosambi 1, oleh karena itu
             sah
             bertindak untuk atas nama PT Bank Mandiri (Persero) Tbk. selanjutnya disebut "<b>Bank</b>"
         </li>
         <li class="text-justify">
-            Tuan BURHANUDIN 38 tahun bertempat tinggal di Jl. CANTIGA NO. 139 RT/RW 006/006 TANGERANG 15147 pemegang KTP
-            no. 1234567 diterbitkan oleh Kelurahan PABUARAN Kecamatan BOJONG GEDE Kabupaten/Kotamadya BOGOR dan untuk
-            melakukan perbuatan hukum telah mendapatkan persetujuan dari istri Nyonya SRI WAHYUNINGSIH sesuai kutipan
-            akta/surat nikah tanggal 11 Mei 2012 Pemegang KTP No. 1234567 yang turut hadir dan menandatangani akta ini
+            Tuan {{ strtoupper($customer->nama_lengkap) }}
+            {{ \Carbon\Carbon::parse($customer->tanggal_lahir)->age }} tahun
+            bertempat tinggal di
+            {{ strtoupper($customer->alamat) }} pemegang KTP
+            no. {{ $customer->no_ktp }} diterbitkan oleh Kelurahan {{ strtoupper($customer->kelurahan) }} Kecamatan
+            {{ strtoupper($customer->kecamatan) }} Kabupaten/Kotamadya
+            {{ $customer->kota }} dan untuk
+            melakukan perbuatan hukum telah mendapatkan persetujuan dari {{ $customer->suami_istri->status }}
+            @if ($customer->suami_istri->status == 'istri')
+                Nyonya
+            @else
+                Tuan
+            @endif
+            {{ $customer->suami_istri->nama_suami_istri }} sesuai kutipan
+            akta/surat nikah tanggal
+            {{ \Carbon\Carbon::parse($customer->suami_istri->tanggal_nikah)->format('d F Y') }} Pemegang KTP No.
+            {{ $customer->suami_istri->no_ktp }} yang turut
+            hadir dan menandatangani akta ini
             unutk selanjutnya disebut "<b>Debitur</b>"
         </li>
     </ol>
@@ -57,40 +73,34 @@
             <td width="20">1. </td>
             <td width="150">Jumlah Kredit</td>
             <td>:</td>
-            <td>Rp. 100.000.000 (Seratus Juta Rupiah)</td>
+            <td>@currency($customer->limit_kredit) ({{ \Terbilang::make($customer->limit_kredit, ' rupiah') }})</td>
         </tr>
         <tr>
             <td>2. </td>
             <td>Tujuan Kredit</td>
             <td>:</td>
-            <td>Perdagangan Eceran</td>
+            <td>{{ $customer->tujuan_penggunaan }}</td>
         </tr>
         <tr>
             <td>3. </td>
-            <td>Sifat Kredit</td>
+            <td>Provisi</td>
             <td>:</td>
-            <td>Non Revolving</td>
+            <td>@currency($customer->calculation->biaya_provisi_admin)</td>
         </tr>
         <tr>
             <td>4. </td>
             <td>Bunga</td>
             <td>:</td>
-            <td>7.00% efektif</td>
+            <td>{{ $customer->calculation->bunga_per_tahun . '% efektif' }}</td>
         </tr>
         <tr>
             <td>5. </td>
-            <td>Provisi</td>
+            <td>Administrasi</td>
             <td>:</td>
-            <td>Rp. 1.500.000</td>
+            <td>@currency($customer->calculation->biaya_administrasi)</td>
         </tr>
         <tr>
             <td>6. </td>
-            <td>Administrasi</td>
-            <td>:</td>
-            <td>Rp. 500.000</td>
-        </tr>
-        <tr>
-            <td>7. </td>
             <td>Premi Asuransi</td>
             <td>:</td>
             <td>Rp. 580.500 (JASINDO) Rp. 144.100 (BOSOWA)</td>
@@ -102,25 +112,27 @@
                 ditarik kembali</td>
         </tr>
         <tr>
-            <td>8. </td>
+            <td>7. </td>
             <td>Jangka Waktu</td>
             <td>:</td>
-            <td>36 Bulan terhitung mulai Pencairan Kredit. Berakhirnya jangka waktu
+            <td>{{ $customer->jangka_waktu }} Bulan terhitung mulai Pencairan Kredit. Berakhirnya jangka waktu
                 Kredit tidak dengan
                 sendirinya
                 menyebabkan Kredit lunas</td>
         </tr>
         <tr>
-            <td>9. </td>
+            <td>8. </td>
             <td>Pembayaran Kredit</td>
             <td>:</td>
             <td>Pembayaran pokok berikut bunganya dengan cara angsuran tetap yaitu jumlah angsuran pokok berikut
-                bunganya dalam 36 kali angsuran berturut - turut tiap - tiap kali sebesar Rp. 123.123.123 ( satu dua
-                tiga satu dua tiga ) sesuai dengan jadwal angsuran yang ditetapkan dalam lampiran yang merupakan satu
+                bunganya dalam 36 kali angsuran berturut - turut tiap - tiap kali sebesar
+                @currency($customer->calculation->bunga_per_bulan) (
+                {{ \Terbilang::make($customer->calculation->bunga_per_bulan, ' rupiah') }} ) sesuai dengan jadwal
+                angsuran yang ditetapkan dalam lampiran yang merupakan satu
                 kesatuan dengna Perjanjian Kredit ini</td>
         </tr>
         <tr>
-            <td>11. </td>
+            <td>9. </td>
             <td>Denda Keterlambatan</td>
             <td>:</td>
             <td>
@@ -137,7 +149,10 @@
     <p style="font-size: 13px;">Untuk menjamin pembayaran kembali Kredit secara tertib sesuai dengan Perjanjian Kredit,
         dengan ini Debitur
         menyerahkan agunan berupa</p>
-    <p style="font-size: 13px;">BURHANUDDIN - SHGB NO. 1606 dengan sertifikat No. 1606</p>
+    <p style="font-size: 13px;">{{ strtoupper($customer->nama_lengkap) }} -
+        {{ strtoupper($customer->jenis_agunan) }} dengan
+        sertifikat
+        No. {{ $customer->nomor_sertifikat }}</p>
 
     <br> <br>
     <div class="text-center" style="font-size: 13px;">
@@ -148,7 +163,7 @@
     <div style="font-size: 13px;">
         <p>Pencairan Kredit dilakukan secara sekaligus dengan cara dipindahkan ke rekening tabungan atas nama Debitur
             nomor
-            rekening 123456789 setelah persyaratan yaitu:</p>
+            rekening {{ $customer->no_rekening }} setelah persyaratan yaitu:</p>
         <ol type="1">
             <li>Perjanjian Kredit telah ditandatangani.</li>
             <li>Telah dilakukan pengamanan/pengikatan agunan sesuai dengan persyaratan Bank.</li>
@@ -189,8 +204,10 @@
 
     <table style="margin-top: 100px; font-size: 13px;">
         <tr>
-            <td width="180">Ardiyan Agus</td>
-            <td width="150">Prayogo Sri</td>
+            <td width="180">{{ strtoupper($customer->nama_lengkap) }}</td>
+            <td width="150">
+                {{ $customer->suami_istri->status . ' : ' . strtoupper($customer->suami_istri->nama_suami_istri) }}
+            </td>
             <td>INDAH YULIANA</td>
         </tr>
     </table>
