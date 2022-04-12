@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Calculation;
 use App\Models\Calon_Debitur;
+use App\Models\Dokumen;
 use App\Models\Kerabat;
 use App\Models\Nasabah;
 use App\Models\Suami_istri;
@@ -185,6 +186,21 @@ class CreditController extends Controller
                 'nasabah_id' => $nasabah->id
             ]);
 
+            $ext_ktp = $request->foto_ktp->getClientOriginalExtension();
+            $ext_kk = $request->foto_kk->getClientOriginalExtension();
+            $ext_usaha = $request->foto_usaha->getClientOriginalExtension();
+
+            $ktp = time() . "." . $ext_ktp;
+            $kk = time() . "." . $ext_kk;
+            $usaha = time() . "." . $ext_usaha;
+
+            Dokumen::create([
+                'foto_ktp' => $ktp,
+                'foto_kk' => $kk,
+                'foto_usaha' => $usaha,
+                'nasabah_id' => $nasabah->id
+            ]);
+
             Calculation::create([
                 'bunga_per_bulan' => $bunga_per_bulan,
                 'biaya_provisi_admin' => $biaya_provisi_admin,
@@ -192,6 +208,10 @@ class CreditController extends Controller
                 'biaya_administrasi' => $biaya_administrasi,
                 'bunga_per_tahun' => $bunga_per_tahun
             ]);
+
+            $request->foto_ktp->storeAs('public/ktp', $ktp);
+            $request->foto_kk->storeAs('public/kk', $kk);
+            $request->foto_usaha->storeAs('public/usaha', $usaha);
 
             DB::commit();
             return redirect('credits')->with('success', 'Beerhasil tambah adata');
@@ -549,5 +569,43 @@ class CreditController extends Controller
         $pdf = PDF::loadview('credits.credit_approved', ['customer' => $customer]);
 
         return $pdf->stream();
+    }
+
+    public function get_document(Request $request)
+    {
+        $document = Dokumen::where('nasabah_id', $request->id)->first();
+
+        if ($document !== null) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $document
+            ]);
+        } else {
+            return response()->json([
+                'status' => 500,
+                'message' => 'error',
+                'data' => 'document not found'
+            ]);
+        }
+    }
+
+    public function get_nasabah($id)
+    {
+        $customer = Nasabah::with('calculation')->findOrFail($id);
+
+        if ($customer !== null) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $customer
+            ]);
+        } else {
+            return response()->json([
+                'status' => 500,
+                'message' => 'error',
+                'data' => 'data not found'
+            ]);
+        }
     }
 }

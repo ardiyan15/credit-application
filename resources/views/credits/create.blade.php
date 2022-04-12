@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('credits.store') }}" method="POST">
+                                <form action="{{ route('credits.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <h5 class="mb-4 bg-primary p-2 rounded">Cabang / Unit Mikro</h5>
@@ -213,6 +213,10 @@
                                                     class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
+                                                <label for="">Upload KTP</label>
+                                                <input type="file" name="foto_ktp" class="form-control">
+                                            </div>
+                                            <div class="col-md-6 form-group">
                                                 <label for="">No NPWP</label> <small class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_npwp" placeholder="No NPWP"
                                                     class="form-control">
@@ -260,6 +264,10 @@
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="number" name="no_kartu_keluarga"
                                                     class="form-control" placeholder="No Kartu Keluarga">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Kartu Keluarga</label>
+                                                <input type="file" name="foto_kk" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Suami / Istri</h5>
@@ -367,6 +375,10 @@
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="date" name="ditempati_usaha" class="form-control"
                                                     placeholder="Ditempati Sejak">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Foto Tempat Usaha</label>
+                                                <input type="file" name="foto_usaha" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Kerabat Dekat Yang Tidak Serumah</h5>

@@ -252,6 +252,9 @@
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_ktp" placeholder="No KTP"
                                                     class="form-control" value="{{ $customer->no_ktp }}">
+                                                    <small>
+                                                        <a href="" class="document" data-id="{{ $customer->id }}" data-type="document_ktp" onclick="return false" data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                    </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No NPWP</label> <small class="text-danger text-bold">*</small>
@@ -318,6 +321,9 @@
                                                 <input required type="number" name="no_kartu_keluarga"
                                                     class="form-control" placeholder="No Kartu Keluarga"
                                                     value="{{ $customer->no_kartu_keluarga }}">
+                                                    <small>
+                                                        <a href="" class="document" data-id="{{ $customer->id }}" data-type="keluarga_dokumen" onclick="return false" data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                    </small>
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Suami / Istri</h5>
@@ -408,6 +414,9 @@
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="bidang_usaha" placeholder="Bidang Usaha"
                                                     class="form-control" value="{{ $customer->usaha->bidang_usaha }}">
+                                                    <small>
+                                                        <a href="" class="document" data-id="{{ $customer->id }}" data-type="usaha_dokumen" onclick="return false" data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                    </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Usaha</label> <small
@@ -577,16 +586,32 @@
             </div>
         </section>
     </div>
+
+    <div class="modal fade" id="document" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Foto Dokumen</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="img-content">
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @push('scripts')
     <script>
         let jenisAgunan = '';
         let limitKredit
+        
         $("#jenis_agunan").on('change', function() {
             jenisAgunan = $(this).val()
-            console.log(jenisAgunan)
         })
+
         $("#submit").on('click', function(e) {
             limitKredit = $("#limit_kredit").val()
             if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
@@ -597,6 +622,35 @@
                 )
                 e.preventDefault()
             }
+        })
+
+        $(".document").on('click', function(){
+            let type = $(this).data('type')
+            let id = $(this).data('id')
+            let source = ''
+
+            $("#img-content").empty()
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('credits.get_document') }}',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    // type: type,
+                    id: id
+                },
+                success: ({data}) => {
+                    console.log(type)
+                    if(type == 'document_ktp') {
+                        $("#img-content").append(`<img class="text-center" src="{!! asset('/storage/ktp/${data.foto_ktp}') !!}" width="450" />`)
+                    } else if(type == 'usaha_dokumen') {
+                        $("#img-content").append(`<img class="text-center" src="{!! asset('/storage/usaha/${data.foto_usaha}') !!}" width="450" />`)
+                    } else {
+                        $("#img-content").append(`<img class="text-center" src="{!! asset('/storage/kk/${data.foto_kk}') !!}" width="450" />`)
+                    }
+                },
+                error: err => console.log(err)
+            })
         })
     </script>
 @endpush

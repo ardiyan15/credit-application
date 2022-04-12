@@ -38,4 +38,14 @@ class Nasabah extends Model
     {
         return $this->hasOne(Calculation::class, 'nasabah_id');
     }
+
+    public function dokumen()
+    {
+        return $this->hasOne(Dokumen::class, 'nasabah_id');
+    }
+
+    public function mks()
+    {
+        return $this->hasOne(Mks::class, 'nasabah_id');
+    }
 }

@@ -26,7 +26,7 @@
                                             <th class="text-center">#</th>
                                             <th class="text-center">Nasabah</th>
                                             <th class="text-center">Nomor KTP</th>
-                                            <th class="text-center">Nomor Handphone</th>
+                                            <th class="text-center">Nomor Rekening</th>
                                             <th class="text-center">Limit Kredit</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Keterangan</th>
@@ -39,8 +39,8 @@
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">{{ $customer->nama_lengkap }}</td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
-                                                <td class="text-center">{{ $customer->no_telepon }}</td>
-                                                <td class="text-center">{{ $customer->limit_kredit }}</td>
+                                                <td class="text-center">{{ $customer->no_rekening }}</td>
+                                                <td class="text-center">@currency($customer->limit_kredit)</td>
                                                 <td class="text-center">
                                                     @if ($customer->approval_lv_1 == 0)
                                                         <span class="text-white badge badge-pill p-1 bg-warning">Pending
@@ -79,7 +79,7 @@
                                                         @if (($customer->approval_lv_1 == 0 && $customer->approval_lv_2 == 0) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 2))
                                                             <a href="{{ route('credits.edit', $customer->id) }}"
                                                                 class="btn btn-sm btn-info rounded">Edit</a>
-                                                            {{-- @elseif($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1) --}}
+                                                        @elseif($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1)
                                                             <a target="_blank"
                                                                 href="{{ route('credits.print', $customer->id) }}"
                                                                 class="btn btn-success btn-sm rounded">Print</a>

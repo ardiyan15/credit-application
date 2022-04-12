@@ -31,6 +31,26 @@
                     <a href="#" class="@if ($menu == 'approval') active @endif nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
+                            MKS
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('mks.index') }}"
+                                class="@if ($sub_menu == 'approval_credit') active @endif nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Perhitungan MKS</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item @if ($menu == 'approval') menu-open @endif">
+                    <a href="#" class="@if ($menu == 'approval') active @endif nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
                             Approval
                             <i class="right fas fa-angle-left"></i>
                         </p>
