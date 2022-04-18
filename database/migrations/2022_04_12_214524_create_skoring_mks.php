@@ -13,9 +13,16 @@ class CreateSkoringMks extends Migration
      */
     public function up()
     {
-        Schema::create('skoring_mks', function (Blueprint $table) {
+        Schema::create('skoring_mka', function (Blueprint $table) {
             $table->id();
-            $table->string('skor', 30);
+            $table->string('aset', 30);
+            $table->string('profit_ramai', 30);
+            $table->string('profit_sepi', 30);
+            $table->string('profit_normal', 30);
+            $table->string('persediaan_aset', 30);
+            $table->string('fixed_aset', 30);
+            $table->string('laba_perbulan', 30);
+            $table->string('laba_pertahun', 30);
             $table->softDeletes();
             $table->timestamps();
             $table->unsignedBigInteger('nasabah_id');
@@ -30,6 +37,6 @@ class CreateSkoringMks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skoring_mks');
+        Schema::dropIfExists('skoring_mka');
     }
 }

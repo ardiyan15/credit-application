@@ -22,7 +22,7 @@
                                             <th class="text-center">#</th>
                                             <th class="text-center">Nama Lengkap</th>
                                             <th class="text-center">Nomor KTP</th>
-                                            <th class="text-center">Nomor Handphone</th>
+                                            <th class="text-center">Nomor Rekening</th>
                                             <th class="text-center">Limit Kredit</th>
                                         </tr>
                                     </thead>
@@ -31,13 +31,19 @@
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('approval.show', $customer->id) }}">
-                                                        {{ $customer->nama_lengkap }}
-                                                    </a>
+                                                    @if (Auth::user()->roles != 'kepala cabang')
+                                                        <a href="{{ route('approval.show', $customer->id) }}">
+                                                            {{ $customer->nama_lengkap }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('approval.skoring', $customer->id) }}">
+                                                            {{ $customer->nama_lengkap }}
+                                                        </a>
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
-                                                <td class="text-center">{{ $customer->no_telepon }}</td>
-                                                <td class="text-center">{{ $customer->limit_kredit }}</td>
+                                                <td class="text-center">{{ $customer->no_rekening }}</td>
+                                                <td class="text-center">@currency($customer->limit_kredit)</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

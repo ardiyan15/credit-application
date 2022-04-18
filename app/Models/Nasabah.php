@@ -48,4 +48,9 @@ class Nasabah extends Model
     {
         return $this->hasOne(Mks::class, 'nasabah_id');
     }
+
+    public function skoring()
+    {
+        return $this->hasOne(Skoring::class, 'nasabah_id');
+    }
 }

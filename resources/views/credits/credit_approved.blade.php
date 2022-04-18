@@ -100,19 +100,13 @@
             <td>@currency($customer->calculation->biaya_administrasi)</td>
         </tr>
         <tr>
-            <td>6. </td>
-            <td>Premi Asuransi</td>
-            <td>:</td>
-            <td>Rp. 580.500 (JASINDO) Rp. 144.100 (BOSOWA)</td>
-        </tr>
-        <tr>
             <td></td>
             <td colspan="4"> Biaya tersebut diatas ditanggung Debitur dan biaya - biaya yang telah dibayarkan/disetor
                 tidak dapat
                 ditarik kembali</td>
         </tr>
         <tr>
-            <td>7. </td>
+            <td>6. </td>
             <td>Jangka Waktu</td>
             <td>:</td>
             <td>{{ $customer->jangka_waktu }} Bulan terhitung mulai Pencairan Kredit. Berakhirnya jangka waktu
@@ -121,7 +115,7 @@
                 menyebabkan Kredit lunas</td>
         </tr>
         <tr>
-            <td>8. </td>
+            <td>7. </td>
             <td>Pembayaran Kredit</td>
             <td>:</td>
             <td>Pembayaran pokok berikut bunganya dengan cara angsuran tetap yaitu jumlah angsuran pokok berikut

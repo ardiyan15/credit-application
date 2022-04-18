@@ -16,7 +16,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/print/{id}', [CreditController::class, 'print_credit_approved'])->name('credits.print');
     Route::get('/get_nasabah/{id}', [CreditController::class, 'get_nasabah'])->name('get_nasabah');
+    Route::get('/get_detail_scoring/{id}', [ApprovalController::class, 'detail_score'])->name('approval.skoring');
+    Route::get('/print_credit/{id}', [CreditController::class, 'print_credit'])->name('credits.print_credit');
     Route::patch('/approvalmka/{id}', [ApprovalController::class, 'approvalmka'])->name('approval.approvemka');
+    Route::patch('/approval_head_division/{id}', [ApprovalController::class, 'approval_head_division'])->name('approve.head_division');
     Route::post('/get_document', [CreditController::class, 'get_document'])->name('credits.get_document');
 });
 

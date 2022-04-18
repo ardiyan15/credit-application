@@ -94,4 +94,40 @@ class ApprovalController extends Controller
             return back()->with('error', 'Gagal Approve Kredit');
         }
     }
+
+    public function detail_score($id)
+    {
+        $nasabah = Nasabah::with('skoring', 'calculation')->findOrFail($id);
+
+        $data = [
+            'menu' => $this->menu,
+            'sub_menu' => 'approval',
+            'customer' => $nasabah
+        ];
+
+        return view('approval.detail_skoring')->with($data);
+    }
+
+    public function approval_head_division(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->type == 'approve') {
+                $customer = Nasabah::findOrFail($id);
+                $customer->approval_lv_2 = 1;
+                $customer->pesan_approval_lv_2 = $request->approval_message;
+                $customer->save();
+            } else if ($request->type == 'reject') {
+                $customer = Nasabah::findOrFail($id);
+                $customer->approval_lv_2 = 2;
+                $customer->pesan_approval_lv_2 = $request->approval_message;
+                $customer->save();
+            }
+            DB::commit();
+            return redirect('approval')->with('success', 'Berhasil Approval Data');
+        } catch (\Throwable $err) {
+            DB::rollBack();
+            return back()->with('error', 'Gagal Approval Data');
+        }
+    }
 }

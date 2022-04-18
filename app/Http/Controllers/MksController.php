@@ -42,13 +42,21 @@ class MksController extends Controller
         DB::beginTransaction();
         try {
             Mks::create([
-                'skor' => $request->skor,
-                'nasabah_id' => $request->nasabah_id
+                'aset' => $request->aset,
+                'profit_ramai' => $request->profit_ramai,
+                'profit_sepi' => $request->profit_sepi,
+                'profit_normal' => $request->profit_normal,
+                'persediaan_aset' => $request->persediaan_aset,
+                'fixed_aset' => $request->fixed_aset,
+                'laba_perbulan' => $request->laba_perbulan,
+                'laba_pertahun' => $request->laba_pertahun,
+                'nasabah_id' => $request->nasabah_id,
             ]);
             DB::commit();
             return redirect('mks')->with('success', 'Berhasil input data');
         } catch (\Throwable $err) {
             DB::rollBack();
+            throw $err;
             return back()->with('error' . 'Gagal input data');
         }
     }

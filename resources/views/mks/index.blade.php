@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Skoring MKS</h1>
+                        <h1>Skoring MKA</h1>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <a href="{{ route('mks.create') }}" class="btn btn-primary btn-sm rounded">Perhitungan
-                                    MKS</a>
+                                    MKA</a>
                             </div>
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">

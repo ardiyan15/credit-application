@@ -224,7 +224,15 @@ class CreditController extends Controller
 
     public function show($id)
     {
-        //
+        $nasabah = Nasabah::with('suami_istri', 'usaha', 'kerabat')->findOrFail($id);
+
+        $data = [
+            'menu' => $this->menu,
+            'sub_menu' => 'credit',
+            'customer' => $nasabah
+        ];
+
+        return view('credits.detail')->with($data);
     }
 
     public function edit($id)
@@ -607,5 +615,14 @@ class CreditController extends Controller
                 'data' => 'data not found'
             ]);
         }
+    }
+
+    public function print_credit($id)
+    {
+        $customer = Nasabah::findOrFail($id);
+
+        $pdf = PDF::loadview('credits.form_credit', ['customer' => $customer]);
+        $pdf->setPaper([0, 0, 1000, 1500]);
+        return $pdf->stream();
     }
 }

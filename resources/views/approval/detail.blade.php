@@ -460,7 +460,7 @@
                 <form action="{{ route('approval.approvemka', $customer->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
-                    <input type="text" id="valueApproval" name="kode_approval">
+                    <input type="hidden" id="valueApproval" name="kode_approval">
                     <div class="modal-body">
                         <label for="">Pesan Approval</label>
                         <textarea class="form-control" name="message" id="" cols="30" rows="10" placeholder="Pesan Approval"></textarea>
