@@ -622,7 +622,7 @@ class CreditController extends Controller
         $customer = Nasabah::findOrFail($id);
 
         $pdf = PDF::loadview('credits.form_credit', ['customer' => $customer]);
-        $pdf->setPaper([0, 0, 1000, 1500]);
+        $pdf->setPaper([0, 0, 1000, 2000]);
         return $pdf->stream();
     }
 }

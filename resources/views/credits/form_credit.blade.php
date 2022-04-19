@@ -395,6 +395,127 @@
                     terdapat perubahan data dalam aplikasi ini.</li>
                 <li>Bersedia mentaati segala persyaratan dan ketentuan yang berlaku di PT Bank Mandiri Persero Tbk.</li>
             </ol>
+            <p>Mengacu kepada ketentuan Bank Indonesia tentang transparansi informasi Suku Bunga Dasar Kredit Bank
+                Mandiri menginformasikan bahwa Suku Bunga Dasar Kredit (SBDK) kredit Mikro telah dipublikasikan melalui
+                sarana papan pengumuman cabang, website www.bankmandiri.co.id dan surat kabar</p>
+            <p>Sehubungan dengan Transparansi informasi Produk Bank dan Penggunaan Data Nasabah dengan ini saya / kami
+                menyatakan bahwa:</p>
+            <ol type="1">
+                <li>Bank telah memberikan penjelasan yang cukup mengenai karakteristik Produk Bank yang akan saya / kami
+                    telah mengerti dan memahani segala konsekuensi pemanfaatan Produk Bank, termasuk manfaat, risiko,
+                    dan biaya - biaya yang melekat pada Produk Bank tersebut</li>
+                <li>Memberikan persetujuan kepada Bank untuk memberikan dan atau menyebarluaskan data pribadi saya
+                    kepada pihak lain di luar badan hukum Bank untuk tujuan komersial.
+                    <ul type="none">
+                        <table>
+                            <tr>
+                                <td width="20">Ya</td>
+                                <td width="30">
+                                    <div
+                                        style="margin-top: 5px; display: inline-block; width: 30px; height: 20px; border: 1 solid black;">
+                                    </div>
+                                </td>
+                                <td width="20">Tidak</td>
+                                <td>
+                                    <div
+                                        style="margin-top: 5px; display: inline-block; width: 30px; height: 20px; border: 1 solid black;">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </ul>
+                </li>
+                <li>
+                    Telah memahami penjelasan Bank mengenai tujuan dan konsekuensi dari pemberitaan dan atau
+                    penyebarluasan data pribadi saya kepada pihak di luar badan hukum Bank di atas
+                    <ul type="none">
+                        <table>
+                            <tr>
+                                <td width="20">Ya</td>
+                                <td width="30">
+                                    <div
+                                        style="margin-top: 5px; display: inline-block; width: 30px; height: 20px; border: 1 solid black;">
+                                    </div>
+                                </td>
+                                <td width="20">Tidak</td>
+                                <td>
+                                    <div
+                                        style="margin-top: 5px; display: inline-block; width: 30px; height: 20px; border: 1 solid black;">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="margin-left: -80px; margin-top: 40px; float: left; margin-right: 150px;">
+                            <tr>
+                                <td width="400" colspan="3">
+                                    <div class="text-right"
+                                        style="margin-top: 20px; width: 100%; border-bottom: black solid 0.5px;">
+                                        (tempat,tanggal/bulan/tahun)
+                                    </div>
+                                    <span class="text-left">tandatangan</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th height="50"></th>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td width="200" colspan="3">
+                                    <div class="text-right"
+                                        style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
+                                        <span style="float: left;" class="text-left">Nama Jelas</span>
+                                    </div>
+                                    <div class="text-right"
+                                        style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
+                                        <span style="clear: both;" class="text-right">Nama Jelas MKS</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top: 40px; float: left; margin-right: 50px;">
+                            <tr>
+                                <td width="400" colspan="3">
+                                    <div class="text-right"
+                                        style="margin-top: 20px; width: 100%; border-bottom: black solid 0.5px;">
+                                        (tempat,tanggal/bulan/tahun)
+                                    </div>
+                                    <span class="text-left">tandatangan</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th height="50"></th>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td width="200" colspan="3">
+                                    <div class="text-right"
+                                        style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
+                                        <span style="float: left;" class="text-left">Nama Calon Debitur</span>
+                                    </div>
+                                    <div class="text-left"
+                                        style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
+                                        <span style="margin-top: 0px;" class="text-right">Nama Suami
+                                            / Istri</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </ul>
+                </li>
+
+            </ol>
         </div>
     </div>
     </div>
