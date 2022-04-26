@@ -79,14 +79,12 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        @if (($customer->approval_lv_1 == 0 && $customer->approval_lv_2 == 0) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 2))
-                                                            <a href="{{ route('credits.edit', $customer->id) }}"
-                                                                class="btn btn-sm btn-info rounded">Edit</a>
-                                                        @elseif($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1)
-                                                            <a target="_blank"
-                                                                href="{{ route('credits.print', $customer->id) }}"
-                                                                class="btn btn-success btn-sm rounded">Print</a>
-                                                        @endif
+                                                        <a href="{{ route('credits.show', $customer->id) }}"
+                                                            class="btn btn-sm btn-primary rounded">
+                                                            Detail
+                                                        </a>
+                                                        <a href="{{ route('credits.edit', $customer->id) }}"
+                                                            class="btn btn-sm btn-info rounded">Edit</a>
                                                         <button
                                                             class="delete-confirm btn btn-sm btn-danger rounded">Hapus</button>
                                                     </form>

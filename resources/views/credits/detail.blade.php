@@ -23,6 +23,12 @@
                                         <a href="{{ route('credits.print_credit', $customer->id) }}" target="_blank"
                                             class="btn btn-info btn-sm rounded mb-2">Print Form
                                             Kredit</a>
+                                        @if ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1)
+                                            <a target="_blank" href="{{ route('credits.print', $customer->id) }}"
+                                                class="btn btn-success btn-sm rounded mb-2">Print Perjanjian Kredit</a>
+                                        @endif
+                                        <a href="{{ route('credits.index') }}"
+                                            class="btn btn-sm btn-secondary rounded mb-2">Kembali</a>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Cabang / Unit Mikro</h5>
                                         <div class="row">
                                             <div class="col-md-6 form-group">

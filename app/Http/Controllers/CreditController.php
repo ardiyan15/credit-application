@@ -49,7 +49,6 @@ class CreditController extends Controller
             }
         }
 
-
         if ($request->jenis_pinjaman === 'kur') {
             // $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
 
@@ -65,12 +64,6 @@ class CreditController extends Controller
                 $biaya_administrasi = 500000;
             }
         } else {
-            // if ($request->limit_kredit <= 50000000) {
-            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 1.5 / 100));
-            // } else {
-            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.99 / 100));
-            // }
-
             $biaya_provisi_admin = ($request->limit_kredit * 0.5) / 100;
 
             $biaya_administrasi = 50000;
@@ -451,11 +444,6 @@ class CreditController extends Controller
                 $biaya_administrasi = 500000;
             }
         } else {
-            // if ($request->limit_kredit <= 50000000) {
-            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 1.5 / 100));
-            // } else {
-            //     $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.99 / 100));
-            // }
 
             $biaya_provisi_admin = ($request->limit_kredit * 0.5) / 100;
 
@@ -624,5 +612,16 @@ class CreditController extends Controller
         $pdf = PDF::loadview('credits.form_credit', ['customer' => $customer]);
         $pdf->setPaper([0, 0, 1000, 2000]);
         return $pdf->stream();
+    }
+
+    public function get_instalment()
+    {
+        $items = SukuBunga::all();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => $items
+        ]);
     }
 }

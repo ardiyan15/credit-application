@@ -24,6 +24,7 @@
                                             <th class="text-center">Nomor KTP</th>
                                             <th class="text-center">Nomor Rekening</th>
                                             <th class="text-center">Limit Kredit</th>
+                                            <th class="text-center">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,6 +45,10 @@
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
                                                 <td class="text-center">{{ $customer->no_rekening }}</td>
                                                 <td class="text-center">@currency($customer->limit_kredit)</td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('approval.detail', $customer->id) }}"
+                                                        class="btn btn-info btn-sm">Detail</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

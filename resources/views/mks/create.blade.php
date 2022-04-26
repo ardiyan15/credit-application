@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Skoring MKS</h1>
+                        <h1>Skoring MKA</h1>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                                     @csrf
                                     <div class="col-lg-6 form-group">
                                         <label for="">Nasabah</label>
-                                        <select name="nasabah_id" id="nasabah_id" class="form-control">
+                                        <select name="nasabah_id" id="nasabah_id" required class="form-control">
                                             <option value="">-- Pilih Nasabah --</option>
                                             @foreach ($customers as $customer)
                                                 <option value="{{ $customer->id }}">{{ $customer->nama_lengkap }}
@@ -28,78 +28,46 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-lg-6">
-                                        {{-- <table>
-                                            <tr>
-                                                <th width="150">No KTP</th>
-                                                <td width="40">:</td>
-                                                <td id="no_ktp" width="200"></td>
-                                                <th width="150">Jenis Agunan</th>
-                                                <td width="40">:</td>
-                                                <td id="jenis_agunan"></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nama Lengkap</th>
-                                                <td>:</td>
-                                                <td id="name"></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Limit Kredit</th>
-                                                <td>:</td>
-                                                <td id="credit_limit"></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Tenor</th>
-                                                <td>:</td>
-                                                <td id="tenor"></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Cicilan Perbulan</th>
-                                                <td>:</td>
-                                                <td id="cicilan"></td>
-                                            </tr>
-                                        </table> --}}
-                                    </div>
                                     <br>
                                     <div class="row">
                                         <div class="col-lg-6 form-group">
                                             <label for="">Kas, Tabungan, Deposito, atau Asset Lainnya</label>
                                             <input type="text" name="aset"
                                                 placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai</label>
                                             <input type="text" name="profit_ramai"
                                                 placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi</label>
                                             <input type="text" name="profit_sepi"
                                                 placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Normal</label>
                                             <input type="text" name="profit_normal" id="normal_perbulan"
                                                 placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Persediaan Rata - Rata</label>
                                             <input type="text" name="persediaan_aset" placeholder="Persedian Rata - Rata"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Kekayaan Berupa Fixed Asset</label>
                                             <input type="text" name="fixed_aset" placeholder="Kekayaan Berupa Fixed Asset"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Laba Usaha Perbulan</label>
                                             <input type="text" name="laba_perbulan" placeholder="Laba Usaha Perbulan"
-                                                class="form-control" readonly id="laba_perbulan">
+                                                class="form-control" readonly id="laba_perbulan" required>
                                             <input type="hidden" name="laba_pertahun" id="laba_pertahun_input">
                                         </div>
                                     </div>
@@ -121,8 +89,9 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mt-2">
-                                        <button disabled id="submit" class="btn btn-primary btn-sm rounded">Simpan</button>
-                                        <a href="" class="btn btn-secondary btn-sm rounded">Kembali</a>
+                                        <button id="submit" class="btn btn-primary btn-sm rounded">Simpan</button>
+                                        <a href="{{ route('mks.index') }}"
+                                            class="btn btn-secondary btn-sm rounded">Kembali</a>
                                     </div>
                                 </form>
                             </div>
@@ -190,9 +159,9 @@
 
         $("#normal_perbulan").on('keyup', function() {
             let pendapatanNormalPerbulan = $("#normal_perbulan").val()
-            if (pendapatanNormalPerbulan == '') {
-                return alert('Pendapatan Rata - Rata Perbulan Saat Kondisi Normal harus diisi ')
-            }
+            // if (pendapatanNormalPerbulan == '') {
+            //     return alert('Pendapatan Rata - Rata Perbulan Saat Kondisi Normal harus diisi ')
+            // }
             let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
             let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
             let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);

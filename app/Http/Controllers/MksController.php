@@ -26,7 +26,7 @@ class MksController extends Controller
 
     public function create()
     {
-        $nasabah = Nasabah::orderBy('id', 'DESC')->get();
+        $nasabah = Nasabah::doesntHave('skoring')->orderBy('id', 'DESC')->get();
 
         $data = [
             'menu' => $this->menu,
@@ -52,6 +52,11 @@ class MksController extends Controller
                 'laba_pertahun' => $request->laba_pertahun,
                 'nasabah_id' => $request->nasabah_id,
             ]);
+
+            $customer = Nasabah::findOrFail($request->nasabah_id);
+            $customer->approval_lv_1 = 1;
+            $customer->pesan_approval_lv_1 = 'OK';
+            $customer->save();
             DB::commit();
             return redirect('mks')->with('success', 'Berhasil input data');
         } catch (\Throwable $err) {
