@@ -81,12 +81,16 @@
                                                         @method('DELETE')
                                                         <a href="{{ route('credits.show', $customer->id) }}"
                                                             class="btn btn-sm btn-primary rounded">
-                                                            Detail
+                                                            <i class="fas fa-info-circle" title="Detail"></i>
                                                         </a>
-                                                        <a href="{{ route('credits.edit', $customer->id) }}"
-                                                            class="btn btn-sm btn-info rounded">Edit</a>
-                                                        <button
-                                                            class="delete-confirm btn btn-sm btn-danger rounded">Hapus</button>
+                                                        @if ($customer->approval_lv_1 != 1 && $customer->approval_lv_2 != 1)
+                                                            <a href="{{ route('credits.edit', $customer->id) }}"
+                                                                class="btn btn-sm btn-info rounded"><i
+                                                                    class="fas fa-edit" title="Edit"></i></a>
+                                                        @endif
+                                                        <button class="delete-confirm btn btn-sm btn-danger rounded"><i
+                                                                class="fa fa-trash" aria-hidden="true"
+                                                                data-toggle="tooltip" title="Hapus"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>

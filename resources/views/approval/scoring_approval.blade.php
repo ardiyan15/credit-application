@@ -91,7 +91,8 @@
                                         <button id="compute" class="btn btn-primary btn-sm rounded">Hitung</button>
                                         <button data-toggle="modal" data-target="#modalApprove" id="save" disabled
                                             class="btn btn-success btn-sm rounded">Approve</button>
-                                        <button id="reject" class="btn btn-danger btn-sm rounded">Reject</button>
+                                        <button id="reject" data-toggle="modal" data-target="#rejectModal"
+                                            class="btn btn-danger btn-sm rounded">Reject</button>
                                     </div>
                                 </div>
                             </div>
@@ -125,6 +126,32 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-sm rounded">Simpan</button>
                         <button type="button" class="btn btn-secondary btn-sm rounded" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Approval Kepala Cabang</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('approval.reject_credit', $customer->id) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <div class="modal-body">
+                        <input type="hidden" name="type" id="type">
+                        <label for="" id="title_message">Pesan Reject</label>
+                        <textarea name="approval_message" id="" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-sm btn rounded btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-sm rounded btn-success">Simpan</button>
                     </div>
                 </form>
             </div>

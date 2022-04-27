@@ -184,4 +184,21 @@ class ApprovalController extends Controller
 
         return view('approval.scoring_approval')->with($data);
     }
+
+    public function reject_credit(Request $request, $id)
+    {
+        $nasabah = Nasabah::findOrFail($id);
+
+        DB::beginTransaction();
+        try {
+            $nasabah->approval_lv_2 = 3;
+            $nasabah->pesan_approval_lv_2 = $request->approval_message;
+            $nasabah->save();
+            DB::commit();
+            return redirect('approval')->with('success', 'Behasil Reject Data');
+        } catch (\Throwable $err) {
+            DB::rollBack();
+            return back()->with('error', 'Gagal Reject Data');
+        }
+    }
 }

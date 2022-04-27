@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::patch('/approvalmka/{id}', [ApprovalController::class, 'approvalmka'])->name('approval.approvemka');
     Route::patch('/approval_head_division/{id}', [ApprovalController::class, 'approval_head_division'])->name('approve.head_division');
+    Route::patch('/reject_credit/{id}', [ApprovalController::class, 'reject_credit'])->name('approval.reject_credit');
 
     Route::post('/get_document', [CreditController::class, 'get_document'])->name('credits.get_document');
 });
