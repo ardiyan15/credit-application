@@ -44,4 +44,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function user_created()
+    {
+        return $this->hasMany(Nasabah::class, 'created_by');
+    }
 }

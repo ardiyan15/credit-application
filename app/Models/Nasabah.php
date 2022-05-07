@@ -53,4 +53,9 @@ class Nasabah extends Model
     {
         return $this->hasOne(Skoring::class, 'nasabah_id');
     }
+
+    public function user_created()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

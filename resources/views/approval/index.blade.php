@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Approval Pengajuan Kredit</h1>
+                        <h1>Approval Kepala Cabang</h1>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                                                 <td class="text-center">@currency($customer->limit_kredit)</td>
                                                 <td class="text-center">
                                                     <a href="{{ route('approval.detail', $customer->id) }}"
-                                                        class="btn btn-info btn-sm">Detail</a>
+                                                        class="btn btn-info btn-sm">Approval</a>
                                                 </td>
                                             </tr>
                                         @endforeach

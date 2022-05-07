@@ -17,6 +17,48 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5>{{ $customer->nama_lengkap }}</h5>
+                                <div class="row">
+                                    <div class="col-lg-6 form-group">
+                                        <label for="">Kas, Tabungan, Deposito, atau Asset Lainnya</label>
+                                        <input type="text" name="aset"
+                                            placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai</label>
+                                        <input type="text" name="profit_ramai"
+                                            placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi</label>
+                                        <input type="text" name="profit_sepi"
+                                            placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Normal</label>
+                                        <input type="text" name="profit_normal" id="normal_perbulan"
+                                            placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label for="">Persediaan Rata - Rata</label>
+                                        <input type="text" name="persediaan_aset" placeholder="Persedian Rata - Rata"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label for="">Kekayaan Berupa Fixed Asset</label>
+                                        <input type="text" name="fixed_aset" placeholder="Kekayaan Berupa Fixed Asset"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 form-group">
+                                        <label for="">Laba Usaha Perbulan</label>
+                                        <input type="text" name="laba_perbulan" placeholder="Laba Usaha Perbulan"
+                                            class="form-control" readonly id="laba_perbulan" required>
+                                        <input type="hidden" name="laba_pertahun" id="laba_pertahun_input">
+                                    </div>
+                                </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -31,9 +73,9 @@
                                                 <td>:</td>
                                                 <td>
                                                     @if ($customer->jenis_agunan !== null)
-                                                        <input type="checkbox" checked name="" id="">
+                                                        <input type="checkbox" readonly checked name="" id="">
                                                     @else
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" name="" readonly id="">
                                                     @endif
                                                 </td>
                                             </tr>
@@ -118,10 +160,10 @@
                     <div class="modal-body">
                         <label for="">Pesan Approve</label>
                         <textarea name="approval_message" id="" cols="30" rows="10" class="form-control"></textarea>
-                        <input type="text" name="type" value="approve">
-                        <input type="text" name="limit_kredit" id="input_limit_kredit">
-                        <input type="text" name="tenor" id="input_tenor">
-                        <input type="text" name="jenis_kredit" id="input_jenis_kredit">
+                        <input type="hidden" name="type" value="approve">
+                        <input type="hidden" name="limit_kredit" id="input_limit_kredit">
+                        <input type="hidden" name="tenor" id="input_tenor">
+                        <input type="hidden" name="jenis_kredit" id="input_jenis_kredit">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-sm rounded">Simpan</button>

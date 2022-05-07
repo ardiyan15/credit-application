@@ -41,7 +41,7 @@
                             <a href="{{ route('mks.index') }}"
                                 class="@if ($sub_menu == 'scoring') active @endif nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Perhitungan MKA</p>
+                                <p>Skoring MKA</p>
                             </a>
                         </li>
                     </ul>
@@ -55,13 +55,21 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('approval.bi_checking') }}"
+                                class="@if ($sub_menu == 'approval_bi_checking') active @endif nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Approval BI Checking</p>
+                            </a>
+                        </li>
+                    </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('approval.index') }}"
                                 class="@if ($sub_menu == 'approval_credit') active @endif nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Approval Kredit</p>
+                                <p>Approval K. Cabang</p>
                             </a>
                         </li>
                     </ul>
@@ -76,6 +84,13 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('employee.index') }}"
+                                class="@if ($sub_menu == 'employee') active @endif nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employee</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('users.index') }}"
                                 class="@if ($sub_menu == 'user') active @endif nav-link">

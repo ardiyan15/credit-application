@@ -30,6 +30,7 @@
                                             <th class="text-center">Limit Kredit</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Keterangan</th>
+                                            <th class="text-center">Pembuat</th>
                                             <th class="text-center">Opsi</th>
                                         </tr>
                                     </thead>
@@ -48,7 +49,7 @@
                                                     @if ($customer->approval_lv_1 == 0)
                                                         <span class="text-white badge badge-pill p-1 bg-warning">Pending
                                                             MKA</span>
-                                                    @elseif($customer->approval_lv_1 == 3)
+                                                    @elseif($customer->approval_lv_1 == 2)
                                                         <span
                                                             class="text-white badge badge-pill pl-2 pr-2 bg-danger">Ditolak
                                                             MKA</span>
@@ -70,23 +71,22 @@
                                                 <td class="text-center">
                                                     @if ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 0)
                                                         <span>{{ $customer->pesan_approval_lv_1 }}</span>
-                                                    @elseif($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1)
+                                                    @elseif(($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 3) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 2))
                                                         <span>{{ $customer->pesan_approval_lv_2 }}</span>
                                                     @endif
                                                 </td>
+                                                <td class="text-center">{{ $customer->user_created->fullname }}</td>
                                                 <td class="text-center">
                                                     <form action="{{ route('credits.destroy', $customer->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <a href="{{ route('credits.show', $customer->id) }}"
-                                                            class="btn btn-sm btn-primary rounded">
-                                                            <i class="fas fa-info-circle" title="Detail"></i>
-                                                        </a>
-                                                        @if ($customer->approval_lv_1 != 1 && $customer->approval_lv_2 != 1)
-                                                            <a href="{{ route('credits.edit', $customer->id) }}"
-                                                                class="btn btn-sm btn-info rounded"><i
-                                                                    class="fas fa-edit" title="Edit"></i></a>
+                                                        @if ($customer->approval_lv_1 != 2 && $customer->approval_lv_1 !== 1)
+                                                            @if ($customer->approval_lv_1 != 1 && $customer->approval_lv_2 != 1)
+                                                                <a href="{{ route('credits.edit', $customer->id) }}"
+                                                                    class="btn btn-sm btn-info rounded"><i
+                                                                        class="fas fa-edit" title="Edit"></i></a>
+                                                            @endif
                                                         @endif
                                                         <button class="delete-confirm btn btn-sm btn-danger rounded"><i
                                                                 class="fa fa-trash" aria-hidden="true"

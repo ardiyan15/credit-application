@@ -26,7 +26,7 @@ class MksController extends Controller
 
     public function create()
     {
-        $nasabah = Nasabah::doesntHave('skoring')->orderBy('id', 'DESC')->get();
+        $nasabah = Nasabah::doesntHave('skoring')->where('approval_lv_1', '1')->orderBy('id', 'DESC')->get();
 
         $data = [
             'menu' => $this->menu,

@@ -11,6 +11,7 @@ use App\Models\Suami_istri;
 use App\Models\SukuBunga;
 use App\Models\Usaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDF;
 
@@ -21,7 +22,7 @@ class CreditController extends Controller
     {
         $data = [
             'menu' => $this->menu,
-            'customers' => Nasabah::orderBy('id', 'DESC')->get(),
+            'customers' => Nasabah::with('user_created')->orderBy('id', 'DESC')->get(),
             'sub_menu' => 'credit'
         ];
 
@@ -127,7 +128,8 @@ class CreditController extends Controller
                 'approval_lv_1' => 0,
                 'pesan_approval_lv_1' => null,
                 'approval_lv_2' => 0,
-                'pesan_approval_lv_2' => null
+                'pesan_approval_lv_2' => null,
+                'created_by' => Auth::user()->id
             ]);
 
             $nasabah = Nasabah::orderBy('id', 'DESC')->first();

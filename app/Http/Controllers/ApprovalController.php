@@ -201,4 +201,36 @@ class ApprovalController extends Controller
             return back()->with('error', 'Gagal Reject Data');
         }
     }
+
+    public function bi_checking()
+    {
+        $data = [
+            'menu' => $this->menu,
+            'sub_menu' => 'approval_bi_checking',
+            'customers' => Nasabah::orderBy('id', 'DESC')->where('approval_lv_1', 0)->get()
+        ];
+
+        return view('approval.bi_checking')->with($data);
+    }
+
+    public function bi_checking_approval(Request $request)
+    {
+        $nasabah = Nasabah::findOrFail($request->id_customer);
+        try {
+            if ($request->type == 'approve') {
+                $nasabah->approval_lv_1 = 1;
+                $nasabah->pesan_approval_lv_1 = $request->pesan_approve;
+                $nasabah->save();
+            } else {
+                $nasabah->approval_lv_1 = 2;
+                $nasabah->pesan_approval_lv_1 = $request->pesan_approve;
+                $nasabah->save();
+            }
+            DB::commit();
+            return back()->with('success', 'Berhasil melakukan approval');
+        } catch (\Throwable $err) {
+            DB::rollBack();
+            return back()->with('error', 'Gagal melakukan approval');
+        }
+    }
 }

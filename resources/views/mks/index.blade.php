@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('mks.create') }}" class="btn btn-primary btn-sm rounded">Perhitungan
+                                <a href="{{ route('mks.create') }}" class="btn btn-primary btn-sm rounded">Skoring
                                     MKA</a>
                             </div>
                             <div class="card-body">
@@ -28,7 +28,6 @@
                                             <th class="text-center">Nomor KTP</th>
                                             <th class="text-center">Nomor Rekening</th>
                                             <th class="text-center">Limit Kredit</th>
-                                            <th class="text-center">Scoring</th>
                                             <th class="text-center">Opsi</th>
                                         </tr>
                                     </thead>
@@ -40,14 +39,16 @@
                                                 <td class="text-center">{{ $score->nasabah->no_ktp }}</td>
                                                 <td class="text-center">{{ $score->nasabah->no_rekening }}</td>
                                                 <td class="text-center">@currency($score->nasabah->limit_kredit)</td>
-                                                <td class="text-center">@currency($score->skor)</td>
                                                 <td class="text-center">
                                                     <form action="{{ route('mks.destroy', $score->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="{{ route('mks.edit', $score->id) }}"
-                                                            class="btn btn-info btn-sm">Edit</a>
-                                                        <button class="delete-confirm btn btn-danger btn-sm">Hapus</button>
+                                                            class="btn btn-info btn-sm"><i class="fas fa-edit"
+                                                                title="Edit"></i></a>
+                                                        <button class="delete-confirm btn btn-danger btn-sm"><i
+                                                                class="fa fa-trash" aria-hidden="true"
+                                                                data-toggle="tooltip" title="Hapus"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>
