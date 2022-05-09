@@ -34,13 +34,13 @@
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">
                                                     @if (Auth::user()->roles != 'kepala cabang')
-                                                        <a href="{{ route('approval.show', $customer->id) }}">
-                                                            {{ $customer->nama_lengkap }}
-                                                        </a>
+                                                        {{-- <a href="{{ route('approval.show', $customer->id) }}"> --}}
+                                                        {{ $customer->nama_lengkap }}
+                                                        {{-- </a> --}}
                                                     @else
-                                                        <a href="{{ route('approval.skoring', $customer->id) }}">
-                                                            {{ $customer->nama_lengkap }}
-                                                        </a>
+                                                        {{-- <a href="{{ route('approval.skoring', $customer->id) }}"> --}}
+                                                        {{ $customer->nama_lengkap }}
+                                                        {{-- </a> --}}
                                                     @endif
                                                 </td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>

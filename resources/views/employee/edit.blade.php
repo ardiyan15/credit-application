@@ -18,28 +18,29 @@
                             <div class="card-header">
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('employee.store') }}">
+                                <form method="POST" action="{{ route('employee.update', $employee->id) }}">
+                                    @method('PATCH')
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">NIP</label>
                                                 <input type="text" name="nip" class="form-control" placeholder="NIP"
-                                                    required>
+                                                    required value="{{ $employee->nip }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Nama</label>
                                                 <input type="text" name="nama" class="form-control" placeholder="Nama"
-                                                    required>
+                                                    required value="{{ $employee->nama }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">No Telepon</label>
                                                 <input type="text" name="no_telepon" class="form-control"
-                                                    placeholder="No Telepon" required>
+                                                    placeholder="No Telepon" required value="{{ $employee->no_telepon }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -47,21 +48,25 @@
                                                 <label for="">Jabatan</label>
                                                 <select name="jabatan" id="" class="form-control" required>
                                                     <option value="">-- Pilih Jabatan --</option>
-                                                    <option value="MKS">MKS</option>
-                                                    <option value="MKA">MKA</option>
-                                                    <option value="BOS">BOS</option>
-                                                    <option value="Teller">Teller</option>
-                                                    <option value="Customer Service Representative">Customer Service
-                                                        Representative</option>
-                                                    <option value="Mikro Branch Manager">Mikro Branch Manager</option>
-                                                    <option value="Branch Manager">Branch Manager</option>
+                                                    @foreach ($positions as $position)
+                                                        @if ($position['value'] == $employee->jabatan)
+                                                            <option value="{{ $position['value'] }}" selected>
+                                                                {{ $position['name'] }}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{ $position['value'] }}">
+                                                                {{ $position['name'] }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Alamat</label>
-                                                <textarea name="alamat" id="" cols="30" rows="5" class="form-control" placeholder="Alamat" required></textarea>
+                                                <textarea name="alamat" id="" cols="30" rows="5" class="form-control" placeholder="Alamat"
+                                                    required>{{ $employee->alamat }}</textarea>
                                             </div>
                                         </div>
                                     </div>

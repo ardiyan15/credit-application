@@ -174,7 +174,7 @@ class ApprovalController extends Controller
 
     public function approval_detail($id)
     {
-        $customer = Nasabah::with('calculation', 'usaha')->findOrFail($id);
+        $customer = Nasabah::with('skoring', 'calculation', 'usaha')->findOrFail($id);
 
         $data = [
             'menu' => $this->menu,

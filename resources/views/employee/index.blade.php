@@ -43,13 +43,13 @@
                                                     <form action="{{ route('employee.destroy', $employee->id) }}"
                                                         method="POST">
                                                         <a href="{{ route('employee.edit', $employee->id) }}"
-                                                            class="btn btn-info btn-sm rounded">Ubah</a>
+                                                            class="btn btn-info btn-sm rounded"><i class="fas fa-edit"
+                                                                title="Edit"></i></a>
                                                         @csrf
                                                         @method('DELETE')
-                                                        @if (Auth::user()->id != $employee->id)
-                                                            <button onclick="return confirm('Ingin menghapus data?')"
-                                                                class="btn btn-danger btn-sm rounded delete-confirm">Hapus</button>
-                                                        @endif
+                                                        <button class="btn btn-danger btn-sm rounded delete-confirm"><i
+                                                                class="fa fa-trash" aria-hidden="true"
+                                                                data-toggle="tooltip" title="Hapus"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -64,3 +64,25 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $('.delete-confirm').on('click', function(event) {
+            event.preventDefault();
+            let id = $(this).data('id')
+            Swal.fire({
+                title: 'Hapus Data',
+                text: 'Ingin menghapus data?',
+                icon: 'question',
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText: "Batal",
+                focusConfirm: false,
+            }).then((value) => {
+                if (value.isConfirmed) {
+                    $(this).closest("form").submit()
+                }
+            });
+        });
+    </script>
+@endpush
