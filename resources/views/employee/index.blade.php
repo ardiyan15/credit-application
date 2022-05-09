@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('users.create') }}"
+                                <a href="{{ route('employee.create') }}"
                                     class="btn btn-primary btn-sm rounded pull-right">Tambah Employee</a>
                             </div>
                             <div class="card-body">
@@ -25,7 +25,7 @@
                                         <tr>
                                             <th class="text-center">#</th>
                                             <th class="text-center">NIP</th>
-                                            <th class="text-center">Username</th>
+                                            <th class="text-center">Nama</th>
                                             <th class="text-center">Roles</th>
                                             <th class="text-center">Tanggal Dibuat</th>
                                             <th class="text-center">Opsi</th>
@@ -37,11 +37,12 @@
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">{{ $employee->nip }}</td>
                                                 <td class="text-center">{{ $employee->nama }}</td>
+                                                <td class="text-center">{{ $employee->jabatan }}</td>
                                                 <td class="text-center">{{ substr($employee->created_at, 0, 10) }}</td>
                                                 <td class="text-center">
-                                                    <form action="{{ route('users.destroy', $employee->id) }}"
+                                                    <form action="{{ route('employee.destroy', $employee->id) }}"
                                                         method="POST">
-                                                        <a href="{{ route('users.edit', $employee->id) }}"
+                                                        <a href="{{ route('employee.edit', $employee->id) }}"
                                                             class="btn btn-info btn-sm rounded">Ubah</a>
                                                         @csrf
                                                         @method('DELETE')

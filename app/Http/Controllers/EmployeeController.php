@@ -22,15 +22,14 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        //
+        $data = [
+            'menu' => $this->menu,
+            'sub_menu' => 'employee',
+        ];
+
+        return view('employee.create')->with($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
