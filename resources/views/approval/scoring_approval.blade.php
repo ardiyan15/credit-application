@@ -263,6 +263,7 @@
                                 .per_bulan / 100))
                         }
                     })
+                    console.log()
                     $("#result").empty()
                     $("#result").append("Rp. " + rupiah(instalment))
                     $("#input_limit_kredit").val(limit_kredit)

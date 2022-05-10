@@ -83,7 +83,7 @@
                     </li>
                 @endif
 
-                @if (Auth::user()->roles == 'superadmin')
+                @if (Auth::user()->roles == 'superadmin' || Auth::user()->roles == 'mks')
                     <li class="nav-item @if ($menu == 'master') menu-open @endif">
                         <a href="#" class="@if ($menu == 'master') active @endif nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -93,34 +93,40 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ route('employee.index') }}"
-                                    class="@if ($sub_menu == 'employee') active @endif nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Employee</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('users.index') }}"
-                                    class="@if ($sub_menu == 'user') active @endif nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>User</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('credits.index') }}"
-                                    class="@if ($sub_menu == 'credit') active @endif nav-link ">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Pengajuan Kredit</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('sukubunga.index') }}"
-                                    class="@if ($sub_menu == 'suku_bunga') active @endif nav-link ">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Suku Bunga</p>
-                                </a>
-                            </li>
+                            @if (Auth::user()->roles == 'superadmin')
+                                <li class="nav-item">
+                                    <a href="{{ route('employee.index') }}"
+                                        class="@if ($sub_menu == 'employee') active @endif nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Employee</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('users.index') }}"
+                                        class="@if ($sub_menu == 'user') active @endif nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User</p>
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->roles == 'mks')
+                                <li class="nav-item">
+                                    <a href="{{ route('credits.index') }}"
+                                        class="@if ($sub_menu == 'credit') active @endif nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pengajuan Kredit</p>
+                                    </a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->roles == 'superadmin')
+                                <li class="nav-item">
+                                    <a href="{{ route('sukubunga.index') }}"
+                                        class="@if ($sub_menu == 'suku_bunga') active @endif nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Suku Bunga</p>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 @endif

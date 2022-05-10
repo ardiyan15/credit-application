@@ -148,7 +148,7 @@
         sertifikat
         No. {{ $customer->nomor_sertifikat }}</p>
 
-    <br> <br>
+    <br> <br> <br> <br>
     <div class="text-center" style="font-size: 13px;">
         <span class="text-center"><b> Pasal 3 </b></span><br>
         <span class="text-center"><b>Pencairan Kredit</b></span>
