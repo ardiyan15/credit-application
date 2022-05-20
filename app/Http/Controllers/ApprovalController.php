@@ -22,10 +22,7 @@ class ApprovalController extends Controller
         //         ['approval_lv_2', '=', 0]
         //     ])->doesntHave('skoring')->orderBy('id', 'DESC')->get();
         // } else if (Auth::user()->roles == 'kepala cabang' || Auth::user()->roles == 'superadmin') {
-        $customers = Nasabah::where([
-            ['approval_lv_1', '=', 1],
-            ['approval_lv_2', '=', 0]
-        ])->whereHas('skoring')->orderBy('id', 'DESC')->get();
+        $customers = Nasabah::whereHas('skoring')->orderBy('id', 'DESC')->get();
         // }
 
         $data = [
@@ -207,7 +204,7 @@ class ApprovalController extends Controller
         $data = [
             'menu' => $this->menu,
             'sub_menu' => 'approval_bi_checking',
-            'customers' => Nasabah::orderBy('id', 'DESC')->where('approval_lv_1', 0)->get()
+            'customers' => Nasabah::orderBy('id', 'DESC')->get()
         ];
 
         return view('approval.bi_checking')->with($data);

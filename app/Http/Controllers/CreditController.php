@@ -10,6 +10,7 @@ use App\Models\Nasabah;
 use App\Models\Suami_istri;
 use App\Models\SukuBunga;
 use App\Models\Usaha;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -236,14 +237,6 @@ class CreditController extends Controller
             [
                 'value' => 'Baru',
                 'name' => 'Baru'
-            ],
-            [
-                'value' => 'Top Up',
-                'name' => 'Top Up'
-            ],
-            [
-                'value' => 'Take Over',
-                'name' => 'Take Ovew'
             ]
         ];
 
@@ -610,8 +603,9 @@ class CreditController extends Controller
     public function print_credit($id)
     {
         $customer = Nasabah::findOrFail($id);
+        $user = User::where('roles', 'kepala cabang')->first();
 
-        $pdf = PDF::loadview('credits.form_credit', ['customer' => $customer]);
+        $pdf = PDF::loadview('credits.form_credit', ['customer' => $customer, 'user' => $user]);
         $pdf->setPaper([0, 0, 1000, 2000]);
         return $pdf->stream();
     }

@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/mks', MksController::class);
     Route::resource('/employee', EmployeeController::class);
 
+    Route::get('/add_skoring/{id}', [MksController::class, 'create'])->name('mks.add_skoring');
     Route::get('/print/{id}', [CreditController::class, 'print_credit_approved'])->name('credits.print');
     Route::get('/get_nasabah/{id}', [CreditController::class, 'get_nasabah'])->name('get_nasabah');
     Route::get('/get_detail_scoring/{id}', [ApprovalController::class, 'detail_score'])->name('approval.skoring');

@@ -21,8 +21,9 @@
     <h5 class="text-center">Nomor :
         R03.JRK/{{ $customer->nomor_urut }}/{{ strtoupper($customer->jenis_pinjaman) }}/{{ substr($customer->created_at, 0, 4) }}
     </h5>
-    <p style="font-size: 13px;">Perjanjian kredit ini dibuat dan ditandatangani di DKI Jakarta pada hari Jumat, 29 Maret
-        2019 oleh dan antara :
+    <p style="font-size: 13px;">Perjanjian kredit ini dibuat dan ditandatangani di DKI Jakarta pada hari
+        {{ \Carbon\Carbon::now()->format('d F Y') }} Pemegang KTP No.
+        oleh dan antara :
     </p>
     <ol type="I" style="font-size: 13px;">
         <li class="text-justify">

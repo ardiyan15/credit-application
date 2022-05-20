@@ -112,7 +112,7 @@ class UserController extends Controller
             $user->nip = $request->nip;
             $user->save();
             DB::commit();
-            return redirect('users')->with('success', 'Berhasil edit user');
+            return redirect('users/' . $user->id)->with('success', 'Berhasil edit user');
         } catch (\Throwable $err) {
             DB::rollBack();
             throw $err;

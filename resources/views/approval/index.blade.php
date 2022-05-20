@@ -24,6 +24,7 @@
                                             <th class="text-center">Nomor KTP</th>
                                             <th class="text-center">Nomor Rekening</th>
                                             <th class="text-center">Limit Kredit</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Opsi</th>
                                         </tr>
                                     </thead>
@@ -32,22 +33,25 @@
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">
-                                                    @if (Auth::user()->roles != 'kepala cabang')
-                                                        <a href="{{ route('approval.show', $customer->id) }}">
-                                                            {{ $customer->nama_lengkap }}
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('approval.skoring', $customer->id) }}">
-                                                            {{ $customer->nama_lengkap }}
-                                                        </a>
-                                                    @endif
+                                                    {{ $customer->nama_lengkap }}
                                                 </td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
                                                 <td class="text-center">{{ $customer->no_rekening }}</td>
                                                 <td class="text-center">@currency($customer->limit_kredit)</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('approval.detail', $customer->id) }}"
-                                                        class="btn btn-info btn-sm">Approval</a>
+                                                    @if ($customer->approval_lv_2 == 0)
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-danger">
+                                                            Belum diapprove</span>
+                                                    @else
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-success">
+                                                            Sudah diapprove</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($customer->approval_lv_2 == 0)
+                                                        <a href="{{ route('approval.detail', $customer->id) }}"
+                                                            class="btn btn-info btn-sm">Approval</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

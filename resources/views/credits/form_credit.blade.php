@@ -223,7 +223,7 @@
                 <tr>
                     <th>13. Tempat, Tanggal Lahir</th>
                     <td>:</td>
-                    <td> {{ $customer->suami_istri->tempat_lahir .', ' .\Carbon\Carbon::parse($customer->suami_istri->tanggal_lahir)->translatedFormat('d F Y') }}
+                    <td> {{ $customer->suami_istri->tempat_lahir . ', ' . \Carbon\Carbon::parse($customer->suami_istri->tanggal_lahir)->translatedFormat('d F Y') }}
                     </td>
                 </tr>
                 <tr>
@@ -450,7 +450,7 @@
                                 <td width="400" colspan="3">
                                     <div class="text-right"
                                         style="margin-top: 20px; width: 100%; border-bottom: black solid 0.5px;">
-                                        (tempat,tanggal/bulan/tahun)
+                                        (Tangerang,{{ \Carbon\Carbon::parse($customer->created_at)->format('d/F/Y') }})
                                     </div>
                                     <span class="text-left">tandatangan</span>
                                 </td>
@@ -469,11 +469,13 @@
                                 <td width="200" colspan="3">
                                     <div class="text-right"
                                         style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="float: left;" class="text-left">Nama Jelas</span>
+                                        <span style="float: left;"
+                                            class="text-left">{{ $user->fullname }}</span>
                                     </div>
                                     <div class="text-right"
                                         style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="clear: both;" class="text-right">Nama Jelas MKS</span>
+                                        <span style="clear: both;"
+                                            class="text-right">{{ $customer->user_created->fullname }}</span>
                                     </div>
                                 </td>
                             </tr>
@@ -483,7 +485,7 @@
                                 <td width="400" colspan="3">
                                     <div class="text-right"
                                         style="margin-top: 20px; width: 100%; border-bottom: black solid 0.5px;">
-                                        (tempat,tanggal/bulan/tahun)
+                                        (Tangerang,{{ \Carbon\Carbon::parse($customer->created_at)->format('d/F/Y') }})
                                     </div>
                                     <span class="text-left">tandatangan</span>
                                 </td>
@@ -502,12 +504,13 @@
                                 <td width="200" colspan="3">
                                     <div class="text-right"
                                         style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="float: left;" class="text-left">Nama Calon Debitur</span>
+                                        <span style="float: left;"
+                                            class="text-left">{{ $customer->nama_lengkap }}</span>
                                     </div>
                                     <div class="text-left"
                                         style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="margin-top: 0px;" class="text-right">Nama Suami
-                                            / Istri</span>
+                                        <span style="margin-top: 0px;"
+                                            class="text-right">{{ $customer->suami_istri->nama_suami_istri }}</span>
                                     </div>
                                 </td>
                             </tr>

@@ -21,11 +21,8 @@
                                     <div class="col-lg-6 form-group">
                                         <label for="">Nasabah</label>
                                         <select name="nasabah_id" id="nasabah_id" required class="form-control">
-                                            <option value="">-- Pilih Nasabah --</option>
-                                            @foreach ($customers as $customer)
-                                                <option value="{{ $customer->id }}">{{ $customer->nama_lengkap }}
-                                                </option>
-                                            @endforeach
+                                            <option value="{{ $customer->id }}" selected>{{ $customer->nama_lengkap }}
+                                            </option>
                                         </select>
                                     </div>
                                     <br>
@@ -34,35 +31,35 @@
                                             <label for="">Kas, Tabungan, Deposito, atau Asset Lainnya</label>
                                             <input type="text" name="aset"
                                                 placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya"
-                                                class="form-control" required>
+                                                class="form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai</label>
                                             <input type="text" name="profit_ramai"
                                                 placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                class="form-control" required>
+                                                class="form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi</label>
                                             <input type="text" name="profit_sepi"
                                                 placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                class="form-control" required>
+                                                class="form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Normal</label>
                                             <input type="text" name="profit_normal" id="normal_perbulan"
                                                 placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                class="form-control" required>
+                                                class="form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Persediaan Rata - Rata</label>
                                             <input type="text" name="persediaan_aset" placeholder="Persedian Rata - Rata"
-                                                class="form-control" required>
+                                                class="form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Kekayaan Berupa Fixed Asset</label>
                                             <input type="text" name="fixed_aset" placeholder="Kekayaan Berupa Fixed Asset"
-                                                class="form-control" required>
+                                                class="form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Laba Usaha Perbulan</label>
@@ -120,41 +117,39 @@
             return rupiah
         }
 
-        $("#nasabah_id").on('change', function() {
-            let id = $(this).val()
-            let url = '{{ route('get_nasabah', ':id') }}'
-            url = url.replace(':id', id)
+        let id = $('#nasabah_id option:selected').val()
 
-            $.ajax({
-                type: 'GET',
-                url: url,
-                success: ({
-                    data
-                }) => {
-                    limitKredit = data.limit_kredit
-                    $("#limit_kredit").text("Rp. " + format_rupiah(data.limit_kredit))
-                },
-                error: err => console.log(err)
-            })
+        // let id = $(this).val()
+        let url = '{{ route('get_nasabah', ':id') }}'
+        url = url.replace(':id', id)
 
-            let pendapatanNormalPerbulan = $("#normal_perbulan").val()
-            // if (pendapatanNormalPerbulan == '') {
-            //     return alert('Pendapatan Rata - Rata Perbulan Saat Kondisi Normal harus diisi ')
-            // }
-            let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
-            let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
-            let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);
-            $("#laba_perbulan").val(labaBersihPerbulan)
-            $("#laba_pertahun").text("Rp. " + format_rupiah(labaBersihPertahun))
-            if (labaBersihPertahun > limitKredit) {
-                $("#info_laba_bersih").removeClass("bg-danger bg-warning").addClass("bg-success")
-                $("#submit").prop('disabled', false)
-            } else if (labaBersihPerbulan == limitKredit) {
-                $("#info_laba_bersih").removeClass('bg-danger bg-success').addClass("bg-warning")
-                $("#submit").prop('disabled', false)
-            } else {
-                $("#info_laba_bersih").removeClass('bg-success bg-primary').addClass("bg-danger")
-            }
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: ({
+                data
+            }) => {
+                limitKredit = data.limit_kredit
+                $("#limit_kredit").text("Rp. " + format_rupiah(data.limit_kredit))
+
+                let pendapatanNormalPerbulan = $("#normal_perbulan").val()
+
+                let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
+                let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
+                let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);
+                $("#laba_perbulan").val(labaBersihPerbulan)
+                $("#laba_pertahun").text("Rp. " + format_rupiah(labaBersihPertahun))
+                if (labaBersihPertahun > limitKredit) {
+                    $("#info_laba_bersih").removeClass("bg-danger bg-warning").addClass("bg-success")
+                    $("#submit").prop('disabled', false)
+                } else if (labaBersihPerbulan == limitKredit) {
+                    $("#info_laba_bersih").removeClass('bg-danger bg-success').addClass("bg-warning")
+                    $("#submit").prop('disabled', false)
+                } else {
+                    $("#info_laba_bersih").removeClass('bg-success bg-primary').addClass("bg-danger")
+                }
+            },
+            error: err => console.log(err)
         })
 
         $("#normal_perbulan").on('keyup', function() {

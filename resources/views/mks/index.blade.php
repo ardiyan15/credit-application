@@ -16,8 +16,6 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('mks.create') }}" class="btn btn-primary btn-sm rounded">Skoring
-                                    MKA</a>
                             </div>
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">
@@ -28,28 +26,47 @@
                                             <th class="text-center">Nomor KTP</th>
                                             <th class="text-center">Nomor Rekening</th>
                                             <th class="text-center">Limit Kredit</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($scores as $score)
+                                        @foreach ($customers as $customer)
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td class="text-center">{{ $score->nasabah->nama_lengkap }}</td>
-                                                <td class="text-center">{{ $score->nasabah->no_ktp }}</td>
-                                                <td class="text-center">{{ $score->nasabah->no_rekening }}</td>
-                                                <td class="text-center">@currency($score->nasabah->limit_kredit)</td>
+                                                <td class="text-center">{{ $customer->nama_lengkap }}</td>
+                                                <td class="text-center">{{ $customer->no_ktp }}</td>
+                                                <td class="text-center">{{ $customer->no_rekening }}</td>
+                                                <td class="text-center">@currency($customer->limit_kredit)</td>
                                                 <td class="text-center">
-                                                    <form action="{{ route('mks.destroy', $score->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <a href="{{ route('mks.edit', $score->id) }}"
-                                                            class="btn btn-info btn-sm"><i class="fas fa-edit"
-                                                                title="Edit"></i></a>
-                                                        <button class="delete-confirm btn btn-danger btn-sm"><i
-                                                                class="fa fa-trash" aria-hidden="true"
-                                                                data-toggle="tooltip" title="Hapus"></i></button>
-                                                    </form>
+                                                    @if ($customer->skoring != null)
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-success">
+                                                            Sudah Ada Skoring</span>
+                                                    @else
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-danger">
+                                                            Belum Ada Skroing</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($customer->skoring && Auth::user()->roles == 'mka')
+                                                        <form action="{{ route('mks.destroy', $customer->skoring->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="{{ route('mks.edit', $customer->skoring->id) }}"
+                                                                class="btn btn-info btn-sm"><i class="fas fa-edit"
+                                                                    title="Edit"></i></a>
+                                                            <button class="delete-confirm btn btn-danger btn-sm"><i
+                                                                    class="fa fa-trash" aria-hidden="true"
+                                                                    data-toggle="tooltip" title="Hapus"></i></button>
+                                                        </form>
+                                                    @endif
+                                                    @if ($customer->skoring == null && Auth::user()->roles == 'mka')
+                                                        <a href="{{ route('mks.add_skoring', $customer->id) }}"
+                                                            class="btn btn-primary btn-sm"><i class="fa fa-star"
+                                                                aria-hidden="true" data-toggle="tooltip"
+                                                                title="Skoring"></i></a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

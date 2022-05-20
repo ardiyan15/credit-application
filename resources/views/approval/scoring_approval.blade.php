@@ -121,7 +121,8 @@
                                                 <th>Jangka Waktu /bulan</th>
                                                 <td>:</td>
                                                 <td><input type="text" id="jangka_waktu" placeholder="jangka waktu /bulan"
-                                                        class="form-control">
+                                                        class="form-control" value="{{ $customer->jangka_waktu }}"
+                                                        readonly>
                                                 </td>
                                             </tr>
                                             <tr>

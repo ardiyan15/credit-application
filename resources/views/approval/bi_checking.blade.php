@@ -24,6 +24,7 @@
                                             <th class="text-center">Nomor KTP</th>
                                             <th class="text-center">Nomor Rekening</th>
                                             <th class="text-center">Limit Kredit</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Opsi</th>
                                             <th hidden></th>
                                         </tr>
@@ -34,23 +35,30 @@
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">
                                                     @if (Auth::user()->roles != 'kepala cabang')
-                                                        {{-- <a href="{{ route('approval.show', $customer->id) }}"> --}}
                                                         {{ $customer->nama_lengkap }}
-                                                        {{-- </a> --}}
                                                     @else
-                                                        {{-- <a href="{{ route('approval.skoring', $customer->id) }}"> --}}
                                                         {{ $customer->nama_lengkap }}
-                                                        {{-- </a> --}}
                                                     @endif
                                                 </td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
                                                 <td class="text-center">{{ $customer->no_rekening }}</td>
                                                 <td class="text-center">@currency($customer->limit_kredit)</td>
                                                 <td class="text-center">
-                                                    <button data-toggle="modal" data-target="#approve"
-                                                        class="approve btn btn-primary btn-sm rounded">Approve</button>
-                                                    <button data-toggle="modal" data-target="#reject"
-                                                        class="reject btn btn-danger btn-sm rounded">Reject</button>
+                                                    @if ($customer->approval_lv_1 == 0)
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-danger">
+                                                            Belum diapprove</span>
+                                                    @else
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-success">
+                                                            Sudah diapprove</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($customer->approval_lv_1 == 0)
+                                                        <button data-toggle="modal" data-target="#approve"
+                                                            class="approve btn btn-primary btn-sm rounded">Approve</button>
+                                                        <button data-toggle="modal" data-target="#reject"
+                                                            class="reject btn btn-danger btn-sm rounded">Reject</button>
+                                                    @endif
                                                 </td>
                                                 <td hidden class="id_customer">{{ $customer->id }}</td>
                                             </tr>

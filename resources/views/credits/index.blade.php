@@ -16,8 +16,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('credits.create') }}" class="btn btn-primary btn-sm rounded">Tambah
-                                    Pengajuan Kredit</a>
+                                @if (Auth::user()->roles == 'mks')
+                                    <a href="{{ route('credits.create') }}" class="btn btn-primary btn-sm rounded">Tambah
+                                        Pengajuan Kredit</a>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">
@@ -88,9 +90,11 @@
                                                                         class="fas fa-edit" title="Edit"></i></a>
                                                             @endif
                                                         @endif
-                                                        <button class="delete-confirm btn btn-sm btn-danger rounded"><i
-                                                                class="fa fa-trash" aria-hidden="true"
-                                                                data-toggle="tooltip" title="Hapus"></i></button>
+                                                        @if (Auth::user()->roles != 'mka' && Auth::user()->roles != 'kepala cabang')
+                                                            <button class="delete-confirm btn btn-sm btn-danger rounded"><i
+                                                                    class="fa fa-trash" aria-hidden="true"
+                                                                    data-toggle="tooltip" title="Hapus"></i></button>
+                                                        @endif
                                                     </form>
                                                 </td>
                                             </tr>

@@ -27,8 +27,6 @@
                                                 <select required name="jenis_pengajuan" id="" class="form-control">
                                                     <option value="">-- Pilih Pengajuan --</option>
                                                     <option value="Baru">Baru</option>
-                                                    <option value="Top Up">Top Up</option>
-                                                    <option value="Take Over">Take Over</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6 form-group">

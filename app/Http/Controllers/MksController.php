@@ -13,25 +13,25 @@ class MksController extends Controller
 
     public function index()
     {
-        $scores = Mks::with('nasabah')->orderBy('id', 'DESC')->get();
+        $customers = Nasabah::with('skoring')->where('approval_lv_1', '1')->orderBy('id', 'DESC')->get();
 
         $data = [
             'menu' => $this->menu,
             'sub_menu' => 'scoring',
-            'scores' => $scores
+            'customers' => $customers
         ];
 
         return view('mks.index')->with($data);
     }
 
-    public function create()
+    public function create($id)
     {
-        $nasabah = Nasabah::doesntHave('skoring')->where('approval_lv_1', '1')->orderBy('id', 'DESC')->get();
+        $nasabah = Nasabah::findOrFail($id);
 
         $data = [
             'menu' => $this->menu,
             'sub_menu' => 'scoring',
-            'customers' => $nasabah
+            'customer' => $nasabah
         ];
 
         return view('mks.create')->with($data);
@@ -74,7 +74,7 @@ class MksController extends Controller
     public function edit($id)
     {
         $score = Mks::findOrFail($id);
-        $customers = Nasabah::orderBy('id', 'DESC')->get();
+        $customers = Nasabah::with('skoring')->orderBy('id', 'DESC')->get();
 
         $data = [
             'menu' => $this->menu,
@@ -91,7 +91,14 @@ class MksController extends Controller
         DB::beginTransaction();
         try {
             $score = Mks::findOrFail($id);
-            $score->skor = $request->skor;
+            $score->aset = $request->aset;
+            $score->profit_ramai = $request->profit_ramai;
+            $score->profit_sepi = $request->profit_sepi;
+            $score->profit_normal = $request->profit_normal;
+            $score->persediaan_aset = $request->persediaan_aset;
+            $score->fixed_aset = $request->fixed_aset;
+            $score->laba_perbulan = $request->laba_perbulan;
+            $score->laba_pertahun = $request->laba_pertahun;
             $score->nasabah_id = $request->nasabah_id;
             $score->save();
             DB::commit();

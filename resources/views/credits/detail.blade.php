@@ -23,7 +23,7 @@
                                         <a href="{{ route('credits.print_credit', $customer->id) }}" target="_blank"
                                             class="btn btn-info btn-sm rounded mb-2">Print Form
                                             Kredit</a>
-                                        @if ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1)
+                                        @if ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1 && Auth::user()->roles == 'kepala cabang')
                                             <a target="_blank" href="{{ route('credits.print', $customer->id) }}"
                                                 class="btn btn-success btn-sm rounded mb-2">Print Perjanjian Kredit</a>
                                         @endif
