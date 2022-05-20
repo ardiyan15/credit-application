@@ -3059,7 +3059,8 @@ fieldset:disabled a.btn {
 
 .btn-dark.disabled, .btn-dark:disabled {
   color: #fff;
-  background-color: #343a40;
+  /* background-color: #343a40; */
+  background-color: '#f0dc29';
   border-color: #343a40;
 }
 
