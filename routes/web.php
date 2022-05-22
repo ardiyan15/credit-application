@@ -4,6 +4,7 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MksController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SukuBungaController;
 use App\Http\Controllers\UserController;
 use App\Models\Employee;
@@ -16,7 +17,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/sukubunga', SukuBungaController::class);
     Route::resource('/mks', MksController::class);
     Route::resource('/employee', EmployeeController::class);
+    Route::resource('/profile', ProfileController::class);
 
+    Route::get('/print_mka/{id}', [MksController::class, 'print'])->name('mks.print');
     Route::get('/add_skoring/{id}', [MksController::class, 'create'])->name('mks.add_skoring');
     Route::get('/print/{id}', [CreditController::class, 'print_credit_approved'])->name('credits.print');
     Route::get('/get_nasabah/{id}', [CreditController::class, 'get_nasabah'])->name('get_nasabah');

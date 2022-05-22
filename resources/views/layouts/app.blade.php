@@ -28,6 +28,15 @@
             color: black !important;
         }
 
+        .custom-active {
+            background-color: #013066 !important;
+            color: white !important;
+        }
+
+        .btn-primary {
+            background-color: #013066 !important;
+        }
+
     </style>
 </head>
 

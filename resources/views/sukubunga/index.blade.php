@@ -23,13 +23,13 @@
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Jenis Pinjaman</th>
-                                            <th class="text-center">Range Kredit</th>
-                                            <th class="text-center">Bunga Per Bulan</th>
-                                            <th class="text-center">Bunga Per Tahun</th>
-                                            <th class="text-center">Opsi</th>
+                                        <tr style="background-color: #013066">
+                                            <th class="text-center text-white">#</th>
+                                            <th class="text-center text-white">Jenis Pinjaman</th>
+                                            <th class="text-center text-white">Range Kredit</th>
+                                            <th class="text-center text-white">Bunga Per Bulan</th>
+                                            <th class="text-center text-white">Bunga Per Tahun</th>
+                                            <th class="text-center text-white">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

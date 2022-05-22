@@ -19,12 +19,22 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <style>
+        .btn-primary {
+            background-color: #013066 !important;
+        }
+
+    </style>
 </head>
-<div class="container" style="margin-top: 20%;">
+<div class="container" style="margin-top: 15%;">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                {{-- <div class="card-header">{{ __('Login') }}</div> --}}
+                <div class="card-header">
+                    <img src="{{ asset('dist/img/mandiri-logo-transparent.png') }}" class="center"
+                        alt="AdminLTE Logo" style="width: 150px; margin-left: 38%; opacity: .8">
+                </div>
                 <div class="card-body">
 
                     <form method="POST" action="{{ route('login') }}">
@@ -64,7 +74,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-sm btn-primary">
                                     {{ __('Login') }}
                                 </button>
                             </div>

@@ -18,14 +18,14 @@
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Nama Lengkap</th>
-                                            <th class="text-center">Nomor KTP</th>
-                                            <th class="text-center">Nomor Rekening</th>
-                                            <th class="text-center">Limit Kredit</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Opsi</th>
+                                        <tr style="background-color: #013066">
+                                            <th class="text-center text-white">#</th>
+                                            <th class="text-center text-white">Nama Lengkap</th>
+                                            <th class="text-center text-white">Nomor KTP</th>
+                                            <th class="text-center text-white">Nomor Rekening</th>
+                                            <th class="text-center text-white">Limit Kredit</th>
+                                            <th class="text-center text-white">Status</th>
+                                            <th class="text-center text-white">Opsi</th>
                                             <th hidden></th>
                                         </tr>
                                     </thead>

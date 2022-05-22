@@ -17,18 +17,19 @@
                         <div class="card">
                             <div class="card-header">
                                 <a href="{{ route('employee.create') }}"
-                                    class="btn btn-primary btn-sm rounded pull-right">Tambah Employee</a>
+                                    class="btn btn-primary btn-sm rounded pull-right">Tambah
+                                    Employee</a>
                             </div>
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">NIP</th>
-                                            <th class="text-center">Nama</th>
-                                            <th class="text-center">Roles</th>
-                                            <th class="text-center">Tanggal Dibuat</th>
-                                            <th class="text-center">Opsi</th>
+                                        <tr style="background-color: #013066">
+                                            <th class="text-center text-white">#</th>
+                                            <th class="text-center text-white">NIP</th>
+                                            <th class="text-center text-white">Nama</th>
+                                            <th class="text-center text-white">Roles</th>
+                                            <th class="text-center text-white">Tanggal Dibuat</th>
+                                            <th class="text-center text-white">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -35,7 +35,7 @@
                                         <td>{{ $user->roles }}</td>
                                     </tr>
                                 </table>
-                                <a href="{{ route('users.edit', $user->id) }}"
+                                <a href="{{ route('profile.edit', $user->id) }}"
                                     class="btn btn-info btn-sm rounded mt-3">Ubah</a>
                             </div>
                         </div>

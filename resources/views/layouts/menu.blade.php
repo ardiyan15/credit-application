@@ -9,7 +9,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="{{ route('home') }}"
-                        class="nav-link @if ($menu == 'Dashboard') active @else custom-color @endif"><i
+                        class="nav-link @if ($menu == 'Dashboard') custom-active @else custom-color @endif"><i
                             class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -18,8 +18,8 @@
                 </li>
                 <li class="nav-item">
 
-                    <a href="{{ route('users.show', Auth::user()->id) }}"
-                        class="nav-link @if ($menu == 'users') active @else custom-color @endif"><i
+                    <a href="{{ route('profile.show', Auth::user()->id) }}"
+                        class="nav-link @if ($menu == 'users') custom-active @else custom-color @endif"><i
                             class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             User Profile
@@ -29,7 +29,8 @@
 
                 @if (Auth::user()->roles == 'mka' || Auth::user()->roles == 'kepala cabang')
                     <li class="nav-item @if ($menu == 'mks') menu-open @endif">
-                        <a href="#" class="@if ($menu == 'mks') active @else custom-color @endif nav-link">
+                        <a href="#"
+                            class="@if ($menu == 'mks') custom-active @else custom-color @endif nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 MKA
@@ -51,7 +52,8 @@
 
                 @if (Auth::user()->roles == 'kepala cabang' || Auth::user()->roles == 'mka')
                     <li class="nav-item @if ($menu == 'approval') menu-open @endif">
-                        <a href="#" class="@if ($menu == 'approval') active @else custom-color @endif nav-link">
+                        <a href="#"
+                            class="@if ($menu == 'approval') custom-active @else custom-color @endif nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Approval
@@ -84,7 +86,8 @@
                 @endif
 
                 <li class="nav-item @if ($menu == 'master') menu-open @endif">
-                    <a href="#" class="@if ($menu == 'master') active @else custom-color @endif nav-link">
+                    <a href="#"
+                        class="@if ($menu == 'master') custom-active @else custom-color @endif nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Data Master

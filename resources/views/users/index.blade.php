@@ -22,12 +22,12 @@
                             <div class="card-body">
                                 <table id="table" class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Username</th>
-                                            <th class="text-center">Roles</th>
-                                            <th class="text-center">Tanggal Dibuat</th>
-                                            <th class="text-center">Opsi</th>
+                                        <tr style="background-color: #013066">
+                                            <th class="text-center text-white">#</th>
+                                            <th class="text-center text-white">Username</th>
+                                            <th class="text-center text-white">Roles</th>
+                                            <th class="text-center text-white">Tanggal Dibuat</th>
+                                            <th class="text-center text-white">Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Mks;
 use App\Models\Nasabah;
+use App\Models\Skoring;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MksController extends Controller
 {
@@ -43,8 +45,11 @@ class MksController extends Controller
         try {
             Mks::create([
                 'aset' => $request->aset,
+                'profit_ramai_hari' => $request->profit_ramai_hari,
                 'profit_ramai' => $request->profit_ramai,
+                'profit_sepi_hari' => $request->profit_sepi_hari,
                 'profit_sepi' => $request->profit_sepi,
+                'profit_normal_hari' => $request->profit_normal_hari,
                 'profit_normal' => $request->profit_normal,
                 'persediaan_aset' => $request->persediaan_aset,
                 'fixed_aset' => $request->fixed_aset,
@@ -73,14 +78,12 @@ class MksController extends Controller
 
     public function edit($id)
     {
-        $score = Mks::findOrFail($id);
-        $customers = Nasabah::with('skoring')->orderBy('id', 'DESC')->get();
+        $score = Mks::with('nasabah')->findOrFail($id);
 
         $data = [
             'menu' => $this->menu,
             'sub_menu' => 'scoring',
-            'score' => $score,
-            'customers' => $customers
+            'score' => $score
         ];
 
         return view('mks.edit')->with($data);
@@ -92,8 +95,11 @@ class MksController extends Controller
         try {
             $score = Mks::findOrFail($id);
             $score->aset = $request->aset;
+            $score->profit_ramai_hari = $request->profit_ramai_hari;
             $score->profit_ramai = $request->profit_ramai;
+            $score->profit_sepi_hari = $request->profit_sepi_hari;
             $score->profit_sepi = $request->profit_sepi;
+            $score->profit_normal_hari = $request->profit_normal_hari;
             $score->profit_normal = $request->profit_normal;
             $score->persediaan_aset = $request->persediaan_aset;
             $score->fixed_aset = $request->fixed_aset;
@@ -105,6 +111,7 @@ class MksController extends Controller
             return redirect('mks')->with('success', 'Berhasil update data');
         } catch (\Throwable $err) {
             DB::rollBack();
+            throw $err;
             return back()->with('error', 'Gagal update data');
         }
     }
@@ -121,5 +128,15 @@ class MksController extends Controller
             DB::rollBack();
             return back()->with('error', 'Gagal hapus data');
         }
+    }
+
+    public function print($id)
+    {
+        $score = Skoring::with(['nasabah' => function ($nasabah) {
+            $nasabah->with('user_created', 'usaha');
+        }])->findOrFail($id);
+
+        $pdf = PDF::loadview('mks.print', ['scoring' => $score]);
+        return $pdf->stream();
     }
 }

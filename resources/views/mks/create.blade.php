@@ -33,23 +33,62 @@
                                                 placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya"
                                                 class="form-control" required value="0">
                                         </div>
-                                        <div class="col-lg-6 form-group">
-                                            <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai</label>
-                                            <input type="text" name="profit_ramai"
-                                                placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                class="form-control" required value="0">
+                                        <div class="col-lg-6">
+                                            <label for="">Pendapatan Rata - Rata Saat Kondisi Ramai</label>
+                                            <div class="mb-3 row form-group">
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="profit_ramai_hari"
+                                                        placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
+                                                        class="form-control" required value="0">
+                                                </div>
+                                                <span style="margin-top: 5px;">/ hari</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="profit_ramai"
+                                                        placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
+                                                        class="form-control" required value="0">
+                                                </div>
+                                                <span style="margin-top: 5px;">/ bulan</span>
+                                            </div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi</label>
-                                            <input type="text" name="profit_sepi"
-                                                placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                class="form-control" required value="0">
+                                            <label for="">Pendapatan Rata - Rata Saat Kondisi Sepi</label>
+                                            <div class="row form-group">
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="profit_sepi_hari"
+                                                        placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
+                                                        class="form-control" required value="0">
+                                                </div>
+                                                <span style="margin-top: 5px;">/ hari</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="profit_sepi"
+                                                        placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
+                                                        class="form-control" required value="0">
+                                                </div>
+                                                <span style="margin-top: 5px;">/ bulan</span>
+                                            </div>
                                         </div>
                                         <div class="col-lg-6 form-group">
-                                            <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Normal</label>
-                                            <input type="text" name="profit_normal" id="normal_perbulan"
-                                                placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                class="form-control" required value="0">
+                                            <label for="">Pendapatan Rata - Rata Saat Kondisi Normal</label>
+                                            <div class="row form-group">
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="profit_normal_hari"
+                                                        placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
+                                                        class="form-control" required value="0">
+                                                </div>
+                                                <span style="margin-top: 5px;">/ hari</span>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="profit_normal" id="normal_perbulan"
+                                                        placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
+                                                        class="form-control" required value="0">
+                                                </div>
+                                                <span style="margin-top: 5px;">/ bulan</span>
+                                            </div>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Persediaan Rata - Rata</label>
