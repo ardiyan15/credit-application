@@ -44,9 +44,18 @@ class CreditController extends Controller
         // mendapatkkan cicilan per bulan
         $items = SukuBunga::all();
 
+        $limit_kredit = str_replace('.', '', $request->limit_kredit);
+        $penghasilan_debitur = str_replace('.', '', $request->penghasilan_debitur);
+        $total_pinjaman = str_replace('.', '', $request->total_pinjaman);
+        $biaya_debitur = str_replace('.', '', $request->biaya_debitur);
+        $keuntungan = str_replace('.', '', $request->keuntungan);
+        $angsuran_pinjaman_lain = str_replace('.', '', $request->angsuran_pinjaman_lain);
+        $penghasilan_lainnya = str_replace('.', '', $request->penghasilan_lainnya);
+        $total_penghasilan = str_replace('.', '', $request->total_penghasilan);
+
         foreach ($items as $item) {
-            if ($item->tipe === $request->jenis_pinjaman && $request->limit_kredit >= $item->kredit_terkecil && $request->limit_kredit < $item->kredit_terbesar) {
-                $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * $item->per_bulan / 100));
+            if ($item->tipe === $request->jenis_pinjaman && $limit_kredit >= $item->kredit_terkecil && $limit_kredit < $item->kredit_terbesar) {
+                $bunga_per_bulan = floor(($limit_kredit / $request->jangka_waktu) + ($limit_kredit * $item->per_bulan / 100));
                 $bunga_per_tahun = $item->per_tahun;
             }
         }
@@ -54,15 +63,15 @@ class CreditController extends Controller
         if ($request->jenis_pinjaman === 'kur') {
             // $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
 
-            $biaya_provisi_admin = ($request->limit_kredit * 1.5) / 100;
+            $biaya_provisi_admin = ($limit_kredit * 1.5) / 100;
 
-            if ($request->limit_kredit >= 200000000 || $request->limit_kredit <= 350000000) {
-                $biaya_provisi_admin = ($request->limit_kredit * 0.25) / 100;
+            if ($limit_kredit >= 200000000 || $limit_kredit <= 350000000) {
+                $biaya_provisi_admin = ($limit_kredit * 0.25) / 100;
             }
 
             $biaya_administrasi = 250000;
 
-            if ($request->limit_kredit >= 25000000 || $request->limit_kredit <= 350000000) {
+            if ($limit_kredit >= 25000000 || $limit_kredit <= 350000000) {
                 $biaya_administrasi = 500000;
             }
         } else {
@@ -70,7 +79,7 @@ class CreditController extends Controller
 
             $biaya_administrasi = 50000;
 
-            if ($request->limit_kredit >= 50000000) {
+            if ($limit_kredit >= 50000000) {
                 $biaya_administrasi = 100000;
             }
         }
@@ -91,6 +100,7 @@ class CreditController extends Controller
         DB::beginTransaction();
         try {
             Nasabah::create([
+                'jenis_kelamin' => $request->jenis_kelamin_nasabah,
                 'no_rekening' => $request->nomor_rekening,
                 'nomor_urut' => $nomor_urut,
                 'nama_lengkap' => $request->nama_lengkap,
@@ -118,7 +128,7 @@ class CreditController extends Controller
                 'jumlah_tanggungan' => $request->jumlah_tanggungan,
                 'no_kartu_keluarga' => $request->no_kartu_keluarga,
                 'jenis_pengajuan' => $request->jenis_pengajuan,
-                'limit_kredit' => $request->limit_kredit,
+                'limit_kredit' => $limit_kredit,
                 'jangka_waktu' => $request->jangka_waktu,
                 'tujuan_penggunaan' => $request->tujuan_penggunaan,
                 'deskripsi' => $request->deskripsi_penggunaan,
@@ -171,14 +181,14 @@ class CreditController extends Controller
             ]);
 
             Calon_Debitur::create([
-                'penghasilan' => $request->penghasilan_debitur,
-                'biaya_biaya' => $request->biaya_debitur,
-                'keuntungan' => $request->keuntungan,
-                'penghasilan_lainnya' => $request->penghasilan_lainnya,
-                'total_pinjaman_lain' => $request->total_pinjaman,
-                'sisa_waktu_angsuran' => $request->siswa_waktu_angsuran,
-                'angsuran_pinjaman_lain' => $request->angsuran_pinjaman_lain,
-                'total_penghasilan' => $request->total_penghasilan,
+                'penghasilan' => $penghasilan_debitur,
+                'biaya_biaya' => $biaya_debitur,
+                'keuntungan' => $keuntungan,
+                'penghasilan_lainnya' => $penghasilan_lainnya,
+                'total_pinjaman_lain' => $total_pinjaman,
+                'sisa_waktu_angsuran' => $request->sisa_waktu_angsuran,
+                'angsuran_pinjaman_lain' => $angsuran_pinjaman_lain,
+                'total_penghasilan' => $total_penghasilan,
                 'nasabah_id' => $nasabah->id
             ]);
 

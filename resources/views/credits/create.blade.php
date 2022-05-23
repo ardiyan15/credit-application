@@ -113,6 +113,15 @@
                                                     placeholder="Tanggal Lahir">
                                             </div>
                                             <div class="col-md-6 form-group">
+                                                <label for="">Jenis Kelamin</label> <small
+                                                    class="text-danger text-bold">*</small>
+                                                <select required name="jenis_kelamin_kerabat" id="" class="form-control">
+                                                    <option value="" selected>-- Pilih Jenis Kelamin --</option>
+                                                    <option value="laki - laki">Laki - Laki</option>
+                                                    <option value="perempuan">Perempuan</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
                                                 <label for="">Nama Ibu Kandung</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" class="form-control" name="ibu_kandung"
@@ -215,7 +224,8 @@
                                                 <input type="file" name="foto_ktp" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                <label for="">No NPWP</label> <small class="text-danger text-bold">*</small>
+                                                <label for="">No NPWP</label> <small
+                                                    class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_npwp" placeholder="No NPWP"
                                                     class="form-control">
                                             </div>
@@ -431,50 +441,51 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Penghasilan Perbulan</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="penghasilan_debitur"
-                                                    class="form-control" placeholder="Penghasilan Debitur">
+                                                <input required type="text" name="penghasilan_debitur"
+                                                    class="rupiah form-control" placeholder="Penghasilan Debitur">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Total Pinjaman</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="total_pinjaman"
-                                                    placeholder="Total Pinjaman" class="form-control">
+                                                    placeholder="Total Pinjaman" class="rupiah form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Biaya - Biaya</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="biaya_debitur"
-                                                    placeholder="Biaya - Biaya" class="form-control">
+                                                <input required type="text" name="biaya_debitur" placeholder="Biaya - Biaya"
+                                                    class="rupiah form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Sisa Waktu Angsuran (Bulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="siswa_waktu_angsuran"
+                                                <input required type="text" name="sisa_waktu_angsuran"
                                                     placeholder="Siswa Waktu Angsuran (Bulan)" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Keuntungan</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="keuntungan" placeholder="Keuntungan"
-                                                    class="form-control">
+                                                <input required type="text" name="keuntungan" placeholder="Keuntungan"
+                                                    class="form-control rupiah">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Angsuran Pinjaman Lain (perbulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="angsuran_pinjaman_lain"
-                                                    placeholder="Angsuran Pinjaman Lain (perbulan)" class="form-control">
+                                                <input required type="text" name="angsuran_pinjaman_lain"
+                                                    placeholder="Angsuran Pinjaman Lain (perbulan)"
+                                                    class="rupiah form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Penghasilan Lainnya</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="penghasilan_lainnya"
-                                                    placeholder="Penghasilan Lainnya" class="form-control">
+                                                <input required type="text" name="penghasilan_lainnya"
+                                                    placeholder="Penghasilan Lainnya" class="rupiah form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Total Penghasilan (perbulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="total_penghasilan"
-                                                    class="form-control" placeholder="Total Penghasilan (perbulan)">
+                                                <input required type="text" name="total_penghasilan"
+                                                    class="form-control rupiah" placeholder="Total Penghasilan (perbulan)">
                                             </div>
                                         </div>
                                     </div>
@@ -508,5 +519,31 @@
                 e.preventDefault()
             }
         })
+
+        // var rupiah = document.getElementById('rupiah');
+        let rupiah = $(".rupiah")
+        rupiah.on('keyup', function(e) {
+            console.log($(this).val())
+            $(this).val(formatRupiah(this.value, ));
+        });
+
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            console.log(rupiah)
+            return rupiah
+            // return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '')
+        }
     </script>
 @endpush
