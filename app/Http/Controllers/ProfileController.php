@@ -37,10 +37,26 @@ class ProfileController extends Controller
 
     public function edit($id)
     {
+        $roles = [
+            0 => [
+                'name' => 'MKS',
+                'value' => 'mks'
+            ],
+            1 => [
+                'name' => 'MKA',
+                'value' => 'mka'
+            ],
+            2 => [
+                'name' => 'Kepala Cabang',
+                'value' => 'kepala cabang'
+            ],
+        ];
+
         $data = [
             'menu' => 'users',
             'sub_menu' => '',
-            'user' => User::findOrFail($id)
+            'user' => User::findOrFail($id),
+            'roles' => $roles
         ];
 
         return view('profile.edit')->with($data);

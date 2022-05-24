@@ -75,7 +75,7 @@ class CreditController extends Controller
                 $biaya_administrasi = 500000;
             }
         } else {
-            $biaya_provisi_admin = ($request->limit_kredit * 0.5) / 100;
+            $biaya_provisi_admin = ($limit_kredit * 0.5) / 100;
 
             $biaya_administrasi = 50000;
 

@@ -115,7 +115,7 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Jenis Kelamin</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="jenis_kelamin_kerabat" id="" class="form-control">
+                                                <select required name="jenis_kelamin_nasabah" id="" class="form-control">
                                                     <option value="" selected>-- Pilih Jenis Kelamin --</option>
                                                     <option value="laki - laki">Laki - Laki</option>
                                                     <option value="perempuan">Perempuan</option>
@@ -508,17 +508,17 @@
             jenisAgunan = $(this).val()
             console.log(jenisAgunan)
         })
-        $("#submit").on('click', function(e) {
-            limitKredit = $("#limit_kredit").val()
-            if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
-                Swal.fire(
-                    'Gagal',
-                    'Jika agunan menggunakan BPKB Motor atau BPKB Mobil limit kredit tidak boleh lebih dari Rp. 50.000.000',
-                    'error'
-                )
-                e.preventDefault()
-            }
-        })
+        // $("#submit").on('click', function(e) {
+        //     limitKredit = $("#limit_kredit").val()
+        //     if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
+        //         Swal.fire(
+        //             'Gagal',
+        //             'Jika agunan menggunakan BPKB Motor atau BPKB Mobil limit kredit tidak boleh lebih dari Rp. 50.000.000',
+        //             'error'
+        //         )
+        //         e.preventDefault()
+        //     }
+        // })
 
         // var rupiah = document.getElementById('rupiah');
         let rupiah = $(".rupiah")

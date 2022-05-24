@@ -59,7 +59,9 @@ class SukuBungaController extends Controller
     {
         $suku_bunga = SukuBunga::findOrFail($id);
         $data = [
-            'suku_bunga' => $suku_bunga
+            'suku_bunga' => $suku_bunga,
+            'menu' => $this->menu,
+            'sub_menu' => 'suku_bunga'
         ];
         return view('sukubunga.edit')->with($data);
     }

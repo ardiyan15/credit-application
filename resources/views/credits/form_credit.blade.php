@@ -239,7 +239,14 @@
                 <tr>
                     <th>16. Penghasilan Bulanan</th>
                     <td>:</td>
-                    <td>@currency($customer->suami_istri->penghasilan)</td>
+                    <td>
+                        @if ($customer->suami_istri != null)
+                            {{-- {{ $customer->suami_istri->penghasilan }} --}}
+                            @currency($customer->suami_istri->penghasilan)
+                        @else
+                            ''
+                        @endif
+                    </td>
                 </tr>
             </table>
             <div class="data-pemohon bg-primary mt-2">
