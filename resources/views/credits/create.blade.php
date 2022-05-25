@@ -506,7 +506,6 @@
         let limitKredit
         $("#jenis_agunan").on('change', function() {
             jenisAgunan = $(this).val()
-            console.log(jenisAgunan)
         })
         // $("#submit").on('click', function(e) {
         //     limitKredit = $("#limit_kredit").val()

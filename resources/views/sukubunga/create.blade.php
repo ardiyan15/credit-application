@@ -34,14 +34,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Kredit Terkecil</label>
-                                                <input type="text" name="kredit_terkecil" class="form-control"
+                                                <input type="text" name="kredit_terkecil" class="rupiah form-control"
                                                     placeholder="Kredit Terkecil">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Kredit Terbesar</label>
-                                                <input type="text" name="kredit_terbesar" class="form-control"
+                                                <input type="text" name="kredit_terbesar" class="rupiah form-control"
                                                     placeholder="Kredit Terbsesar">
                                             </div>
                                         </div>
@@ -61,6 +61,7 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-sm rounded">Submit</button>
+                                    <a href="{{ route('sukubunga.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
                                 </form>
                             </div>
                         </div>

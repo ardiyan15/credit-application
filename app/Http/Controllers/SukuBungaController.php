@@ -33,12 +33,15 @@ class SukuBungaController extends Controller
 
     public function store(Request $request)
     {
+        $kredit_terkecil = str_replace('.', '', $request->kredit_terkecil);
+        $kredit_terbesar = str_replace('.', '', $request->kredit_terbesar);
+
         DB::beginTransaction();
         try {
             SukuBunga::create([
                 'tipe' => $request->tipe,
-                'kredit_terkecil' => $request->kredit_terkecil,
-                'kredit_terbesar' => $request->kredit_terbesar,
+                'kredit_terkecil' => $kredit_terkecil,
+                'kredit_terbesar' => $kredit_terbesar,
                 'per_bulan' => $request->per_bulan,
                 'per_tahun' => $request->per_tahun
             ]);
@@ -68,12 +71,15 @@ class SukuBungaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $kredit_terkecil = str_replace('.', '', $request->kredit_terkecil);
+        $kredit_terbesar = str_replace('.', '', $request->kredit_terbesar);
+
         DB::beginTransaction();
         try {
             $suku_bunga = SukuBunga::findOrFail($id);
             $suku_bunga->tipe = $request->tipe;
-            $suku_bunga->kredit_terkecil = $request->kredit_terkecil;
-            $suku_bunga->kredit_terbesar = $request->kredit_terbesar;
+            $suku_bunga->kredit_terkecil = $kredit_terkecil;
+            $suku_bunga->kredit_terbesar = $kredit_terbesar;
             $suku_bunga->per_bulan = $request->per_bulan;
             $suku_bunga->per_tahun = $request->per_tahun;
             $suku_bunga->save();

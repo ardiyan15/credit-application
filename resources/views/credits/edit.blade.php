@@ -43,7 +43,7 @@
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" id="limit_kredit" class="rupiah form-control"
                                                     placeholder="Limit Kredit" name="limit_kredit"
-                                                    value="{{ $customer->limit_kredit }}">
+                                                    value="@rupiah($customer->limit_kredit)">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputPassword1">Jangka Waktu (bulan)</label> <small
@@ -252,9 +252,11 @@
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_ktp" placeholder="No KTP"
                                                     class="form-control" value="{{ $customer->no_ktp }}">
-                                                    <small>
-                                                        <a href="" class="document" data-id="{{ $customer->id }}" data-type="document_ktp" onclick="return false" data-toggle="modal" data-target="#document">Lihat Dokumen</a>
-                                                    </small>
+                                                <small>
+                                                    <a href="" class="document" data-id="{{ $customer->id }}"
+                                                        data-type="document_ktp" onclick="return false" data-toggle="modal"
+                                                        data-target="#document">Lihat Dokumen</a>
+                                                </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No NPWP</label> <small class="text-danger text-bold">*</small>
@@ -321,9 +323,11 @@
                                                 <input required type="number" name="no_kartu_keluarga"
                                                     class="form-control" placeholder="No Kartu Keluarga"
                                                     value="{{ $customer->no_kartu_keluarga }}">
-                                                    <small>
-                                                        <a href="" class="document" data-id="{{ $customer->id }}" data-type="keluarga_dokumen" onclick="return false" data-toggle="modal" data-target="#document">Lihat Dokumen</a>
-                                                    </small>
+                                                <small>
+                                                    <a href="" class="document" data-id="{{ $customer->id }}"
+                                                        data-type="keluarga_dokumen" onclick="return false"
+                                                        data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                </small>
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Suami / Istri</h5>
@@ -414,9 +418,11 @@
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="bidang_usaha" placeholder="Bidang Usaha"
                                                     class="form-control" value="{{ $customer->usaha->bidang_usaha }}">
-                                                    <small>
-                                                        <a href="" class="document" data-id="{{ $customer->id }}" data-type="usaha_dokumen" onclick="return false" data-toggle="modal" data-target="#document">Lihat Dokumen</a>
-                                                    </small>
+                                                <small>
+                                                    <a href="" class="document" data-id="{{ $customer->id }}"
+                                                        data-type="usaha_dokumen" onclick="return false" data-toggle="modal"
+                                                        data-target="#document">Lihat Dokumen</a>
+                                                </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Usaha</label> <small
@@ -522,62 +528,61 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Penghasilan Perbulan</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="penghasilan_debitur"
-                                                    class="form-control" placeholder="Penghasilan Debitur"
-                                                    value="{{ $customer->calon_debitur->penghasilan }}">
+                                                <input required type="text" name="penghasilan_debitur"
+                                                    class="rupiah form-control" placeholder="Penghasilan Debitur"
+                                                    value="@rupiah($customer->calon_debitur->penghasilan)">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Total Pinjaman</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="total_pinjaman"
-                                                    placeholder="Total Pinjaman" class="form-control"
-                                                    value="{{ $customer->calon_debitur->total_pinjaman_lain }}">
+                                                    placeholder="Total Pinjaman" class="rupiah form-control"
+                                                    value="@rupiah($customer->calon_debitur->total_pinjaman_lain)">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Biaya - Biaya</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="biaya_debitur"
-                                                    placeholder="Biaya - Biaya" class="form-control"
-                                                    value="{{ $customer->calon_debitur->biaya_biaya }}">
+                                                <input required type="text" name="biaya_debitur" placeholder="Biaya - Biaya"
+                                                    class="rupiah form-control" value="@rupiah($customer->calon_debitur->biaya_biaya)">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Sisa Waktu Angsuran (Bulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="siswa_waktu_angsuran"
+                                                <input required type="number" name="sisa_waktu_angsuran"
                                                     placeholder="Siswa Waktu Angsuran (Bulan)" class="form-control"
                                                     value="{{ $customer->calon_debitur->sisa_waktu_angsuran }}">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Keuntungan</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="keuntungan" placeholder="Keuntungan"
-                                                    class="form-control"
-                                                    value="{{ $customer->calon_debitur->keuntungan }}">
+                                                <input required type="text" name="keuntungan" placeholder="Keuntungan"
+                                                    class="rupiah form-control" value="@rupiah($customer->calon_debitur->keuntungan)">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Angsuran Pinjaman Lain (perbulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="angsuran_pinjaman_lain"
-                                                    placeholder="Angsuran Pinjaman Lain (perbulan)" class="form-control"
-                                                    value="{{ $customer->calon_debitur->angsuran_pinjaman_lain }}">
+                                                <input required type="text" name="angsuran_pinjaman_lain"
+                                                    placeholder="Angsuran Pinjaman Lain (perbulan)"
+                                                    class="rupiah form-control" value="@rupiah($customer->calon_debitur->angsuran_pinjaman_lain)">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Penghasilan Lainnya</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="penghasilan_lainnya"
-                                                    placeholder="Penghasilan Lainnya" class="form-control"
-                                                    value="{{ $customer->calon_debitur->penghasilan_lainnya }}">
+                                                <input required type="text" name="penghasilan_lainnya"
+                                                    placeholder="Penghasilan Lainnya" class="rupiah form-control"
+                                                    value="@rupiah($customer->calon_debitur->penghasilan_lainnya)">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Total Penghasilan (perbulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="total_penghasilan"
-                                                    class="form-control" placeholder="Total Penghasilan (perbulan)"
-                                                    value="{{ $customer->calon_debitur->total_penghasilan }}">
+                                                <input required type="text" name="total_penghasilan"
+                                                    class="rupiah form-control" placeholder="Total Penghasilan (perbulan)"
+                                                    value="@rupiah($customer->calon_debitur->total_penghasilan)">
                                             </div>
                                         </div>
                                     </div>
                                     <button id="submit" class="btn btn-primary btn-sm rounded">Submit</button>
+                                    <a href="{{ route('credits.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
                                 </form>
                             </div>
                         </div>
@@ -589,42 +594,42 @@
 
     <div class="modal fade" id="document" role="dialog">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Foto Dokumen</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Foto Dokumen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="img-content">
+                </div>
             </div>
-            <div class="modal-body" id="img-content">
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 @endsection
 
 @push('scripts')
     <script>
         let jenisAgunan = '';
         let limitKredit
-        
+
         $("#jenis_agunan").on('change', function() {
             jenisAgunan = $(this).val()
         })
 
-        $("#submit").on('click', function(e) {
-            limitKredit = $("#limit_kredit").val()
-            if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
-                Swal.fire(
-                    'Gagal',
-                    'Jika agunan menggunakan BPKB Motor atau BPKB Mobil limit kredit tidak boleh lebih dari Rp. 50.000.000',
-                    'error'
-                )
-                e.preventDefault()
-            }
-        })
+        // $("#submit").on('click', function(e) {
+        //     limitKredit = $("#limit_kredit").val()
+        //     if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
+        //         Swal.fire(
+        //             'Gagal',
+        //             'Jika agunan menggunakan BPKB Motor atau BPKB Mobil limit kredit tidak boleh lebih dari Rp. 50.000.000',
+        //             'error'
+        //         )
+        //         e.preventDefault()
+        //     }
+        // })
 
-        $(".document").on('click', function(){
+        $(".document").on('click', function() {
             let type = $(this).data('type')
             let id = $(this).data('id')
             let source = ''
@@ -639,14 +644,19 @@
                     // type: type,
                     id: id
                 },
-                success: ({data}) => {
+                success: ({
+                    data
+                }) => {
                     console.log(type)
-                    if(type == 'document_ktp') {
-                        $("#img-content").append(`<img class="text-center" src="{!! asset('/storage/ktp/${data.foto_ktp}') !!}" width="450" />`)
-                    } else if(type == 'usaha_dokumen') {
-                        $("#img-content").append(`<img class="text-center" src="{!! asset('/storage/usaha/${data.foto_usaha}') !!}" width="450" />`)
+                    if (type == 'document_ktp') {
+                        $("#img-content").append(
+                            `<img class="text-center" src="{!! asset('/storage/ktp/${data.foto_ktp}') !!}" width="450" />`)
+                    } else if (type == 'usaha_dokumen') {
+                        $("#img-content").append(
+                            `<img class="text-center" src="{!! asset('/storage/usaha/${data.foto_usaha}') !!}" width="450" />`)
                     } else {
-                        $("#img-content").append(`<img class="text-center" src="{!! asset('/storage/kk/${data.foto_kk}') !!}" width="450" />`)
+                        $("#img-content").append(
+                            `<img class="text-center" src="{!! asset('/storage/kk/${data.foto_kk}') !!}" width="450" />`)
                     }
                 },
                 error: err => console.log(err)

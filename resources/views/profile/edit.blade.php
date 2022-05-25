@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tambah User</h1>
+                        <h1>Edit Profile</h1>
                     </div>
                 </div>
             </div>

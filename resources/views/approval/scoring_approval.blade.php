@@ -22,46 +22,41 @@
                                         <label for="">Kas, Tabungan, Deposito, atau Asset Lainnya</label>
                                         <input type="text" name="aset"
                                             placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya" class="form-control"
-                                            required readonly value="{{ $customer->skoring->aset }}">
+                                            required readonly value="@rupiah($customer->skoring->aset)">
                                     </div>
                                     <div class="col-lg-6 form-group">
                                         <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai</label>
                                         <input type="text" name="profit_ramai"
                                             placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                            class="form-control" required readonly
-                                            value="{{ $customer->skoring->profit_ramai }}">
+                                            class="form-control" required readonly value="@rupiah($customer->skoring->profit_ramai)">
                                     </div>
                                     <div class="col-lg-6 form-group">
                                         <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi</label>
                                         <input type="text" name="profit_sepi"
                                             placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                            class="form-control" required readonly
-                                            value="{{ $customer->skoring->profit_sepi }}">
+                                            class="form-control" required readonly value="@rupiah($customer->skoring->profit_sepi)">
                                     </div>
                                     <div class="col-lg-6 form-group">
                                         <label for="">Pendapatan Rata - Rata Perbulan Saat Kondisi Normal</label>
                                         <input type="text" name="profit_normal" id="normal_perbulan"
                                             placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                            class="form-control" required readonly
-                                            value="{{ $customer->skoring->profit_normal }}">
+                                            class="form-control" required readonly value="@rupiah($customer->skoring->profit_normal)">
                                     </div>
                                     <div class="col-lg-6 form-group">
                                         <label for="">Persediaan Rata - Rata</label>
                                         <input type="text" name="persediaan_aset" placeholder="Persedian Rata - Rata"
-                                            class="form-control" required readonly
-                                            value="{{ $customer->skoring->persediaan_aset }}">
+                                            class="form-control" required readonly value="@rupiah($customer->skoring->persediaan_aset)">
                                     </div>
                                     <div class="col-lg-6 form-group">
                                         <label for="">Kekayaan Berupa Fixed Asset</label>
                                         <input type="text" name="fixed_aset" placeholder="Kekayaan Berupa Fixed Asset"
-                                            class="form-control" required readonly
-                                            value="{{ $customer->skoring->fixed_aset }}">
+                                            class="form-control" required readonly value="@rupiah($customer->skoring->fixed_aset)">
                                     </div>
                                     <div class="col-lg-6 form-group">
                                         <label for="">Laba Usaha Perbulan</label>
                                         <input type="text" name="laba_perbulan" placeholder="Laba Usaha Perbulan"
                                             class="form-control" readonly id="laba_perbulan" required readonly
-                                            value="{{ $customer->skoring->laba_perbulan }}">
+                                            value="@rupiah($customer->skoring->laba_perbulan)">
                                         <input type="hidden" name="laba_pertahun" id="laba_pertahun_input">
                                     </div>
                                 </div>
@@ -114,8 +109,8 @@
                                             <tr>
                                                 <th>Limit Yang disetujui</th>
                                                 <td>:</td>
-                                                <td id="td_limit"><input type="number" value="" id="limit_approve"
-                                                        placeholder="Limit yang disetujui" class="form-control"></td>
+                                                <td id="td_limit"><input type="text" value="" id="limit_approve"
+                                                        placeholder="Limit yang disetujui" class="rupiah form-control"></td>
                                             </tr>
                                             <tr>
                                                 <th>Jangka Waktu /bulan</th>
@@ -216,7 +211,7 @@
         let jenis_pinjaman = $("#jenis_kredit").text().toLowerCase()
 
         $("#compute").on('click', function() {
-            limit_kredit = parseInt($("#limit_approve").val())
+            limit_kredit = parseInt($("#limit_approve").val().split(".").join(""))
             tenor = $("#jangka_waktu").val()
             if (limit_kredit == '' || isNaN(limit_kredit)) {
                 Swal.fire(
@@ -236,7 +231,8 @@
             calculation(limit_kredit, jenis_pinjaman)
         })
 
-        function rupiah(number) {
+        function format_rupiah(number) {
+            console.log(number)
             var number_string = number.toString(),
                 sisa = number_string.length % 3,
                 rupiah = number_string.substr(0, sisa),
@@ -246,7 +242,6 @@
                 separator = sisa ? '.' : '';
                 rupiah += separator + ribuan.join('.');
             }
-
             return rupiah
         }
 
@@ -257,6 +252,7 @@
                 success: ({
                     data
                 }) => {
+                    instalment = false
                     data.forEach((item, index) => {
                         if (item.tipe == jenis_pinjaman && limit_kredit >= item.kredit_terkecil &&
                             limit_kredit < item.kredit_terbesar) {
@@ -264,14 +260,23 @@
                                 .per_bulan / 100))
                         }
                     })
-                    console.log()
-                    $("#result").empty()
-                    $("#result").append("Rp. " + rupiah(instalment))
-                    $("#input_limit_kredit").val(limit_kredit)
-                    $("#input_tenor").val(tenor)
-                    $("#input_jenis_kredit").val(jenis_pinjaman)
-                    if ($("#result") != '') {
-                        $("#save").prop('disabled', false)
+                    if (instalment == false) {
+                        Swal.fire(
+                            'Gagal',
+                            'Limit Kredit tidak sesuai dengan suku bunga',
+                            'error'
+                        )
+                        return false
+                    } else {
+                        $("#result").empty()
+                        // console.log(instalment)
+                        $("#result").append("Rp. " + format_rupiah(instalment))
+                        $("#input_limit_kredit").val(limit_kredit)
+                        $("#input_tenor").val(tenor)
+                        $("#input_jenis_kredit").val(jenis_pinjaman)
+                        if ($("#result") != '') {
+                            $("#save").prop('disabled', false)
+                        }
                     }
                 },
                 error: err => console.log(err)

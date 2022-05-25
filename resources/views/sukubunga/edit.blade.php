@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tambah Perhitungan Suku Bunga</h1>
+                        <h1>Edit Perhitungan Suku Bunga</h1>
                     </div>
                 </div>
             </div>
@@ -37,17 +37,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Kredit Terkecil</label>
-                                                <input type="text" name="kredit_terkecil" class="form-control"
-                                                    placeholder="Kredit Terkecil"
-                                                    value="{{ $suku_bunga->kredit_terkecil }}">
+                                                <input type="text" name="kredit_terkecil" class="rupiah form-control"
+                                                    placeholder="Kredit Terkecil" value="@rupiah($suku_bunga->kredit_terkecil)">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Kredit Terbesar</label>
-                                                <input type="text" name="kredit_terbesar" class="form-control"
-                                                    placeholder="Kredit Terbsesar"
-                                                    value="{{ $suku_bunga->kredit_terbesar }}">
+                                                <input type="text" name="kredit_terbesar" class="rupiah form-control"
+                                                    placeholder="Kredit Terbsesar" value="@rupiah($suku_bunga->kredit_terbesar)">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -66,6 +64,7 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-sm rounded">Submit</button>
+                                    <a href="{{ route('sukubunga.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
                                 </form>
                             </div>
                         </div>

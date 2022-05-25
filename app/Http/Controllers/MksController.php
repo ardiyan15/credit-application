@@ -41,20 +41,32 @@ class MksController extends Controller
 
     public function store(Request $request)
     {
+        $aset = str_replace('.', '', $request->aset);
+        $profit_ramai_hari = str_replace('.', '', $request->profit_ramai_hari);
+        $profit_ramai = str_replace('.', '', $request->profit_ramai);
+        $profit_sepi_hari = str_replace('.', '', $request->profit_sepi_hari);
+        $profit_sepi = str_replace('.', '', $request->profit_sepi);
+        $profit_normal_hari = str_replace('.', '', $request->profit_normal_hari);
+        $profit_normal = str_replace('.', '', $request->profit_normal);
+        $persediaan_aset = str_replace('.', '', $request->persediaan_aset);
+        $fixed_aset = str_replace('.', '', $request->fixed_aset);
+        $laba_perbulan = str_replace('.', '', $request->laba_perbulan);
+        $laba_pertahun = str_replace('.', '', $request->laba_pertahun);
+
         DB::beginTransaction();
         try {
             Mks::create([
-                'aset' => $request->aset,
-                'profit_ramai_hari' => $request->profit_ramai_hari,
-                'profit_ramai' => $request->profit_ramai,
-                'profit_sepi_hari' => $request->profit_sepi_hari,
-                'profit_sepi' => $request->profit_sepi,
-                'profit_normal_hari' => $request->profit_normal_hari,
-                'profit_normal' => $request->profit_normal,
-                'persediaan_aset' => $request->persediaan_aset,
-                'fixed_aset' => $request->fixed_aset,
-                'laba_perbulan' => $request->laba_perbulan,
-                'laba_pertahun' => $request->laba_pertahun,
+                'aset' => $aset,
+                'profit_ramai_hari' => $profit_ramai_hari,
+                'profit_ramai' => $profit_ramai,
+                'profit_sepi_hari' => $profit_sepi_hari,
+                'profit_sepi' => $profit_sepi,
+                'profit_normal_hari' => $profit_normal_hari,
+                'profit_normal' => $profit_normal,
+                'persediaan_aset' => $persediaan_aset,
+                'fixed_aset' => $fixed_aset,
+                'laba_perbulan' => $laba_perbulan,
+                'laba_pertahun' => $laba_pertahun,
                 'nasabah_id' => $request->nasabah_id,
             ]);
 
@@ -91,20 +103,32 @@ class MksController extends Controller
 
     public function update(Request $request, $id)
     {
+        $aset = str_replace('.', '', $request->aset);
+        $profit_ramai_hari = str_replace('.', '', $request->profit_ramai_hari);
+        $profit_ramai = str_replace('.', '', $request->profit_ramai);
+        $profit_sepi_hari = str_replace('.', '', $request->profit_sepi_hari);
+        $profit_sepi = str_replace('.', '', $request->profit_sepi);
+        $profit_normal_hari = str_replace('.', '', $request->profit_normal_hari);
+        $profit_normal = str_replace('.', '', $request->profit_normal);
+        $persediaan_aset = str_replace('.', '', $request->persediaan_aset);
+        $fixed_aset = str_replace('.', '', $request->fixed_aset);
+        $laba_perbulan = str_replace('.', '', $request->laba_perbulan);
+        $laba_pertahun = str_replace('.', '', $request->laba_pertahun);
+
         DB::beginTransaction();
         try {
             $score = Mks::findOrFail($id);
-            $score->aset = $request->aset;
-            $score->profit_ramai_hari = $request->profit_ramai_hari;
-            $score->profit_ramai = $request->profit_ramai;
-            $score->profit_sepi_hari = $request->profit_sepi_hari;
-            $score->profit_sepi = $request->profit_sepi;
-            $score->profit_normal_hari = $request->profit_normal_hari;
-            $score->profit_normal = $request->profit_normal;
-            $score->persediaan_aset = $request->persediaan_aset;
-            $score->fixed_aset = $request->fixed_aset;
-            $score->laba_perbulan = $request->laba_perbulan;
-            $score->laba_pertahun = $request->laba_pertahun;
+            $score->aset = $aset;
+            $score->profit_ramai_hari = $profit_ramai_hari;
+            $score->profit_ramai = $profit_ramai;
+            $score->profit_sepi_hari = $profit_sepi_hari;
+            $score->profit_sepi = $profit_sepi;
+            $score->profit_normal_hari = $profit_normal_hari;
+            $score->profit_normal = $profit_normal;
+            $score->persediaan_aset = $persediaan_aset;
+            $score->fixed_aset = $fixed_aset;
+            $score->laba_perbulan = $laba_perbulan;
+            $score->laba_pertahun = $laba_pertahun;
             $score->nasabah_id = $request->nasabah_id;
             $score->save();
             DB::commit();

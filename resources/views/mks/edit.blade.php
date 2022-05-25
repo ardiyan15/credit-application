@@ -161,7 +161,7 @@
                                             <label for="">Kas, Tabungan, Deposito, atau Asset Lainnya</label>
                                             <input type="text" name="aset"
                                                 placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya"
-                                                class="form-control" required value="{{ $score->aset }}">
+                                                class="rupiah form-control" required value="@rupiah($score->aset)">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Saat Kondisi Ramai</label>
@@ -169,8 +169,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_ramai_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                        class="form-control" required
-                                                        value="{{ $score->profit_ramai_hari }}">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_ramai_hari)">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
                                             </div>
@@ -178,8 +177,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_ramai"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                        class="form-control" required
-                                                        value="{{ $score->profit_ramai }}">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_ramai)">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ bulan</span>
                                             </div>
@@ -190,8 +188,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_sepi_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                        class="form-control" required
-                                                        value="{{ $score->profit_sepi_hari }}">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_sepi_hari)">
 
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
@@ -200,7 +197,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_sepi"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                        class="form-control" required value="{{ $score->profit_sepi }}">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_sepi)">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ bulan</span>
                                             </div>
@@ -211,8 +208,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_normal_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                        class="form-control" required
-                                                        value="{{ $score->profit_normal_hari }}">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_normal_hari)">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
                                             </div>
@@ -220,8 +216,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_normal" id="normal_perbulan"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                        class="form-control" required
-                                                        value="{{ $score->profit_normal }}">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_normal)">
                                                 </div>
                                                 <span style="margin-top: 5pxl">/ bulan</span>
                                             </div>
@@ -229,18 +224,18 @@
                                         <div class="col-lg-6 form-group">
                                             <label for="">Persediaan Rata - Rata</label>
                                             <input type="text" name="persediaan_aset" placeholder="Persedian Rata - Rata"
-                                                class="form-control" required value="{{ $score->persediaan_aset }}">
+                                                class="rupiah form-control" required value="@rupiah($score->persediaan_aset)">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Kekayaan Berupa Fixed Asset</label>
                                             <input type="text" name="fixed_aset" placeholder="Kekayaan Berupa Fixed Asset"
-                                                class="form-control" required value="{{ $score->fixed_aset }}">
+                                                class="rupiah form-control" required value="@rupiah($score->fixed_aset)">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Laba Usaha Perbulan</label>
                                             <input type="text" name="laba_perbulan" placeholder="Laba Usaha Perbulan"
-                                                class="form-control" readonly id="laba_perbulan" required
-                                                value="{{ $score->laba_perbulan }}">
+                                                class="rupiah form-control" readonly id="laba_perbulan" required
+                                                value="@rupiah($score->laba_perbulan)">
                                             <input type="hidden" name="laba_pertahun" id="laba_pertahun_input"
                                                 value="{{ $score->laba_pertahun }}">
                                         </div>
@@ -298,12 +293,12 @@
 
         let limit_kredit_nasabah = $("#limit_kredit_nasabah").val()
 
-        let pendapatanNormalPerbulan = $("#normal_perbulan").val()
+        let pendapatanNormalPerbulan = $("#normal_perbulan").val().split(".").join("")
 
         let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100);
         let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup;
         let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);
-        $("#laba_perbulan").val(labaBersihPerbulan)
+        $("#laba_perbulan").val(format_rupiah(labaBersihPerbulan))
         $("#laba_pertahun").text("Rp. " + format_rupiah(labaBersihPertahun))
 
         if (labaBersihPertahun > limit_kredit_nasabah) {

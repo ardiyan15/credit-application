@@ -31,7 +31,7 @@
                                             <label for="">Kas, Tabungan, Deposito, atau Asset Lainnya</label>
                                             <input type="text" name="aset"
                                                 placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya"
-                                                class="form-control" required value="0">
+                                                class="rupiah form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="">Pendapatan Rata - Rata Saat Kondisi Ramai</label>
@@ -39,7 +39,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" name="profit_ramai_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                        class="form-control" required value="0">
+                                                        class="rupiah form-control" required value="0">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
                                             </div>
@@ -47,7 +47,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" name="profit_ramai"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                        class="form-control" required value="0">
+                                                        class="rupiah form-control" required value="0">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ bulan</span>
                                             </div>
@@ -58,7 +58,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" name="profit_sepi_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                        class="form-control" required value="0">
+                                                        class="rupiah form-control" required value="0">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
                                             </div>
@@ -66,7 +66,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" name="profit_sepi"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                        class="form-control" required value="0">
+                                                        class="rupiah form-control" required value="0">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ bulan</span>
                                             </div>
@@ -77,7 +77,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" name="profit_normal_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                        class="form-control" required value="0">
+                                                        class="rupiah form-control" required value="0">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
                                             </div>
@@ -85,7 +85,7 @@
                                                 <div class="col-sm-10">
                                                     <input type="text" name="profit_normal" id="normal_perbulan"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                        class="form-control" required value="0">
+                                                        class="rupiah form-control" required value="0">
                                                 </div>
                                                 <span style="margin-top: 5px;">/ bulan</span>
                                             </div>
@@ -93,12 +93,12 @@
                                         <div class="col-lg-6 form-group">
                                             <label for="">Persediaan Rata - Rata</label>
                                             <input type="text" name="persediaan_aset" placeholder="Persedian Rata - Rata"
-                                                class="form-control" required value="0">
+                                                class="rupiah form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Kekayaan Berupa Fixed Asset</label>
                                             <input type="text" name="fixed_aset" placeholder="Kekayaan Berupa Fixed Asset"
-                                                class="form-control" required value="0">
+                                                class="rupiah form-control" required value="0">
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Laba Usaha Perbulan</label>
@@ -171,12 +171,13 @@
                 limitKredit = data.limit_kredit
                 $("#limit_kredit").text("Rp. " + format_rupiah(data.limit_kredit))
 
-                let pendapatanNormalPerbulan = $("#normal_perbulan").val()
+                let pendapatanNormalPerbulan = $("#normal_perbulan").val().split(".").join("")
+                // console.log(pendapatanNormalPerbulan)
 
                 let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
                 let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
                 let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);
-                $("#laba_perbulan").val(labaBersihPerbulan)
+                $("#laba_perbulan").val(format_rupiah(labaBersihPerbulan))
                 $("#laba_pertahun").text("Rp. " + format_rupiah(labaBersihPertahun))
                 if (labaBersihPertahun > limitKredit) {
                     $("#info_laba_bersih").removeClass("bg-danger bg-warning").addClass("bg-success")
@@ -192,15 +193,15 @@
         })
 
         $("#normal_perbulan").on('keyup', function() {
-            let pendapatanNormalPerbulan = $("#normal_perbulan").val()
+            let pendapatanNormalPerbulan = $("#normal_perbulan").val().split(".").join("")
             // if (pendapatanNormalPerbulan == '') {
             //     return alert('Pendapatan Rata - Rata Perbulan Saat Kondisi Normal harus diisi ')
             // }
             let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
             let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
             let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);
-            $("#laba_pertahun_input").val(labaBersihPertahun)
-            $("#laba_perbulan").val(labaBersihPerbulan)
+            $("#laba_pertahun_input").val(format_rupiah(labaBersihPertahun))
+            $("#laba_perbulan").val(format_rupiah(labaBersihPerbulan))
             $("#laba_pertahun").text("Rp. " + format_rupiah(labaBersihPertahun))
             if (labaBersihPertahun > limitKredit) {
                 $("#info_laba_bersih").removeClass("bg-danger bg-warning").addClass("bg-success")

@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
             return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
         });
 
+        Blade::directive('rupiah', function ($expression) {
+            return "<?php echo number_format($expression,0,',','.'); ?>";
+        });
+
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
         date_default_timezone_set('Asia/Jakarta');
