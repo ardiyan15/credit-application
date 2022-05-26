@@ -23,7 +23,9 @@ class CreditController extends Controller
     {
         $data = [
             'menu' => $this->menu,
-            'customers' => Nasabah::with('user_created')->orderBy('id', 'DESC')->get(),
+            'customers' => Nasabah::with(['user_created' => function ($user_created) {
+                $user_created->with('employee');
+            }])->orderBy('id', 'DESC')->get(),
             'sub_menu' => 'credit'
         ];
 

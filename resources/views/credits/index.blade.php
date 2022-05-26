@@ -77,13 +77,14 @@
                                                         <span>{{ $customer->pesan_approval_lv_2 }}</span>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{ $customer->user_created->fullname }}</td>
+                                                <td class="text-center">{{ $customer->user_created->employee->nama }}
+                                                </td>
                                                 <td class="text-center">
                                                     <form action="{{ route('credits.destroy', $customer->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        @if ($customer->approval_lv_1 != 2 && $customer->approval_lv_1 !== 1 && Auth::user()->roles != 'kepala cabang')
+                                                        @if ($customer->approval_lv_1 != 2 && $customer->approval_lv_1 !== 1 && Auth::user()->roles != 'kepala cabang' && Auth::user()->roles != 'mka')
                                                             @if ($customer->approval_lv_1 != 1 && $customer->approval_lv_2 != 1)
                                                                 <a href="{{ route('credits.edit', $customer->id) }}"
                                                                     class="btn btn-sm btn-info rounded"><i

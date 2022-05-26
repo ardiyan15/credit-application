@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tambah Pengajuan Kredit</h1>
+                        <h1>Detail Pengajuan Kredit</h1>
                     </div>
                 </div>
             </div>
@@ -159,6 +159,9 @@
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control"
                                                     value="{{ $customer->no_telepon }}" readonly>
                                             </div>
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
                                                 <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5" rows="3"
@@ -194,6 +197,9 @@
                                                 <input type="text" name="no_telepon_2"
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control"
                                                     value="{{ $customer->no_telepon_2 }}" readonly>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <hr>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
