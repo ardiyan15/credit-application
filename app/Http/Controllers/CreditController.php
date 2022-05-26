@@ -97,7 +97,6 @@ class CreditController extends Controller
             $nomor_urut = sprintf('%04d', $result);
         }
 
-
         DB::beginTransaction();
         try {
             Nasabah::create([
@@ -196,6 +195,11 @@ class CreditController extends Controller
             $ext_ktp = $request->foto_ktp->getClientOriginalExtension();
             $ext_kk = $request->foto_kk->getClientOriginalExtension();
             $ext_usaha = $request->foto_usaha->getClientOriginalExtension();
+            if ($request->foto_nikah) {
+                $ext_nikah = $request->foto_nikah->getClientOriginalExtension();
+                $nikah = time() . "." . $ext_nikah;
+                $request->foto_nikah->storeAs('public/nikah', $nikah);
+            }
 
             $ktp = time() . "." . $ext_ktp;
             $kk = time() . "." . $ext_kk;
@@ -205,6 +209,7 @@ class CreditController extends Controller
                 'foto_ktp' => $ktp,
                 'foto_kk' => $kk,
                 'foto_usaha' => $usaha,
+                'foto_buku_nikah' => $nikah,
                 'nasabah_id' => $nasabah->id
             ]);
 
@@ -557,6 +562,38 @@ class CreditController extends Controller
                 'biaya_provisi_admin' => $biaya_provisi_admin,
                 'biaya_administrasi' => $biaya_administrasi
             ]);
+
+            $dokumen = Dokumen::where('nasabah_id', $id)->first();
+
+            if ($request->foto_nikah) {
+                $ext_nikah = $request->foto_nikah->getClientOriginalExtension();
+                $nikah = time() . "." . $ext_nikah;
+                $request->foto_nikah->storeAs('public/nikah', $nikah);
+                $dokumen->foto_buku_nikah = $nikah;
+            }
+
+            if ($request->foto_ktp) {
+                $ext_ktp = $request->foto_ktp->getClientOriginalExtension();
+                $ktp = time() . "." . $ext_ktp;
+                $request->foto_ktp->storeAs('public/ktp', $ktp);
+                $dokumen->foto_ktp = $ktp;
+            }
+
+            if ($request->foto_kk) {
+                $ext_kk = $request->foto_kk->getClientOriginalExtension();
+                $kk = time() . "." . $ext_kk;
+                $request->foto_kk->storeAs('public/kk', $kk);
+                $dokumen->foto_kk = $kk;
+            }
+
+            if ($request->foto_usaha) {
+                $ext_usaha = $request->foto_usaha->getClientOriginalExtension();
+                $usaha = time() . "." . $ext_usaha;
+                $request->foto_usaha->storeAs('public/usaha', $usaha);
+                $dokumen->foto_usaha = $usaha;
+            }
+
+            $dokumen->save();
 
             DB::commit();
             return redirect('/credits')->with('success', 'Berhasil Update Data Nasabah');

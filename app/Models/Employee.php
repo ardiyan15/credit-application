@@ -13,4 +13,9 @@ class Employee extends Model
     protected $table = 'employee';
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'employee_id');
+    }
 }

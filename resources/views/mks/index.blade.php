@@ -34,7 +34,15 @@
                                         @foreach ($customers as $customer)
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td class="text-center">{{ $customer->nama_lengkap }}</td>
+                                                <td class="text-center">
+                                                    @if ($customer->skoring)
+                                                        <a href="{{ route('mks.show', $customer->skoring->id) }}">
+                                                            {{ $customer->nama_lengkap }}
+                                                        </a>
+                                                    @else
+                                                        {{ $customer->nama_lengkap }}
+                                                    @endif
+                                                </td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
                                                 <td class="text-center">{{ $customer->no_rekening }}</td>
                                                 <td class="text-center">@currency($customer->limit_kredit)</td>

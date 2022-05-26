@@ -181,6 +181,10 @@
                                                 <input required type="text" name="no_telepon"
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control">
                                             </div>
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-12">
+                                                <hr>
+                                            </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
                                                 <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5" rows="3"></textarea>
@@ -190,6 +194,7 @@
                                                 <input type="text" name="kelurahan_2" placeholder="Kelurahan"
                                                     class="form-control">
                                             </div>
+
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kecamatan</label>
                                                 <input type="text" name="kecamatan_2" placeholder="Kecamatan"
@@ -213,6 +218,9 @@
                                                 <label for="">No telepon yang dapat dihubungi</label>
                                                 <input type="text" name="no_telepon_2"
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control">
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <hr>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
@@ -334,6 +342,10 @@
                                                 <label for="">Penghasilan Bulanan</label>
                                                 <input type="text" name="penghasilan_bulanan"
                                                     placeholder="Penghasilan Bulanan" class="rupiah form-control">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Buku Nikah</label>
+                                                <input type="file" name="foto_nikah" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Usaha</h5>

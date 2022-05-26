@@ -32,7 +32,7 @@
                                             <th class="text-center text-white">Limit Kredit</th>
                                             <th class="text-center text-white">Status</th>
                                             <th class="text-center text-white">Keterangan</th>
-                                            <th class="text-center text-white">Pembuat</th>
+                                            <th class="text-center text-white">MKS</th>
                                             <th class="text-center text-white">Opsi</th>
                                         </tr>
                                     </thead>
@@ -71,7 +71,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    @if ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 0)
+                                                    @if (($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 0) || $customer->approval_lv_1 == 2)
                                                         <span>{{ $customer->pesan_approval_lv_1 }}</span>
                                                     @elseif(($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 1) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 3) || ($customer->approval_lv_1 == 1 && $customer->approval_lv_2 == 2))
                                                         <span>{{ $customer->pesan_approval_lv_2 }}</span>
@@ -83,7 +83,7 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        @if ($customer->approval_lv_1 != 2 && $customer->approval_lv_1 !== 1)
+                                                        @if ($customer->approval_lv_1 != 2 && $customer->approval_lv_1 !== 1 && Auth::user()->roles != 'kepala cabang')
                                                             @if ($customer->approval_lv_1 != 1 && $customer->approval_lv_2 != 1)
                                                                 <a href="{{ route('credits.edit', $customer->id) }}"
                                                                     class="btn btn-sm btn-info rounded"><i

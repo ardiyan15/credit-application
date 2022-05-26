@@ -20,7 +20,7 @@
 
                     <a href="{{ route('profile.show', Auth::user()->id) }}"
                         class="nav-link @if ($menu == 'users') custom-active @else custom-color @endif"><i
-                            class="nav-icon fas fa-tachometer-alt"></i>
+                            class="nav-icon fa fa-user"></i>
                         <p>
                             User Profile
                         </p>
@@ -31,7 +31,7 @@
                     <li class="nav-item @if ($menu == 'mks') menu-open @endif">
                         <a href="#"
                             class="@if ($menu == 'mks') custom-active @else custom-color @endif nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fa fa-list-alt"></i>
                             <p>
                                 MKA
                                 <i class="right fas fa-angle-left"></i>
@@ -54,7 +54,7 @@
                     <li class="nav-item @if ($menu == 'approval') menu-open @endif">
                         <a href="#"
                             class="@if ($menu == 'approval') custom-active @else custom-color @endif nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fa fa-check"></i>
                             <p>
                                 Approval
                                 <i class="right fas fa-angle-left"></i>
@@ -88,7 +88,7 @@
                 <li class="nav-item @if ($menu == 'master') menu-open @endif">
                     <a href="#"
                         class="@if ($menu == 'master') custom-active @else custom-color @endif nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fa fa-database"></i>
                         <p>
                             Data Master
                             <i class="right fas fa-angle-left"></i>

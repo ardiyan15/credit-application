@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tambah Pengajuan Kredit</h1>
+                        <h1>Edit Pengajuan Kredit</h1>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('credits.update', $customer->id) }}" method="POST">
+                                <form action="{{ route('credits.update', $customer->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')
                                     <div class="form-group">
@@ -212,6 +213,9 @@
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control"
                                                     value="{{ $customer->no_telepon }}">
                                             </div>
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
                                                 <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5"
@@ -248,6 +252,9 @@
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control"
                                                     value="{{ $customer->no_telepon_2 }}">
                                             </div>
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_ktp" placeholder="No KTP"
@@ -259,9 +266,16 @@
                                                 </small>
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                <label for="">No NPWP</label> <small class="text-danger text-bold">*</small>
-                                                <input required type="text" name="no_npwp" placeholder="No NPWP"
-                                                    class="form-control" value="{{ $customer->no_npwp }}">
+                                                <label for="">Upload Foto KTP <small>(Jika ingin
+                                                        diubah)</small></label>
+                                                <input type="file" name="foto_ktp" class="form-control">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">No NPWP</label> <small
+                                                    class="text-danger text-bold">*</small>
+                                                <input required type="text" name="no_npwp" maxlength="15" minlength="15"
+                                                    placeholder="No NPWP" class="form-control"
+                                                    value="{{ $customer->no_npwp }}">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Status Tempat Tinggal</label> <small
@@ -320,14 +334,20 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No Kartu Keluarga</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="no_kartu_keluarga"
-                                                    class="form-control" placeholder="No Kartu Keluarga"
+                                                <input required type="text" minlength="16" maxlength="16"
+                                                    name="no_kartu_keluarga" class="form-control"
+                                                    placeholder="No Kartu Keluarga"
                                                     value="{{ $customer->no_kartu_keluarga }}">
                                                 <small>
                                                     <a href="" class="document" data-id="{{ $customer->id }}"
                                                         data-type="keluarga_dokumen" onclick="return false"
                                                         data-toggle="modal" data-target="#document">Lihat Dokumen</a>
                                                 </small>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Foto Kartu Keluarga <small>(Jika Ingin
+                                                        diubah)</small></label>
+                                                <input type="file" name="foto_kk" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Suami / Istri</h5>
@@ -356,6 +376,11 @@
                                                 <label for="">Tanggal Nikah</label>
                                                 <input type="date" name="tanggal_nikah" class="form-control"
                                                     value="{{ $customer->suami_istri->tanggal_nikah }}">
+                                                <small>
+                                                    <a href="" class="document" data-id="{{ $customer->id }}"
+                                                        data-type="document_marriage" onclick="return false"
+                                                        data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label>
@@ -394,7 +419,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label>
                                                 <input type="text" name="no_ktp_suami_istri"
-                                                    placeholder="No KTP Suami / Istri" class="form-control"
+                                                    placeholder="No KTP Suami / Istri" minlength="16" maxlength="16"
+                                                    class="form-control"
                                                     value="{{ $customer->suami_istri->no_ktp }}" />
                                             </div>
                                             <div class="col-md-6 form-group">
@@ -402,6 +428,11 @@
                                                 <input type="text" name="penghasilan_bulanan"
                                                     placeholder="Penghasilan Bulanan" class="rupiah form-control"
                                                     value="{{ $customer->suami_istri->penghasilan }}">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Foto Buku Nikah <small>(Jika ingin
+                                                        diubah)</small></label>
+                                                <input type="file" name="foto_nikah" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Usaha</h5>
@@ -466,6 +497,11 @@
                                                 <input required type="date" name="ditempati_usaha" class="form-control"
                                                     placeholder="Ditempati Sejak"
                                                     value="{{ $customer->usaha->ditempati_sejak }}">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Foto Tempat Usaha <small>(Jika ingin
+                                                        diubah)</small></label>
+                                                <input type="file" name="foto_usaha" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Kerabat Dekat Yang Tidak Serumah</h5>
@@ -654,9 +690,12 @@
                     } else if (type == 'usaha_dokumen') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/usaha/${data.foto_usaha}') !!}" width="450" />`)
-                    } else {
+                    } else if (type == 'keluarga_dokumen') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/kk/${data.foto_kk}') !!}" width="450" />`)
+                    } else if (type == 'document_marriage') {
+                        $("#img-content").append(
+                            `<img class="text-center" src="{!! asset('/storage/nikah/${data.foto_buku_nikah}') !!}" width="450" />`)
                     }
                 },
                 error: err => console.log(err)

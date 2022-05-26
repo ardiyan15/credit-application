@@ -40,8 +40,8 @@
                                                 <label for="">Limit Kredit Dimohon</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" id="limit_kredit" class="rupiah form-control"
-                                                    placeholder="Limit Kredit" name="limit_kredit"
-                                                    value="@currency($customer->limit_kredit)" readonly>
+                                                    placeholder="Limit Kredit" name="limit_kredit" value="@currency($customer->limit_kredit)"
+                                                    readonly>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputPassword1">Jangka Waktu (bulan)</label> <small
@@ -264,6 +264,11 @@
                                                 <label for="">Tanggal Nikah</label>
                                                 <input type="date" name="tanggal_nikah" class="form-control"
                                                     value="{{ $customer->suami_istri->tanggal_nikah }}" readonly>
+                                                <small>
+                                                    <a href="" class="document" data-id="{{ $customer->id }}"
+                                                        data-type="document_marriage" onclick="return false"
+                                                        data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label>
@@ -518,16 +523,18 @@
                 success: ({
                     data
                 }) => {
-                    console.log(type)
                     if (type == 'document_ktp') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/ktp/${data.foto_ktp}') !!}" width="450" />`)
                     } else if (type == 'usaha_dokumen') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/usaha/${data.foto_usaha}') !!}" width="450" />`)
-                    } else {
+                    } else if (type == 'keluarga_dokumen') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/kk/${data.foto_kk}') !!}" width="450" />`)
+                    } else if (type == 'document_marriage') {
+                        $("#img-content").append(
+                            `<img class="text-center" src="{!! asset('/storage/nikah/${data.foto_buku_nikah}') !!}" width="450" />`)
                     }
                 },
                 error: err => console.log(err)

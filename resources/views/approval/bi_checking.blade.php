@@ -45,11 +45,14 @@
                                                 <td class="text-center">@currency($customer->limit_kredit)</td>
                                                 <td class="text-center">
                                                     @if ($customer->approval_lv_1 == 0)
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-warning">
+                                                            Belum ada approval</span>
+                                                    @elseif($customer->approval_lv_1 == 2)
                                                         <span class="text-white badge badge-pill pl-2 pr-2 bg-danger">
-                                                            Belum diapprove</span>
+                                                            Ditolak</span>
                                                     @else
                                                         <span class="text-white badge badge-pill pl-2 pr-2 bg-success">
-                                                            Sudah diapprove</span>
+                                                            Approve</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">

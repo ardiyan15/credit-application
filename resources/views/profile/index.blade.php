@@ -21,13 +21,13 @@
                                 <table>
                                     <tr>
                                         <td class="text-bold" width="100">Username</td>
-                                        <td width="50">:</td>
+                                        <td width="20">:</td>
                                         <td>{{ $user->username }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-bold">Fullname</td>
+                                        <td class="text-bold">Employee</td>
                                         <td>:</td>
-                                        <td>{{ $user->fullname }}</td>
+                                        <td>{{ $user->employee->nama }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold">Roles</td>

@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $data = [
             'menu' => 'users',
             'sub_menu' => '',
-            'user' => User::findOrFail($id)
+            'user' => User::with('employee')->findOrFail($id)
         ];
 
         return view('profile.index')->with($data);

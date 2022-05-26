@@ -67,4 +67,18 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="ano
         return rupiah
         // return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '')
     }
+
+    function preventAlphabet() {
+        var regExp = new RegExp('[a-zA-Z]');
+
+        $('.prevent').on('keydown keyup', function(e) {
+            var value = $(this).val();
+
+            // Do not allow alphabets to be entered.
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
 </script>

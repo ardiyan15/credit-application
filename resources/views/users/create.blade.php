@@ -20,18 +20,12 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6 form-group">
-                                            <label for="">NIP</label>
-                                            <input type="text" class="form-control" placeholder="NIP" name="nip">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label for="">Nama Lengkap</label>
-                                            <input class="form-control" type="text" name="fullname"
-                                                placeholder="Nama Lengkap" required>
-                                        </div>
-                                        <div class="col-md-6 form-group">
                                             <label for="">Username</label>
                                             <input class="form-control" type="text" name="username" placeholder="username"
-                                                required>
+                                                required value="{{ old('username') }}">
+                                            @error('username')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label for="">Password</label>
@@ -41,14 +35,27 @@
                                         <div class="col-md-6 form-group">
                                             <label for="">Roles</label>
                                             <select name="roles" class="form-control" required>
-                                                <option value="" selected>-- Pilih Roles --</option>
-                                                <option value="mks">MKS</option>
-                                                <option value="mka">MKA</option>
-                                                <option value="kepala cabang">Kepala Cabang</option>
+                                                <option value="">-- Pilih Roles --</option>
+                                                <option value="mks" {{ old('roles') == 'mks' ? 'selected' : '' }}>
+                                                    MKS</option>
+                                                <option value="mka" {{ old('roles') == 'mka' ? 'selected' : '' }}>
+                                                    MKA</option>
+                                                <option value="kepala cabang"
+                                                    {{ old('roles') == 'kepala cabang' ? 'selected' : '' }}>Kepala
+                                                    Cabang</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="">Employee</label>
+                                            <select name="employee_id" id="" class="form-control" required>
+                                                <option value="">-- Pilih Employee --</option>
+                                                @foreach ($employees as $employee)
+                                                    <option value="{{ $employee->id }}">{{ $employee->nama }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <button class="btn btn-success btn-sm rounded">Simpan</button>
+                                    <button class="btn btn-primary btn-sm rounded">Simpan</button>
                                     <a href="{{ route('users.index') }}"
                                         class="btn btn-secondary btn-sm rounded">Kembali</a>
                                 </form>

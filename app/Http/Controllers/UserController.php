@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('id', 'DESC')->get();
+        $users = User::whereHas('employee')->with('employee')->orderBy('id', 'DESC')->get();
 
         $data = [
             'users' => $users,
@@ -26,7 +27,10 @@ class UserController extends Controller
 
     public function create()
     {
+        $employees = Employee::doesntHave('user')->orderBy('id', 'DESC')->get();
+
         $data = [
+            'employees' => $employees,
             'menu' => $this->menu,
             'sub_menu' => 'user'
         ];
@@ -36,14 +40,17 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'username' => 'required|unique:users,username'
+        ]);
+
         DB::beginTransaction();
         try {
             User::create([
-                'username' => $request->username,
-                'fullname' => $request->fullname,
+                'username' => $validated['username'],
                 'password' => Hash::make($request->password),
                 'roles' => $request->roles,
-                'nip' => $request->nip
+                'employee_id' => $request->employee_id
             ]);
             DB::commit();
             return redirect('users')->with('success', 'Data Berhasil ditambahkan');
@@ -86,11 +93,15 @@ class UserController extends Controller
             ],
         ];
 
+        // $employees = Employee::whereDoesntHave('user')->orderBy('id', 'DESC')->get();
+
+        $employees = DB::select("SELECT users.id AS 'user_id', employee.id AS 'employee_id', employee.nama FROM employee LEFT JOIN users ON users.employee_id = employee.id WHERE users.employee_id IS NULL OR users.employee_id = $user->employee_id");
         $data = [
             'menu' => $this->menu,
             'sub_menu' => 'user',
             'user' => $user,
-            'roles' => $roles
+            'roles' => $roles,
+            'employees' => $employees
         ];
 
         return view('users.edit')->with($data);
@@ -98,18 +109,21 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'username' => 'required|unique:users,username'
+        ]);
+
         DB::beginTransaction();
         try {
             $user = User::findOrFail($id);
-            $user->fullname = $request->fullname;
-            $user->username = $request->username;
+            $user->username = $validated['username'];
+            $user->employee_id = $request->employee_id;
             if ($request->password) {
                 $user->password = Hash::make($request->password);
             }
             if ($request->roles) {
                 $user->roles = $request->roles;
             }
-            $user->nip = $request->nip;
             $user->save();
             DB::commit();
             return redirect('users')->with('success', 'Berhasil edit user');

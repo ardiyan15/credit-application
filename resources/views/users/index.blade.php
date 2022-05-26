@@ -26,6 +26,7 @@
                                             <th class="text-center text-white">#</th>
                                             <th class="text-center text-white">Username</th>
                                             <th class="text-center text-white">Roles</th>
+                                            <th class="text-center text-white">Employee</th>
                                             <th class="text-center text-white">Tanggal Dibuat</th>
                                             <th class="text-center text-white">Opsi</th>
                                         </tr>
@@ -36,6 +37,7 @@
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">{{ $user->username }}</td>
                                                 <td class="text-center">{{ $user->roles }}</td>
+                                                <td class="text-center">{{ $user->employee->nama }}</td>
                                                 <td class="text-center">{{ substr($user->created_at, 0, 10) }}</td>
                                                 <td class="text-center">
                                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST">

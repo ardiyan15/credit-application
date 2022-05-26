@@ -4,10 +4,11 @@
         width="60">
 </div>
 
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
+    <h6>{{ '[ ' . strtoupper(Auth::user()->employee->nama) . ' - ' . strtoupper(Auth::user()->roles) . ' ]' }}</h6>
 </nav>

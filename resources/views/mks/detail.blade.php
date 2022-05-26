@@ -21,7 +21,7 @@
                                     @method('PATCH')
                                     <div class="col-lg-6 form-group">
                                         <label for="">Nasabah</label>
-                                        <select name="nasabah_id" id="nasabah_id" required class="form-control">
+                                        <select name="nasabah_id" id="nasabah_id" disabled required class="form-control">
                                             <option value="{{ $score->nasabah->id }}" selected>
                                                 {{ $score->nasabah->nama_lengkap }}
                                             </option>
@@ -33,7 +33,7 @@
                                             <label for="">Kas, Tabungan, Deposito, atau Asset Lainnya</label>
                                             <input type="text" name="aset"
                                                 placeholder="Kas, Tabungan, Deposito, atau Asset Lainnya"
-                                                class="rupiah form-control" required value="@rupiah($score->aset)">
+                                                class="rupiah form-control" required value="@rupiah($score->aset)" readonly>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Pendapatan Rata - Rata Saat Kondisi Ramai</label>
@@ -41,7 +41,8 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_ramai_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                        class="rupiah form-control" required value="@rupiah($score->profit_ramai_hari)">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_ramai_hari)"
+                                                        readonly>
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
                                             </div>
@@ -49,7 +50,8 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_ramai"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Ramai"
-                                                        class="rupiah form-control" required value="@rupiah($score->profit_ramai)">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_ramai)"
+                                                        readonly>
                                                 </div>
                                                 <span style="margin-top: 5px;">/ bulan</span>
                                             </div>
@@ -60,7 +62,8 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_sepi_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                        class="rupiah form-control" required value="@rupiah($score->profit_sepi_hari)">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_sepi_hari)"
+                                                        readonly>
 
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
@@ -69,7 +72,8 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_sepi"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Sepi"
-                                                        class="rupiah form-control" required value="@rupiah($score->profit_sepi)">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_sepi)"
+                                                        readonly>
                                                 </div>
                                                 <span style="margin-top: 5px;">/ bulan</span>
                                             </div>
@@ -80,7 +84,8 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_normal_hari"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                        class="rupiah form-control" required value="@rupiah($score->profit_normal_hari)">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_normal_hari)"
+                                                        readonly>
                                                 </div>
                                                 <span style="margin-top: 5px;">/ hari</span>
                                             </div>
@@ -88,7 +93,8 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="profit_normal" id="normal_perbulan"
                                                         placeholder="Pendapatan Rata - Rata Perbulan Saat Kondisi Normal"
-                                                        class="rupiah form-control" required value="@rupiah($score->profit_normal)">
+                                                        class="rupiah form-control" required value="@rupiah($score->profit_normal)"
+                                                        readonly>
                                                 </div>
                                                 <span style="margin-top: 5pxl">/ bulan</span>
                                             </div>
@@ -96,20 +102,20 @@
                                         <div class="col-lg-6 form-group">
                                             <label for="">Persediaan Rata - Rata</label>
                                             <input type="text" name="persediaan_aset" placeholder="Persedian Rata - Rata"
-                                                class="rupiah form-control" required value="@rupiah($score->persediaan_aset)">
+                                                class="rupiah form-control" required value="@rupiah($score->persediaan_aset)" readonly>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Kekayaan Berupa Fixed Asset</label>
                                             <input type="text" name="fixed_aset" placeholder="Kekayaan Berupa Fixed Asset"
-                                                class="rupiah form-control" required value="@rupiah($score->fixed_aset)">
+                                                class="rupiah form-control" required value="@rupiah($score->fixed_aset)" readonly>
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">Laba Usaha Perbulan</label>
                                             <input type="text" name="laba_perbulan" placeholder="Laba Usaha Perbulan"
                                                 class="rupiah form-control" readonly id="laba_perbulan" required
-                                                value="@rupiah($score->laba_perbulan)">
+                                                value="@rupiah($score->laba_perbulan)" readonly>
                                             <input type="hidden" name="laba_pertahun" id="laba_pertahun_input"
-                                                value="{{ $score->laba_pertahun }}">
+                                                value="{{ $score->laba_pertahun }}" readonly>
                                         </div>
                                     </div>
                                     <hr>
@@ -129,11 +135,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mt-2">
-                                        <button id="submit" class="btn btn-primary btn-sm rounded">Simpan</button>
-                                        <a href="{{ route('mks.index') }}"
-                                            class="btn btn-secondary btn-sm rounded">Kembali</a>
-                                    </div>
+                                    <a href="{{ route('mks.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
                                     <input type="hidden" id="limit_kredit_nasabah"
                                         value="{{ $score->nasabah->limit_kredit }}">
                                 </form>

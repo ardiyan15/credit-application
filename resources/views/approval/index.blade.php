@@ -33,18 +33,24 @@
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">
-                                                    {{ $customer->nama_lengkap }}
+                                                    @if ($customer->approval_lv_2 != 0)
+                                                        <a href="{{ route('approval.show', $customer->id) }}">
+                                                            {{ $customer->nama_lengkap }}
+                                                        </a>
+                                                    @else
+                                                        {{ $customer->nama_lengkap }}
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">{{ $customer->no_ktp }}</td>
                                                 <td class="text-center">{{ $customer->no_rekening }}</td>
                                                 <td class="text-center">@currency($customer->limit_kredit)</td>
                                                 <td class="text-center">
                                                     @if ($customer->approval_lv_2 == 0)
-                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-danger">
-                                                            Belum diapprove</span>
+                                                        <span class="text-white badge badge-pill pl-2 pr-2 bg-warning">
+                                                            Belum ada approval</span>
                                                     @else
                                                         <span class="text-white badge badge-pill pl-2 pr-2 bg-success">
-                                                            Sudah diapprove</span>
+                                                            Sudah ada approval</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">

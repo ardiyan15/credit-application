@@ -85,7 +85,15 @@ class MksController extends Controller
 
     public function show($id)
     {
-        //
+        $score = Mks::with('nasabah')->findOrFail($id);
+
+        $data = [
+            'menu' => $this->menu,
+            'sub_menu' => 'scoring',
+            'score' => $score
+        ];
+
+        return view('mks.detail')->with($data);
     }
 
     public function edit($id)
