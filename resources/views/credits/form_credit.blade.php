@@ -240,7 +240,7 @@
                     <th>16. Penghasilan Bulanan</th>
                     <td>:</td>
                     <td>
-                        @if ($customer->suami_istri != null)
+                        @if ($customer->suami_istri != null && $customer->suami_istri->penghasilan)
                             {{-- {{ $customer->suami_istri->penghasilan }} --}}
                             @currency($customer->suami_istri->penghasilan)
                         @else
@@ -477,12 +477,12 @@
                                     <div class="text-right"
                                         style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
                                         <span style="float: left;"
-                                            class="text-left">{{ $user->fullname }}</span>
+                                            class="text-left">{{ $user->employee->nama }}</span>
                                     </div>
                                     <div class="text-right"
                                         style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
                                         <span style="clear: both;"
-                                            class="text-right">{{ $customer->user_created->fullname }}</span>
+                                            class="text-right">{{ $customer->user_created->employee->nama }}</span>
                                     </div>
                                 </td>
                             </tr>

@@ -27,7 +27,13 @@
                                     <tr>
                                         <td class="text-bold">Employee</td>
                                         <td>:</td>
-                                        <td>{{ $user->employee->nama }}</td>
+                                        <td>
+                                            @if ($user->empployee)
+                                                {{ $user->employee->nama }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-bold">Roles</td>
