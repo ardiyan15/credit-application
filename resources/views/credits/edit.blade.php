@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('credits.update', $customer->id) }}" method="POST"
+                                <form id="formCredit" action="{{ route('credits.update', $customer->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')
@@ -80,14 +80,14 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Jenis Pinjaman</label>
-                                                <select name="jenis_pinjaman" id="" class="form-control">
+                                                <select name="jenis_pinjaman" id="jenis_pinjaman" class="form-control">
                                                     <option value="">-- Pilih Jenis Pinjaman --</option>
                                                     @foreach ($jenis_pinjaman as $pinjaman)
                                                         @if ($pinjaman['value'] == $customer->jenis_pinjaman)
                                                             <option value="{{ $pinjaman['value'] }}" selected>
                                                                 {{ $pinjaman['name'] }}</option>
                                                         @else
-                                                            <option value="{{ $pinjaman['value'] }}" selected>
+                                                            <option value="{{ $pinjaman['value'] }}">
                                                                 {{ $pinjaman['name'] }}</option>
                                                         @endif
                                                     @endforeach
@@ -204,7 +204,8 @@
                                                 <label for="">Kode Pos</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="kode_pos" placeholder="Kode Pos"
-                                                    class="form-control" value="{{ $customer->kode_pos }}">
+                                                    class="form-control" value="{{ $customer->kode_pos }}"
+                                                    maxlength="5" minlength="5">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No telepon yang dapat dihubungi</label> <small
@@ -214,7 +215,7 @@
                                                     value="{{ $customer->no_telepon }}">
                                             </div>
                                             <div class="col-md-12">
-                                                <hr>
+                                                <hr class="border border-primary">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
@@ -244,7 +245,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kode Pos</label>
                                                 <input type="text" name="kode_pos_2" placeholder="Kode Pos"
-                                                    class="form-control" value="{{ $customer->kode_pos_2 }}">
+                                                    class="form-control" value="{{ $customer->kode_pos_2 }}"
+                                                    maxlength="5" minlength="5">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No telepon yang dapat dihubungi</label>
@@ -253,12 +255,13 @@
                                                     value="{{ $customer->no_telepon_2 }}">
                                             </div>
                                             <div class="col-md-12">
-                                                <hr>
+                                                <hr class="border border-primary">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_ktp" placeholder="No KTP"
-                                                    class="form-control" value="{{ $customer->no_ktp }}">
+                                                    class="form-control" value="{{ $customer->no_ktp }}" maxlength="16"
+                                                    minlength="16">
                                                 <small>
                                                     <a href="" class="document" data-id="{{ $customer->id }}"
                                                         data-type="document_ktp" onclick="return false" data-toggle="modal"
@@ -617,7 +620,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button id="submit" class="btn btn-primary btn-sm rounded">Submit</button>
+                                    <button id="save" type="button" class="btn btn-primary btn-sm rounded">Submit</button>
                                     <a href="{{ route('credits.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
                                 </form>
                             </div>
@@ -646,25 +649,6 @@
 
 @push('scripts')
     <script>
-        let jenisAgunan = '';
-        let limitKredit
-
-        $("#jenis_agunan").on('change', function() {
-            jenisAgunan = $(this).val()
-        })
-
-        // $("#submit").on('click', function(e) {
-        //     limitKredit = $("#limit_kredit").val()
-        //     if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
-        //         Swal.fire(
-        //             'Gagal',
-        //             'Jika agunan menggunakan BPKB Motor atau BPKB Mobil limit kredit tidak boleh lebih dari Rp. 50.000.000',
-        //             'error'
-        //         )
-        //         e.preventDefault()
-        //     }
-        // })
-
         $(".document").on('click', function() {
             let type = $(this).data('type')
             let id = $(this).data('id')
@@ -677,13 +661,11 @@
                 url: '{{ route('credits.get_document') }}',
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    // type: type,
                     id: id
                 },
                 success: ({
                     data
                 }) => {
-                    console.log(type)
                     if (type == 'document_ktp') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/ktp/${data.foto_ktp}') !!}" width="450" />`)
@@ -701,5 +683,41 @@
                 error: err => console.log(err)
             })
         })
+
+        $("#save").on('click', function(e) {
+            e.preventDefault()
+            let limit_credit = parseInt($("#limit_kredit").val().split(".").join(""))
+            let jenis_pinjaman = $("#jenis_pinjaman").val()
+            calculation(limit_credit, jenis_pinjaman)
+        })
+
+        function calculation(limit_kredit, jenis_pinjaman) {
+            $.ajax({
+                type: 'GET',
+                url: `{{ route('credits.get_instalment') }}`,
+                success: ({
+                    data
+                }) => {
+                    instalment = false
+                    data.forEach((item, index) => {
+                        if (item.tipe == jenis_pinjaman && limit_kredit >= item.kredit_terkecil &&
+                            limit_kredit < item.kredit_terbesar) {
+                            instalment = true
+                        }
+                    })
+                    if (instalment == false) {
+                        Swal.fire(
+                            'Gagal',
+                            'Limit Kredit tidak sesuai dengan suku bunga',
+                            'error'
+                        )
+                        return false
+                    } else {
+                        $("#formCredit").submit()
+                    }
+                },
+                error: err => console.log(err)
+            })
+        }
     </script>
 @endpush

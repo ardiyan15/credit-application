@@ -28,7 +28,7 @@
                                         <td class="text-bold">Employee</td>
                                         <td>:</td>
                                         <td>
-                                            @if ($user->empployee)
+                                            @if ($user->employee !== null)
                                                 {{ $user->employee->nama }}
                                             @else
                                                 -

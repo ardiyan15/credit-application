@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Jenis Pinjaman</label>
-                                                <select name="jenis_pinjaman" id="" class="form-control">
+                                                <select name="jenis_pinjaman" id="jenis_pinjaman" class="form-control">
                                                     <option value="">-- Pilih Jenis Pinjaman --</option>
                                                     <option value="kur">KUR</option>
                                                     <option value="kum">KUM</option>
@@ -173,17 +173,18 @@
                                                 <label for="">Kode Pos</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="kode_pos" placeholder="Kode Pos"
-                                                    class="form-control">
+                                                    class="form-control" maxlength="5" minlength="5">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No telepon yang dapat dihubungi</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_telepon"
-                                                    placeholder="No telepon yang bisa dihubungi" class="form-control">
+                                                    placeholder="No telepon yang bisa dihubungi" minlength="11" max="13"
+                                                    class="form-control">
                                             </div>
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-12">
-                                                <hr>
+                                                <hr class="border border-primary">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
@@ -217,15 +218,16 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No telepon yang dapat dihubungi</label>
                                                 <input type="text" name="no_telepon_2"
-                                                    placeholder="No telepon yang bisa dihubungi" class="form-control">
+                                                    placeholder="No telepon yang bisa dihubungi" minlength="11" max="13"
+                                                    class="form-control">
                                             </div>
                                             <div class="col-sm-12">
-                                                <hr>
+                                                <hr class="border border-primary">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_ktp" placeholder="No KTP"
-                                                    class="form-control">
+                                                    class="form-control" maxlength="16" minlength="16">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Upload KTP</label>
@@ -278,9 +280,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No Kartu Keluarga</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="no_kartu_keluarga"
-                                                    class="form-control" placeholder="No Kartu Keluarga" minlength="16"
-                                                    maxlength="16">
+                                                <input required type="text" name="no_kartu_keluarga" class="form-control"
+                                                    placeholder="No Kartu Keluarga" minlength="16" maxlength="16">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Upload Kartu Keluarga</label>
@@ -389,7 +390,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No Telepon yang dapat dihubungi</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="numbr" class="form-control" name="no_telepon_usaha"
+                                                <input required type="numbr" class="form-control" minlength="11"
+                                                    maxlength="13" name="no_telepon_usaha"
                                                     placeholder="No Telepon yang dapat dihubungi">
                                             </div>
                                             <div class="col-md-6 form-group">
@@ -440,14 +442,15 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No Telepon Rumah</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input type="number" name="no_telepon_rumah_kerabat"
-                                                    placeholder="No Telepon Rumah" class="form-control">
+                                                <input type="text" name="no_telepon_rumah_kerabat"
+                                                    placeholder="No Telepon Rumah" minlength="10" maxlength="12"
+                                                    class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Nomor HP</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="no_hp_kerabat" placeholder="Nomor HP"
-                                                    class="form-control">
+                                                <input required type="text" minlength="10" maxlength="12"
+                                                    name="no_hp_kerabat" placeholder="Nomor HP" class="form-control">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Keuangan Calon Debitur</h5>
@@ -503,7 +506,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button id="submit" class="btn btn-primary btn-sm rounded">Submit</button>
+                                    <button id="save" class="btn btn-primary btn-sm rounded">Submit</button>
+                                    <a href="{{ route('credits.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
                                 </form>
                             </div>
                         </div>
@@ -516,47 +520,40 @@
 
 @push('scripts')
     <script>
-        let jenisAgunan = '';
-        let limitKredit
-        $("#jenis_agunan").on('change', function() {
-            jenisAgunan = $(this).val()
+        $("#save").on('click', function(e) {
+            e.preventDefault()
+            let limit_credit = parseInt($("#limit_kredit").val().split(".").join(""))
+            let jenis_pinjaman = $("#jenis_pinjaman").val()
+            calculation(limit_credit, jenis_pinjaman)
         })
-        // $("#submit").on('click', function(e) {
-        //     limitKredit = $("#limit_kredit").val()
-        //     if (jenisAgunan == 'bpkb motor' || jenisAgunan == 'bpkb mobil' && jenisAgunan > 50000000) {
-        //         Swal.fire(
-        //             'Gagal',
-        //             'Jika agunan menggunakan BPKB Motor atau BPKB Mobil limit kredit tidak boleh lebih dari Rp. 50.000.000',
-        //             'error'
-        //         )
-        //         e.preventDefault()
-        //     }
-        // })
 
-        // var rupiah = document.getElementById('rupiah');
-        let rupiah = $(".rupiah")
-        rupiah.on('keyup', function(e) {
-            console.log($(this).val())
-            $(this).val(formatRupiah(this.value, ));
-        });
-
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.replace(/[^,\d]/g, '').toString(),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            // tambahkan titik jika yang di input sudah menjadi angka ribuan
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
-
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            console.log(rupiah)
-            return rupiah
-            // return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '')
+        function calculation(limit_kredit, jenis_pinjaman) {
+            $.ajax({
+                type: 'GET',
+                url: `{{ route('credits.get_instalment') }}`,
+                success: ({
+                    data
+                }) => {
+                    instalment = false
+                    data.forEach((item, index) => {
+                        if (item.tipe == jenis_pinjaman && limit_kredit >= item.kredit_terkecil &&
+                            limit_kredit < item.kredit_terbesar) {
+                            instalment = true
+                        }
+                    })
+                    if (instalment == false) {
+                        Swal.fire(
+                            'Gagal',
+                            'Limit Kredit tidak sesuai dengan suku bunga',
+                            'error'
+                        )
+                        return false
+                    } else {
+                        $("#formCredit").submit()
+                    }
+                },
+                error: err => console.log(err)
+            })
         }
     </script>
 @endpush

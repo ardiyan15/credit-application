@@ -160,7 +160,7 @@
                                                     value="{{ $customer->no_telepon }}" readonly>
                                             </div>
                                             <div class="col-md-12">
-                                                <hr>
+                                                <hr class="border border-primary">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
@@ -199,7 +199,7 @@
                                                     value="{{ $customer->no_telepon_2 }}" readonly>
                                             </div>
                                             <div class="col-md-12">
-                                                <hr>
+                                                <hr class="border border-primary">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
