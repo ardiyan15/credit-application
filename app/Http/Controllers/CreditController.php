@@ -616,8 +616,8 @@ class CreditController extends Controller
     public function print_credit_approved($id)
     {
         $customer = Nasabah::with('calculation', 'calon_debitur', 'kerabat', 'suami_istri', 'usaha')->findOrFail($id);
-
-        $pdf = PDF::loadview('credits.credit_approved', ['customer' => $customer]);
+        $head = User::with('employee')->where('roles', 'kepala cabang')->first();
+        $pdf = PDF::loadview('credits.credit_approved', ['customer' => $customer, 'head' => $head]);
 
         return $pdf->stream();
     }
@@ -662,8 +662,8 @@ class CreditController extends Controller
 
     public function print_credit($id)
     {
-        $customer = Nasabah::findOrFail($id);
-        $user = User::where('roles', 'kepala cabang')->first();
+        $customer = Nasabah::with('suami_istri')->findOrFail($id);
+        $user = User::with('employee')->where('roles', 'kepala cabang')->first();
 
         $pdf = PDF::loadview('credits.form_credit', ['customer' => $customer, 'user' => $user]);
         $pdf->setPaper([0, 0, 1000, 2000]);

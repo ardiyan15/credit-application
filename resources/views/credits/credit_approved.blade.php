@@ -29,7 +29,8 @@
         <li class="text-justify">
             PT Bank Mandiri (Persero) Tbk. b erkedudukan di Jakarta Selatan dan berkantor pusat di Jl. Jend. Gatot
             Subroto
-            Kav. YULIANA MAHARANI selaku kepala Unit / Cabang MMU KCP MMU Jakarta Raya Kosambi 1, oleh karena itu
+            Kav. {{ $head->employee->nama }} selaku kepala Unit / Cabang MMU KCP MMU Jakarta Raya Kosambi 1, oleh
+            karena itu
             sah
             bertindak untuk atas nama PT Bank Mandiri (Persero) Tbk. selanjutnya disebut "<b>Bank</b>"
         </li>
@@ -203,7 +204,7 @@
             <td width="150">
                 {{ $customer->suami_istri->status . ' : ' . strtoupper($customer->suami_istri->nama_suami_istri) }}
             </td>
-            <td>INDAH YULIANA</td>
+            <td>{{ strtoupper($head->employee->nama) }}</td>
         </tr>
     </table>
 

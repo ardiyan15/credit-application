@@ -77,7 +77,12 @@
                                                         <span>{{ $customer->pesan_approval_lv_2 }}</span>
                                                     @endif
                                                 </td>
-                                                <td class="text-center">{{ $customer->user_created->employee->nama }}
+                                                @if ($customer->user_created->employee)
+                                                    <td class="text-center">
+                                                        {{ $customer->user_created->employee->nama }}
+                                                    @else
+                                                    <td class="text-center">-</td>
+                                                @endif
                                                 </td>
                                                 <td class="text-center">
                                                     <form action="{{ route('credits.destroy', $customer->id) }}"

@@ -10,5 +10,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
-    <h6>{{ '[ ' . strtoupper(Auth::user()->employee->nama) . ' - ' . strtoupper(Auth::user()->roles) . ' ]' }}</h6>
+    @if (Auth::user()->employee)
+        <h6>{{ '[ ' . strtoupper(Auth::user()->employee->nama) . ' - ' . strtoupper(Auth::user()->roles) . ' ]' }}
+        </h6>
+    @else
+        <h6>{{ '[' . strtoupper(Auth::user()->roles) . ' ]' }}</h6>
+    @endif
 </nav>
