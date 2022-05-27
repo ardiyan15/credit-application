@@ -235,7 +235,7 @@
                                                 <label for="">No NPWP</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_npwp" placeholder="No NPWP"
-                                                    class="form-control">
+                                                    class="form-control" maxlength="15" minlength="15">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Status Tempat Tinggal</label> <small
@@ -279,7 +279,8 @@
                                                 <label for="">No Kartu Keluarga</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="number" name="no_kartu_keluarga"
-                                                    class="form-control" placeholder="No Kartu Keluarga">
+                                                    class="form-control" placeholder="No Kartu Keluarga" minlength="16"
+                                                    maxlength="16">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Upload Kartu Keluarga</label>
@@ -336,7 +337,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label>
                                                 <input type="text" name="no_ktp_suami_istri"
-                                                    placeholder="No KTP Suami / Istri" class="form-control">
+                                                    placeholder="No KTP Suami / Istri" class="form-control"
+                                                    minlength="16" maxlength="16">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Penghasilan Bulanan</label>
