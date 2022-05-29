@@ -64,7 +64,6 @@ class CreditController extends Controller
         }
 
         if ($request->jenis_pinjaman === 'kur') {
-            // $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
 
             $biaya_provisi_admin = ($limit_kredit * 1.5) / 100;
 
@@ -449,8 +448,6 @@ class CreditController extends Controller
 
         if ($request->jenis_pinjaman === 'kur') {
 
-            // $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
-
             $biaya_provisi_admin = ($limit_kredit * 1.5) / 100;
 
             if ($limit_kredit >= 200000000 || $limit_kredit <= 350000000) {
@@ -463,7 +460,6 @@ class CreditController extends Controller
                 $biaya_administrasi = 500000;
             }
         } else {
-
             $biaya_provisi_admin = ($limit_kredit * 0.5) / 100;
 
             $biaya_administrasi = 50000;

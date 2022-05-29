@@ -215,7 +215,7 @@
                                                     value="{{ $customer->no_telepon }}">
                                             </div>
                                             <div class="col-md-12">
-                                                <hr class="border border-primary">
+                                                <h5 class="mb-4 bg-primary p-2 rounded"></h5>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
@@ -255,7 +255,7 @@
                                                     value="{{ $customer->no_telepon_2 }}">
                                             </div>
                                             <div class="col-md-12">
-                                                <hr class="border border-primary">
+                                                <h5 class="mb-4 bg-primary p-2 rounded"></h5>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>

@@ -186,31 +186,8 @@
             $("#info_laba_bersih").removeClass('bg-success bg-primary').addClass("bg-danger")
         }
 
-        // $("#normal_perbulan").on('keyup', function() {
-        //     let pendapatanNormalPerbulan = $("#normal_perbulan").val()
-        //     let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
-        //     let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
-        //     let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);
-        //     $("#laba_pertahun_input").val(labaBersihPertahun)
-        //     $("#laba_perbulan").val(labaBersihPerbulan)
-        //     console.log(labaBersihPertahun)
-        //     $("#laba_pertahun").text("Rp. " + format_rupiah(labaBersihPertahun))
-        //     if (labaBersihPertahun > limit_kredit_nasabah) {
-        //         $("#info_laba_bersih").removeClass("bg-danger bg-warning").addClass("bg-success")
-        //         $("#submit").prop('disabled', false)
-        //     } else if (labaBersihPerbulan == limit_kredit_nasabah) {
-        //         $("#info_laba_bersih").removeClass('bg-danger bg-success').addClass("bg-warning")
-        //         $("#submit").prop('disabled', false)
-        //     } else {
-        //         $("#info_laba_bersih").removeClass('bg-success bg-primary').addClass("bg-danger")
-        //     }
-        // })
-
         $("#normal_perbulan").on('keyup', function() {
             let pendapatanNormalPerbulan = $("#normal_perbulan").val().split(".").join("")
-            // if (pendapatanNormalPerbulan == '') {
-            //     return alert('Pendapatan Rata - Rata Perbulan Saat Kondisi Normal harus diisi ')
-            // }
             let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
             let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
             let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);

@@ -184,7 +184,6 @@
                                             </div>
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-12">
-                                                {{-- <hr class="border border-primary"> --}}
                                                 <h5 class="mb-4 bg-primary p-2 rounded"></h5>
                                             </div>
                                             <div class="col-md-6 form-group">
@@ -223,9 +222,7 @@
                                                     class="form-control">
                                             </div>
                                             <div class="col-sm-12">
-                                                {{-- <hr class="border border-primary"> --}}
                                                 <h5 class="mb-4 bg-primary p-2 rounded"></h5>
-
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>

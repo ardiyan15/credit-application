@@ -7,7 +7,6 @@ use App\Http\Controllers\MksController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SukuBungaController;
 use App\Http\Controllers\UserController;
-use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
