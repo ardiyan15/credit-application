@@ -16,7 +16,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('credits.store') }}" method="POST" enctype="multipart/form-data">
+                                <form id="formCredit" action="{{ route('credits.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <h5 class="mb-4 bg-primary p-2 rounded">Cabang / Unit Mikro</h5>
@@ -48,7 +49,6 @@
                                                     <option value="" selected>-- Pilih Tujuan Penggunaan --</option>
                                                     <option value="modal kerja">Modal Kerja</option>
                                                     <option value="investasi">Investasi</option>
-                                                    <option value="kum">KUM</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -89,7 +89,7 @@
                                             <div class="form-group col-md-6">
                                                 <label for="">Nomor Rekening</label>
                                                 <input type="text" class="form-control" name="nomor_rekening"
-                                                    placeholder="Nomor Rekening">
+                                                    placeholder="Nomor Rekening" minlength="13" maxlength="13">
                                             </div>
                                         </div>
                                         <h5 class="mb-4 bg-primary p-2 rounded">Data Nasabah</h5>
@@ -179,12 +179,13 @@
                                                 <label for="">No telepon yang dapat dihubungi</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_telepon"
-                                                    placeholder="No telepon yang bisa dihubungi" minlength="11" max="13"
-                                                    class="form-control">
+                                                    placeholder="No telepon yang bisa dihubungi" minlength="11"
+                                                    maxlength="13" class="form-control">
                                             </div>
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-12">
-                                                <hr class="border border-primary">
+                                                {{-- <hr class="border border-primary"> --}}
+                                                <h5 class="mb-4 bg-primary p-2 rounded"></h5>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
@@ -222,7 +223,9 @@
                                                     class="form-control">
                                             </div>
                                             <div class="col-sm-12">
-                                                <hr class="border border-primary">
+                                                {{-- <hr class="border border-primary"> --}}
+                                                <h5 class="mb-4 bg-primary p-2 rounded"></h5>
+
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
@@ -339,7 +342,7 @@
                                                 <label for="">No KTP</label>
                                                 <input type="text" name="no_ktp_suami_istri"
                                                     placeholder="No KTP Suami / Istri" class="form-control"
-                                                    minlength="16" maxlength="16">
+                                                    minlength="16" maxlength="16" required>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Penghasilan Bulanan</label>

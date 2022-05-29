@@ -18,4 +18,9 @@ class Skoring extends Model
     {
         return $this->belongsTo(Nasabah::class, 'nasabah_id');
     }
+
+    public function mka()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

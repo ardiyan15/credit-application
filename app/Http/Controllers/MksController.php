@@ -8,6 +8,7 @@ use App\Models\Skoring;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class MksController extends Controller
 {
@@ -68,6 +69,7 @@ class MksController extends Controller
                 'laba_perbulan' => $laba_perbulan,
                 'laba_pertahun' => $laba_pertahun,
                 'nasabah_id' => $request->nasabah_id,
+                'created_by' => Auth::user()->id
             ]);
 
             $customer = Nasabah::findOrFail($request->nasabah_id);
@@ -138,6 +140,7 @@ class MksController extends Controller
             $score->laba_perbulan = $laba_perbulan;
             $score->laba_pertahun = $laba_pertahun;
             $score->nasabah_id = $request->nasabah_id;
+            $score->created_by = Auth::user()->id;
             $score->save();
             DB::commit();
             return redirect('mks')->with('success', 'Berhasil update data');
@@ -166,7 +169,7 @@ class MksController extends Controller
     {
         $score = Skoring::with(['nasabah' => function ($nasabah) {
             $nasabah->with('user_created', 'usaha');
-        }])->findOrFail($id);
+        }, 'mka'])->findOrFail($id);
 
         $pdf = PDF::loadview('mks.print', ['scoring' => $score]);
         return $pdf->stream();

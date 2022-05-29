@@ -266,10 +266,6 @@ class CreditController extends Controller
             [
                 'value' => 'investasi',
                 'name' => 'Investasi'
-            ],
-            [
-                'value' => 'kum',
-                'name' => 'KUM'
             ]
         ];
 

@@ -32,7 +32,7 @@
                 <td width="200">{{ strtoupper($scoring->nasabah->nama_lengkap) }}</td>
                 <th>NIP MKS</th>
                 <td>:</td>
-                <td>12312312</td>
+                <td>{{ $scoring->nasabah->user_created->employee->nip }}</td>
             </tr>
             <tr>
                 <th>MBU Cabang</th>
@@ -40,7 +40,7 @@
                 <td>KCP MMU Jakarta Raya Kosambi</td>
                 <th>Nama MKS</th>
                 <td>:</td>
-                <td>{{ ucwords($scoring->nasabah->user_created->fullname) }}</td>
+                <td>{{ ucwords($scoring->nasabah->user_created->employee->nama) }}</td>
             </tr>
             <tr>
                 <th>No Aplikasi</th>
@@ -49,7 +49,7 @@
                 </td>
                 <th>NIP MKA</th>
                 <td>:</td>
-                <td>1231231223</td>
+                <td>{{ $scoring->mka->employee->nip }}</td>
             </tr>
             <tr>
                 <th>Jenis Permohonan</th>
@@ -57,7 +57,7 @@
                 <td>Permohonan Baru</td>
                 <th>Nama MKA</th>
                 <td>:</td>
-                <td>ADEILIA YULIANI</td>
+                <td>{{ $scoring->mka->employee->nama }}</td>
             </tr>
             <tr>
                 <th>Jenis Produk</th>
