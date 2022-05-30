@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Employee::class, 'employee_id');
     }
+
+    public function skoring()
+    {
+        return $this->hasMany(Skoring::class, 'created_by');
+    }
 }

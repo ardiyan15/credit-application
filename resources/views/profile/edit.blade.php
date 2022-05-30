@@ -20,16 +20,6 @@
                                     @csrf
                                     @method('PATCH')
                                     <div class="row">
-                                        {{-- <div class="col-md-6 form-group">
-                                            <label for="">NIP</label>
-                                            <input class="form-control" value="{{ $user->nip }}" type="text" name="nip"
-                                                placeholder="NIP" required>
-                                        </div> --}}
-                                        {{-- <div class="col-md-6 form-group">
-                                            <label for="">Nama Lengkap</label>
-                                            <input class="form-control" value="{{ $user->fullname }}" type="text"
-                                                name="fullname" placeholder="Nama Lengkap" required>
-                                        </div> --}}
                                         <div class="col-md-6 form-group">
                                             <label for="">Username</label>
                                             <input class="form-control" value="{{ old('username', $user->username) }}"
@@ -43,23 +33,6 @@
                                             <input class="form-control" type="password" name="password"
                                                 placeholder="password">
                                         </div>
-                                        {{-- @if ($user->roles != 'superadmin')
-                                            <div class="col-md-6 form-group">
-                                                <label for="">Roles</label>
-                                                <select name="roles" class="form-control" required>
-                                                    <option value="" selected>-- Pilih Roles --</option>
-                                                    @foreach ($roles as $role)
-                                                        @if ($role['value'] == $user->roles)
-                                                            <option value="{{ $role['value'] }}" selected>
-                                                                {{ $role['name'] }}</option>
-                                                        @else
-                                                            <option value="{{ $role['value'] }}">{{ $role['name'] }}
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        @endif --}}
                                     </div>
                                     <button class="btn btn-primary btn-sm rounded">Simpan</button>
                                     <a href="{{ url()->previous() }}" class="btn btn-secondary btn-sm rounded">Kembali</a>

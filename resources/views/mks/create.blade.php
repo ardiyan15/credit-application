@@ -158,7 +158,6 @@
 
         let id = $('#nasabah_id option:selected').val()
 
-        // let id = $(this).val()
         let url = '{{ route('get_nasabah', ':id') }}'
         url = url.replace(':id', id)
 
@@ -172,7 +171,6 @@
                 $("#limit_kredit").text("Rp. " + format_rupiah(data.limit_kredit))
 
                 let pendapatanNormalPerbulan = $("#normal_perbulan").val().split(".").join("")
-                // console.log(pendapatanNormalPerbulan)
 
                 let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
                 let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
@@ -194,9 +192,7 @@
 
         $("#normal_perbulan").on('keyup', function() {
             let pendapatanNormalPerbulan = $("#normal_perbulan").val().split(".").join("")
-            // if (pendapatanNormalPerbulan == '') {
-            //     return alert('Pendapatan Rata - Rata Perbulan Saat Kondisi Normal harus diisi ')
-            // }
+
             let biayaHidup = Math.floor(parseInt(pendapatanNormalPerbulan) * 35 / 100)
             let labaBersihPerbulan = parseInt(pendapatanNormalPerbulan) - biayaHidup
             let labaBersihPertahun = Math.floor(labaBersihPerbulan * 12 - biayaHidup);

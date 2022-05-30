@@ -93,8 +93,6 @@ class UserController extends Controller
             ],
         ];
 
-        // $employees = Employee::whereDoesntHave('user')->orderBy('id', 'DESC')->get();
-
         $employees = DB::select("SELECT users.id AS 'user_id', employee.id AS 'employee_id', employee.nama FROM employee LEFT JOIN users ON users.employee_id = employee.id WHERE users.employee_id IS NULL OR users.employee_id = $user->employee_id");
         $data = [
             'menu' => $this->menu,

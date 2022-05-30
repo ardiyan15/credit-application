@@ -16,14 +16,7 @@ class ApprovalController extends Controller
     public function index()
     {
         $customers = [];
-        // if (Auth::user()->roles == 'mka' || Auth::user()->roles == 'superadmin') {
-        //     $customers = Nasabah::where([
-        //         ['approval_lv_1', '=', 0],
-        //         ['approval_lv_2', '=', 0]
-        //     ])->doesntHave('skoring')->orderBy('id', 'DESC')->get();
-        // } else if (Auth::user()->roles == 'kepala cabang' || Auth::user()->roles == 'superadmin') {
         $customers = Nasabah::whereHas('skoring')->orderBy('id', 'DESC')->get();
-        // }
 
         $data = [
             'menu' => $this->menu,

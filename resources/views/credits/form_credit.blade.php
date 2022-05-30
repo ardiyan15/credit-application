@@ -476,13 +476,13 @@
                                 <td width="200" colspan="3">
                                     <div class="text-right"
                                         style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="float: left;"
-                                            class="text-left">{{ $user->employee->nama }}</span>
+                                        <span style="float: left;" class="text-left">MBM/BM:
+                                            {{ $user->employee->nama }}</span>
                                     </div>
                                     <div class="text-right"
                                         style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="clear: both;"
-                                            class="text-right">{{ $customer->user_created->employee->nama }}</span>
+                                        <span style="clear: both;" class="text-right">MKS:
+                                            {{ $customer->user_created->employee->nama }}</span>
                                     </div>
                                 </td>
                             </tr>
@@ -511,13 +511,13 @@
                                 <td width="200" colspan="3">
                                     <div class="text-right"
                                         style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="float: left;"
-                                            class="text-left">{{ $customer->nama_lengkap }}</span>
+                                        <span style="float: left;" class="text-left">DEBITUR:
+                                            {{ $customer->nama_lengkap }}</span>
                                     </div>
                                     <div class="text-left"
                                         style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
-                                        <span style="margin-top: 0px;"
-                                            class="text-right">{{ $customer->suami_istri->nama_suami_istri }}</span>
+                                        <span style="margin-top: 0px;" class="text-right">SUAMI/ISTRI:
+                                            {{ $customer->suami_istri->nama_suami_istri }}</span>
                                     </div>
                                 </td>
                             </tr>

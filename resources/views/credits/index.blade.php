@@ -120,7 +120,6 @@
     <script>
         $('.delete-confirm').on('click', function(event) {
             event.preventDefault();
-            let id = $(this).data('id')
             Swal.fire({
                 title: 'Hapus Data',
                 text: 'Ingin menghapus data?',
