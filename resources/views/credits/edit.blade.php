@@ -135,6 +135,11 @@
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" class="form-control" name="nama_lengkap"
                                                     placeholder="Nama Lengkap" value="{{ $customer->nama_lengkap }}">
+                                                <small>
+                                                    <a href="" class="document" data-id="{{ $customer->id }}"
+                                                        data-type="document_nasabah" onclick="return false"
+                                                        data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label> <small
@@ -214,6 +219,11 @@
                                                     placeholder="No telepon yang bisa dihubungi" class="form-control"
                                                     value="{{ $customer->no_telepon }}">
                                             </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Foto Nasabah <small>(Jika ingin
+                                                        diubah)</small></label>
+                                                <input type="file" name="foto_nasabah" class="form-control">
+                                            </div>
                                             <div class="col-md-12">
                                                 <hr class="border border-primary">
                                             </div>
@@ -260,8 +270,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_ktp" placeholder="No KTP"
-                                                    class="form-control" value="{{ $customer->no_ktp }}" maxlength="16"
-                                                    minlength="16">
+                                                    class="form-control" value="{{ $customer->no_ktp }}"
+                                                    maxlength="16" minlength="16">
                                                 <small>
                                                     <a href="" class="document" data-id="{{ $customer->id }}"
                                                         data-type="document_ktp" onclick="return false" data-toggle="modal"
@@ -678,6 +688,9 @@
                     } else if (type == 'document_marriage') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/nikah/${data.foto_buku_nikah}') !!}" width="450" />`)
+                    } else if (type == 'document_nasabah') {
+                        $("#img-content").append(
+                            `<img class="text-center" src="{!! asset('/storage/nasabah/${data.foto_nasabah}') !!}" width="450" />`)
                     }
                 },
                 error: err => console.log(err)

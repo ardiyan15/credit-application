@@ -197,7 +197,9 @@ class CreditController extends Controller
             $ext_ktp = $request->foto_ktp->getClientOriginalExtension();
             $ext_kk = $request->foto_kk->getClientOriginalExtension();
             $ext_usaha = $request->foto_usaha->getClientOriginalExtension();
-            if ($request->foto_nikah) {
+            $ext_nasabah = $request->foto_nasabah->getClientOriginalExtension();
+
+            if ($request->foto_nikah !== '') {
                 $ext_nikah = $request->foto_nikah->getClientOriginalExtension();
                 $nikah = time() . "." . $ext_nikah;
                 $request->foto_nikah->storeAs('public/nikah', $nikah);
@@ -206,12 +208,14 @@ class CreditController extends Controller
             $ktp = time() . "." . $ext_ktp;
             $kk = time() . "." . $ext_kk;
             $usaha = time() . "." . $ext_usaha;
+            $foto_nasabah = time() . "." . $ext_nasabah;
 
             Dokumen::create([
                 'foto_ktp' => $ktp,
                 'foto_kk' => $kk,
                 'foto_usaha' => $usaha,
                 'foto_buku_nikah' => $nikah,
+                'foto_nasabah' => $foto_nasabah,
                 'nasabah_id' => $nasabah->id
             ]);
 
@@ -453,8 +457,6 @@ class CreditController extends Controller
 
         if ($request->jenis_pinjaman === 'kur') {
 
-            // $bunga_per_bulan = floor(($request->limit_kredit / $request->jangka_waktu) + ($request->limit_kredit * 0.27 / 100));
-
             $biaya_provisi_admin = ($limit_kredit * 1.5) / 100;
 
             if ($limit_kredit >= 200000000 || $limit_kredit <= 350000000) {
@@ -593,6 +595,13 @@ class CreditController extends Controller
                 $usaha = time() . "." . $ext_usaha;
                 $request->foto_usaha->storeAs('public/usaha', $usaha);
                 $dokumen->foto_usaha = $usaha;
+            }
+
+            if ($request->foto_nasabah) {
+                $ext_nasabah = $request->foto_nasabah->getClientOriginalExtension();
+                $foto_nasabah = time() . "." . $ext_nasabah;
+                $request->foto_nasabah->storeAs('public/nasabah', $foto_nasabah);
+                $dokumen->foto_nasabah = $foto_nasabah;
             }
 
             $dokumen->save();

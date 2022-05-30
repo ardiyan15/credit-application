@@ -16,7 +16,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('credits.store') }}" method="POST" enctype="multipart/form-data">
+                                <form id="formCredit" action="{{ route('credits.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <h5 class="mb-4 bg-primary p-2 rounded">Cabang / Unit Mikro</h5>
@@ -48,7 +49,6 @@
                                                     <option value="" selected>-- Pilih Tujuan Penggunaan --</option>
                                                     <option value="modal kerja">Modal Kerja</option>
                                                     <option value="investasi">Investasi</option>
-                                                    <option value="kum">KUM</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -181,6 +181,10 @@
                                                 <input required type="text" name="no_telepon"
                                                     placeholder="No telepon yang bisa dihubungi" minlength="11" max="13"
                                                     class="form-control">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label for="">Upload Foto Nasabah</label>
+                                                <input type="file" name="foto_nasabah" class="form-control">
                                             </div>
                                             <div class="col-sm-6"></div>
                                             <div class="col-sm-12">

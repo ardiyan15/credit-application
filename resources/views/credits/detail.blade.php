@@ -98,6 +98,11 @@
                                                 <input required type="text" class="form-control" name="nama_lengkap"
                                                     placeholder="Nama Lengkap" value="{{ $customer->nama_lengkap }}"
                                                     readonly>
+                                                <small>
+                                                    <a href="" class="document" data-id="{{ $customer->id }}"
+                                                        data-type="document_nasabah" onclick="return false"
+                                                        data-toggle="modal" data-target="#document">Lihat Dokumen</a>
+                                                </small>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label>
@@ -541,6 +546,9 @@
                     } else if (type == 'document_marriage') {
                         $("#img-content").append(
                             `<img class="text-center" src="{!! asset('/storage/nikah/${data.foto_buku_nikah}') !!}" width="450" />`)
+                    } else if (type == 'document_nasabah') {
+                        $("#img-content").append(
+                            `<img class="text-center" src="{!! asset('/storage/nikah/${data.foto_nasabah}') !!}" width="450" />`)
                     }
                 },
                 error: err => console.log(err)
