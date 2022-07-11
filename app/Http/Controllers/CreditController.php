@@ -67,13 +67,13 @@ class CreditController extends Controller
 
             $biaya_provisi_admin = ($limit_kredit * 1.5) / 100;
 
-            if ($limit_kredit >= 200000000 || $limit_kredit <= 350000000) {
+            if ($limit_kredit >= 200000000 && $limit_kredit <= 350000000) {
                 $biaya_provisi_admin = ($limit_kredit * 0.25) / 100;
             }
 
             $biaya_administrasi = 250000;
 
-            if ($limit_kredit >= 25000000 || $limit_kredit <= 350000000) {
+            if ($limit_kredit >= 25000000 && $limit_kredit <= 350000000) {
                 $biaya_administrasi = 500000;
             }
         } else {
@@ -198,7 +198,9 @@ class CreditController extends Controller
             $ext_usaha = $request->foto_usaha->getClientOriginalExtension();
             $ext_nasabah = $request->foto_nasabah->getClientOriginalExtension();
 
-            if ($request->foto_nikah !== '') {
+            $nikah = '';
+
+            if ($request->foto_nikah != null) {
                 $ext_nikah = $request->foto_nikah->getClientOriginalExtension();
                 $nikah = time() . "." . $ext_nikah;
                 $request->foto_nikah->storeAs('public/nikah', $nikah);

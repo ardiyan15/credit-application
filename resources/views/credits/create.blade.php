@@ -39,13 +39,22 @@
                                             <div class="form-group col-md-6">
                                                 <label for="exampleInputPassword1">Jangka Waktu (bulan)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input name="jangka_waktu" required type="number" class="form-control"
-                                                    placeholder="jangka waktu (bulan)">
+                                                {{-- <input name="jangka_waktu" required type="number" class="form-control"
+                                                    placeholder="jangka waktu (bulan)"> --}}
+                                                <select name="jangka_waktu" id="jangka_waktu" required class="form-control">
+                                                    <option value="">-- Pilih Jangka Waktu --</option>
+                                                    <option value="12">12</option>
+                                                    <option value="24">24</option>
+                                                    <option value="36">36</option>
+                                                    <option value="48">48</option>
+                                                    <option value="60">60</option>
+                                                </select>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Tujuan Penggunaan</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="tujuan_penggunaan" id="" class="form-control">
+                                                <select required name="tujuan_penggunaan" id=""
+                                                    class="form-control">
                                                     <option value="" selected>-- Pilih Tujuan Penggunaan --</option>
                                                     <option value="modal kerja">Modal Kerja</option>
                                                     <option value="investasi">Investasi</option>
@@ -115,7 +124,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Jenis Kelamin</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="jenis_kelamin_nasabah" id="" class="form-control">
+                                                <select required name="jenis_kelamin_nasabah" id=""
+                                                    class="form-control">
                                                     <option value="" selected>-- Pilih Jenis Kelamin --</option>
                                                     <option value="laki - laki">Laki - Laki</option>
                                                     <option value="perempuan">Perempuan</option>
@@ -130,7 +140,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Pendidikan Terakhir</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="pendidikan_terakhir" id="" class="form-control">
+                                                <select required name="pendidikan_terakhir" id=""
+                                                    class="form-control">
                                                     <option value="">-- Pilih Pendidikan Terakhir --</option>
                                                     <option value="tidak tamat sd">Tidak Tamat SD</option>
                                                     <option value="sd">SD</option>
@@ -143,8 +154,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat (Sesuai KTP)</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <textarea required name="alamat_ktp" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5"
-                                                    rows="3"></textarea>
+                                                <textarea required name="alamat_ktp" placeholder="Alamat Sesuai KTP" class="form-control" id=""
+                                                    cols="5" rows="3"></textarea>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kelurahan</label> <small
@@ -159,7 +170,8 @@
                                                     class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                <label for="">Kota</label> <small class="text-danger text-bold">*</small>
+                                                <label for="">Kota</label> <small
+                                                    class="text-danger text-bold">*</small>
                                                 <input required type="text" name="kota" placeholder="Kota"
                                                     class="form-control">
                                             </div>
@@ -192,7 +204,8 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Saat ini (bila berbeda)</label>
-                                                <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5" rows="3"></textarea>
+                                                <textarea name="alamat_ktp_2" placeholder="Alamat Sesuai KTP" class="form-control" id="" cols="5"
+                                                    rows="3"></textarea>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kelurahan</label>
@@ -207,7 +220,8 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Kota</label>
-                                                <input type="text" name="kota_2" placeholder="Kota" class="form-control">
+                                                <input type="text" name="kota_2" placeholder="Kota"
+                                                    class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Provinsi</label>
@@ -222,14 +236,15 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No telepon yang dapat dihubungi</label>
                                                 <input type="text" name="no_telepon_2"
-                                                    placeholder="No telepon yang bisa dihubungi" minlength="11" max="13"
-                                                    class="form-control">
+                                                    placeholder="No telepon yang bisa dihubungi" minlength="11"
+                                                    max="13" class="form-control">
                                             </div>
                                             <div class="col-sm-12">
                                                 <h5 class="mb-4 bg-primary p-2 rounded"></h5>
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                <label for="">No KTP</label> <small class="text-danger text-bold">*</small>
+                                                <label for="">No KTP</label> <small
+                                                    class="text-danger text-bold">*</small>
                                                 <input required type="text" name="no_ktp" placeholder="No KTP"
                                                     class="form-control" maxlength="16" minlength="16">
                                             </div>
@@ -246,8 +261,10 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Status Tempat Tinggal</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="status_tempat_tinggal" id="" class="form-control">
-                                                    <option value="" selected>-- Pilih Status Tempat Tinggal --</option>
+                                                <select required name="status_tempat_tinggal" id=""
+                                                    class="form-control">
+                                                    <option value="" selected>-- Pilih Status Tempat Tinggal --
+                                                    </option>
                                                     <option value="milik sendiri">Milik Sendiri</option>
                                                     <option value="sewa / kontrak">Sewa / Kontrak </option>
                                                     <option value="milik keluarga / orang tua">Milik Keluarga / Orang Tua
@@ -267,8 +284,10 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                <label for="">Status</label> <small class="text-danger text-bold">*</small>
-                                                <select required name="status_pernikahan" id="" class="form-control">
+                                                <label for="">Status</label> <small
+                                                    class="text-danger text-bold">*</small>
+                                                <select required name="status_pernikahan" id=""
+                                                    class="form-control">
                                                     <option value="">-- Pilih Status --</option>
                                                     <option value="menikah">Menikah</option>
                                                     <option value="tidak menikah">Tidak Menikah</option>
@@ -284,8 +303,9 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">No Kartu Keluarga</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="text" name="no_kartu_keluarga" class="form-control"
-                                                    placeholder="No Kartu Keluarga" minlength="16" maxlength="16">
+                                                <input required type="text" name="no_kartu_keluarga"
+                                                    class="form-control" placeholder="No Kartu Keluarga" minlength="16"
+                                                    maxlength="16">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Upload Kartu Keluarga</label>
@@ -313,8 +333,8 @@
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tempat Lahir</label>
-                                                <input type="text" name="tempat_lahir_suami_istri" class="form-control"
-                                                    placeholder="Tempat Lahir">
+                                                <input type="text" name="tempat_lahir_suami_istri"
+                                                    class="form-control" placeholder="Tempat Lahir">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Tanggal Lahir</label>
@@ -366,25 +386,26 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Bidang Usaha</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="text" name="bidang_usaha" placeholder="Bidang Usaha"
-                                                    class="form-control">
+                                                <input required type="text" name="bidang_usaha"
+                                                    placeholder="Bidang Usaha" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Usaha</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <textarea required name="alamat_usaha" placeholder="Alamat usaha" class="form-control" id="" cols="5"
-                                                    rows="3"></textarea>
+                                                <textarea required name="alamat_usaha" placeholder="Alamat usaha" class="form-control" id=""
+                                                    cols="5" rows="3"></textarea>
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Jumlah Karyawan</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="number" name="jumlah_karyawan" class="form-control"
-                                                    placeholder="Jumlah Karyawan">
+                                                <input required type="number" name="jumlah_karyawan"
+                                                    class="form-control" placeholder="Jumlah Karyawan">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Status Kepemilikan Tempat Usaha</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="status_kepemilikan" id="" class="form-control">
+                                                <select required name="status_kepemilikan" id=""
+                                                    class="form-control">
                                                     <option value="" selected>-- Pilih Status Kepemilikan --</option>
                                                     <option value="milik sendiri">Milik Sendiri</option>
                                                     <option value="sewa">Sewa</option>
@@ -401,8 +422,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Ditempati Sejak</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="date" name="ditempati_usaha" class="form-control"
-                                                    placeholder="Ditempati Sejak">
+                                                <input required type="date" name="ditempati_usaha"
+                                                    class="form-control" placeholder="Ditempati Sejak">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Upload Foto Tempat Usaha</label>
@@ -414,13 +435,14 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Nama Lengkap</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="text" name="nama_kerabat" placeholder="Nama Lengkap"
-                                                    class="form-control">
+                                                <input required type="text" name="nama_kerabat"
+                                                    placeholder="Nama Lengkap" class="form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Jenis Kelamin</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <select required name="jenis_kelamin_kerabat" id="" class="form-control">
+                                                <select required name="jenis_kelamin_kerabat" id=""
+                                                    class="form-control">
                                                     <option value="" selected>-- Pilih Jenis Kelamin --</option>
                                                     <option value="laki - laki">Laki - Laki</option>
                                                     <option value="perempuan">Perempuan</option>
@@ -429,8 +451,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Hubungan Kerabat</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="text" name="hubungan_kerabat" class="form-control"
-                                                    placeholder="Hubungan Kerabat">
+                                                <input required type="text" name="hubungan_kerabat"
+                                                    class="form-control" placeholder="Hubungan Kerabat">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Alamat Tinggal</label> <small
@@ -439,7 +461,8 @@
                                                     placeholder="Alamat Tinggal"></textarea>
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                <label for="">Kota</label> <small class="text-danger text-bold">*</small>
+                                                <label for="">Kota</label> <small
+                                                    class="text-danger text-bold">*</small>
                                                 <input required type="text" name="kota_kerabat" placeholder="Kota"
                                                     class="form-control">
                                             </div>
@@ -474,8 +497,8 @@
                                             <div class="col-md-6 form-group">
                                                 <label for="">Biaya - Biaya</label> <small
                                                     class="text-danger text-bold">*</small>
-                                                <input required type="text" name="biaya_debitur" placeholder="Biaya - Biaya"
-                                                    class="rupiah form-control">
+                                                <input required type="text" name="biaya_debitur"
+                                                    placeholder="Biaya - Biaya" class="rupiah form-control">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label for="">Sisa Waktu Angsuran (Bulan)</label> <small
@@ -506,7 +529,8 @@
                                                 <label for="">Total Penghasilan (perbulan)</label> <small
                                                     class="text-danger text-bold">*</small>
                                                 <input required type="text" name="total_penghasilan"
-                                                    class="form-control rupiah" placeholder="Total Penghasilan (perbulan)">
+                                                    class="form-control rupiah"
+                                                    placeholder="Total Penghasilan (perbulan)">
                                             </div>
                                         </div>
                                     </div>

@@ -70,7 +70,6 @@
         table {
             font-size: 15px;
         }
-
     </style>
 </head>
 
@@ -477,7 +476,8 @@
                                     <div class="text-right"
                                         style="display: inline-block; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">
                                         <span style="float: left;" class="text-left">MBM/BM:
-                                            {{ $user->employee->nama }}</span>
+                                            {{-- {{ $user->employee->nama }}</span> --}}
+                                            TEST
                                     </div>
                                     <div class="text-right"
                                         style="float: right; margin-top: 20px; width: 40%; border-top: black solid 0.5px;">

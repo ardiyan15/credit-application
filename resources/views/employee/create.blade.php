@@ -39,7 +39,7 @@
                                             <div class="form-group">
                                                 <label for="">No Telepon</label>
                                                 <input type="text" name="no_telepon" class="form-control"
-                                                    placeholder="No Telepon" required>
+                                                    placeholder="No Telepon" required maxlength="13" minlength="13">
                                             </div>
                                         </div>
                                         <div class="col-md-6">

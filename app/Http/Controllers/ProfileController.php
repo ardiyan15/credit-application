@@ -71,7 +71,6 @@ class ProfileController extends Controller
         try {
             $user = User::findOrFail($id);
             $user->username = $validated['username'];
-            $user->fullname = $request->fullname;
             if ($request->password) {
                 $user->password = $request->password;
             }
