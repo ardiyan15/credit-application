@@ -82,7 +82,7 @@
             <tr>
                 <th>Tanggal Lahir</th>
                 <td>:</td>
-                <td width="200">{{ \Carbon\Carbon::parse($scoring->nasabah->tanggal_lahir)->format('d/m/Y') }}</td>
+                <td width="190">{{ \Carbon\Carbon::parse($scoring->nasabah->tanggal_lahir)->format('d/m/Y') }}</td>
                 <th>Bentuk Usaha</th>
                 <td>:</td>
                 <td>Perorangan</td>
